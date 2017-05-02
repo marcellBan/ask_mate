@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--{% block head %}-->
+{% block head %}
     <meta charset="UTF-8">
-    <meta name="author" content="{% block meta_author %}{% endblock %}">
-    <meta name="description" content="{% block meta_desc %}{% endblock %}">
-    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+    <meta name="author" content="Marcell Bán, Miklós Torbics, Péter Ősz, Márton Mészáros">
+    <meta name="description" content=
+        "Questions from developers, to developers. Easy to use platform to get quick answers when you're stuck!'">
+    <meta name="keywords" content="AskMate, ask, mate, question, answer, codecool, 2017, SzószKód, szósz, kód">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
 
     <link rel="stylesheet" href="material icons!">
-    <link rel="icon" href="">
+    <link rel="icon" href="../static/images/favicon.png">
     <link rel="stylesheet" href="../static/css/layout.css">
-<!--{% endblock %}-->
+{% endblock %}
 </head>
 <body>
     <header id="top">

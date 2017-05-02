@@ -9,7 +9,8 @@ import os
 import base64
 from constants import (QUESTIONS_FILE, ANSWERS_FILE,
                        QUESTION_FIELDS, ANSWER_FIELDS,
-                       ENCODE_QUESTION_FIELDS, ENCODE_ANSWER_FIELDS)
+                       ENCODE_QUESTION_FIELDS, ENCODE_ANSWER_FIELDS,
+                       CONVERT_QUESTION_FIELDS, CONVERT_ANSWER_FIELDS)
 
 
 def load_data(answers=False):
@@ -19,10 +20,12 @@ def load_data(answers=False):
         filepath = ANSWERS_FILE
         fields = ANSWER_FIELDS
         decode = ENCODE_ANSWER_FIELDS
+        convert = CONVERT_ANSWER_FIELDS
     else:
         filepath = QUESTIONS_FILE
         fields = QUESTION_FIELDS
         decode = ENCODE_QUESTION_FIELDS
+        convert = CONVERT_QUESTION_FIELDS
     if os.path.isfile(filepath):
         with open(filepath) as csvfile:
             reader = csv.DictReader(csvfile, fieldnames=fields, delimiter=',')
@@ -30,6 +33,8 @@ def load_data(answers=False):
                 row['id'] = int(row['id'])
                 for field in decode:
                     row[field] = base64.b64decode(row[field])
+                for con in convert:
+                    row[con[0]] = con[1](row[con[0]])
                 data[row['id']] = row
     return data
 

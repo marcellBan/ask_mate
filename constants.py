@@ -31,3 +31,13 @@ ENCODE_ANSWER_FIELDS = (
     'message',
     'image'
 )
+CONVERT_QUESTION_FIELDS = (
+    ('submission_time', int),
+    ('view_number', int),
+    ('vote_number', int)
+)
+CONVERT_ANSWER_FIELDS = (
+    ('submission_time', int),
+    ('vote_number', int),
+    ('question_id', int)
+)

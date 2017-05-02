@@ -3,6 +3,9 @@ AskMate Q&A website
 by SzószKód
 '''
 from flask import Flask, request
+
+import display
+import entry_manager
 app = Flask(__name__)
 
 
@@ -18,7 +21,7 @@ def sorted_index():
 
 @app.route('/question/new', methods=['GET', 'POST'])
 def new_question():
-    return 'New question.'
+    return entry_manager.add_question()
 
 
 @app.route('/question/<int:q_id>')

@@ -8,15 +8,17 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/question/new" method="post">
-        <label for="title">Summary<span class="req">*</span>:</label><br>
+    <form action="" method="get">
+        <label for="title">Summary<span class="req">*</span>:</label>
         <input type="text" name="title" id="title" required autofocus>
         <hr>
         <label for="message">Detailed question<span class="req">*</span>:</label>
         <p>Make sure your question is at least 10 characters long!</p>
-        <textarea name="message" id="message" rows="5" required></textarea>
+        <textarea name="message" id="message" rows="4" required></textarea>
         <hr>
-        <input type="hidden" name="image" value="">
+        <label for="image">Upload an image of your problem:</label>
+        <p>Accepted file formats: .jpg, .png, .gif.</p>
+        <input type="file" name="image" id="image">
         <input type="submit" value="Ask!"><br>
     </form>
 {% endblock %}

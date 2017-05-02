@@ -1,7 +1,7 @@
 {% extends layout.html%}
 {% block main %}
-<table border=1>
     {% for dict in list %}
+        <p><table border=1>
         <tr>
         <td colspan="1">{{ dict.get(vote_number) }}</td>
         <td rowspan="2">{{ dict.get(title) }} {{ dict.get(question) }}</td>
@@ -9,6 +9,6 @@
         <tr>
         <td>{{ len(list) }}</td>
         </tr>
+        </table></p>
     {% endfor %}
-</table>
 {% endblock %}

@@ -8,13 +8,24 @@
 {% endblock %}
 
 {% block main %}
-    <form action="" method="get">
+    <div id="flash-messages" class="page-container">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    </div>
+    <form action="" method="post">
         <label for="title">Summary<span class="req">*</span>:</label>
-        <input type="text" name="title" id="title" required autofocus>
+        <input type="text" name="title" id="title" required value="{{ form_title }}"
+            {% if not form_title %}autofocus{% endif %}>
         <hr>
         <label for="message">Detailed question<span class="req">*</span>:</label>
         <p>Make sure your question is at least 10 characters long!</p>
-        <textarea name="message" id="message" rows="4" required></textarea>
+        <textarea name="message" id="message" rows="4" required
+            {% if form_message %}autofocus{% endif %}>{{ form_message }}</textarea>
         <hr>
         <label for="image">Upload an image of your problem:</label>
         <p>Accepted file formats: .jpg, .png, .gif.</p>

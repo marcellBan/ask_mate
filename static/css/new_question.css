@@ -1,4 +1,4 @@
-main .page-container {
+main > .page-container {
     /*
     padding-top: 10px; padding-bottom: 10px;
     background: #EEE;
@@ -66,4 +66,22 @@ input[type="submit"] {
     input[type="submit"]:hover {
         background: #81C784;
         border-color: #4CAF50;
+    }
+
+#flash-messages {
+    position: fixed; top: 67px; z-index: 1;
+    width: 100%;
+    padding-top: 15px;
+    opacity: 0.75;
+
+    text-align: center;
+}
+
+    .flash-message {
+        padding: 10px 0;
+        background: #FF9E80;
+        border: 1px solid #DD2C00;
+        border-radius: 3px;
+
+        color: #DD2C00;
     }

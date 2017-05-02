@@ -32,3 +32,9 @@ def add_question():
             }
             save_data(data)
             return redirect(url_for('display_question', q_id=maxid + 1))
+
+
+def add_answer(q_id):
+    # TODO load_data(), look for this question_id and use that dictionary
+    if request.method == 'GET':
+        return render_template('new_answer.html')

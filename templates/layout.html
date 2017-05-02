@@ -10,7 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
 
-    <link rel="stylesheet" href="material icons!">
+    <!-- to use material icons, use the class: material-icons
+    https://material.io/icons/
+    -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="icon" href="../static/images/favicon.png">
     <link rel="stylesheet" href="../static/css/layout.css">
 {% endblock %}
@@ -18,8 +21,11 @@
 <body>
     <header id="top">
     <div class="page-container">
-        <a href="#" id="ask-mate"><span style="color: #4CAF50;">Ask</span>Mate</a>
-        <a href="#">I have a question</a>
+        <a href="{{ url_for('index') }}" id="ask-mate"><span style="color: #4CAF50;">Ask</span>Mate</a>
+        <nav>
+            <a href="{{ url_for('index') }}" style="display: none;">Questions</a>
+            <a href="{{ url_for('new_question') }}">I have a question!</a>
+        </nav>
     </div>
     </header>
     <main>
@@ -29,7 +35,7 @@
     </main>
     <footer>
     <div class="page-container">
-        SzószKód
+        footer content
     </div>
     </footer>
 </body>

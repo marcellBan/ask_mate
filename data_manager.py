@@ -32,7 +32,7 @@ def load_data(answers=False):
             for row in reader:
                 row['id'] = int(row['id'])
                 for field in decode:
-                    row[field] = base64.b64decode(row[field])
+                    row[field] = base64.b64decode(row[field]).decode()
                 for con in convert:
                     row[con[0]] = con[1](row[con[0]])
                 data[row['id']] = row
@@ -53,5 +53,5 @@ def save_data(data, answers=False):
         writer = csv.DictWriter(csvfile, fieldnames=fields, delimiter=',')
         for row in data:
             for field in encode:
-                row[field] = base64.b64encode(row[field])
+                data[row][field] = base64.b64encode(bytearray(data[row][field], encoding='utf-8')).decode()
             writer.writerow(data[row])

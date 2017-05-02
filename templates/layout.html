@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--{% block head %}-->
+    <meta charset="UTF-8">
+    <meta name="author" content="{% block meta_author %}{% endblock %}">
+    <meta name="description" content="{% block meta_desc %}{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="material icons!">
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="../static/css/layout.css">
+<!--{% endblock %}-->
+</head>
+<body>
+    <header>
+        <div class="page-container">
+        <a href="#" id="to-home">AskMate</a>
+        <a href="#" id="new-question"  >i have a question</a>
+        </div>
+    </header>
+    <main class="page-container">
+        {% block main %}{% endblock %}
+    </main>
+    <footer>
+        SzószKód
+    </footer>
+</body>
+</html>

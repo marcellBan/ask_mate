@@ -2,16 +2,17 @@
 AskMate Q&A website
 by SzószKód
 '''
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 import display
 import entry_manager
 app = Flask(__name__)
+app.secret_key = 'I have no idea what I\'m doing'
 
 
 @app.route('/')
 def index():
-    return 'Index, all questions with default sorting.'
+    return render_template("layout.html")
 
 
 @app.route('/sort')
@@ -20,7 +21,7 @@ def sorted_index():
 
 
 @app.route('/question/new', methods=['GET', 'POST'])
-def new_question():
+def new_question(form_title=None, form_message=None, form_image=None):
     return entry_manager.add_question()
 
 

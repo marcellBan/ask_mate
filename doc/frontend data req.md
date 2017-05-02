@@ -1,8 +1,8 @@
-#questions
-list of dictionaries, dictionary keys are: question_id, title, message, reputation
+#/, /sort
+list of dictionaries, dictionary keys are: question_id, title, message, vote_number
 
-#answers
-list of dictionaries, disctionary keys are: qestion_id, message, reputation
+#/q/id
+list of dictionaries, disctionary keys are: qestion_id, message, vote_number
 
-#new-answer
+#/q/id/new-answer
 needs the list of dict of questions, to display the correct question above the textbox

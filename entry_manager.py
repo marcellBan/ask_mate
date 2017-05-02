@@ -7,4 +7,4 @@ from flask import render_template, redirect, request
 
 
 def add_question():
-    pass
+    return render_template("new_question.html")

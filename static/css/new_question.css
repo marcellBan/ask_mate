@@ -1,0 +1,61 @@
+.req {
+    color: #FF0000;
+}
+
+form {
+    margin: 0 20px;
+}
+
+label {
+    font-size: 24px;
+}
+
+input, textarea {font-size: 22px;}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    background: #E0E0E0;
+    border: none;
+
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
+
+#message {
+    resize: none;
+}
+
+hr{
+    width: 0; height: 3px;
+    margin-bottom: 35px;
+    background: #4CAF50;
+    border: none;
+
+    transition: width 0.5s ease-in-out;
+}
+
+    input[type="text"]:focus+hr, textarea:focus+hr {
+        width: 100%;
+    }
+
+input[type="submit"] {
+    display: block;
+    margin: 0 auto 30px; padding: 15px 25px;
+    background: #BDBDBD;
+    border: 1px solid #9E9E9E;
+    border-radius: 3px;
+
+    cursor: pointer;
+
+    transition: background 0.3s, border-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background: #4CAF50;
+    border-color: #388E3C;
+}
+
+p:first-of-type {
+    color: #616161;
+}

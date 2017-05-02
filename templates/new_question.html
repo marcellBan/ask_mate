@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}Ask a question!{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="../static/css/new_question.css">
+{% endblock %}
+
+{% block main %}
+    <form action="" method="get">
+        <label for="title">Summary<span class="req">*</span>:</label><br>
+        <input type="text" name="title" id="title" required autofocus>
+        <hr>
+        <label for="message">Detailed question<span class="req">*</span>:</label>
+        <p>Make sure your question is at least 10 characters long!</p>
+        <textarea name="message" id="message" rows="5" required></textarea>
+        <hr>
+        <input type="submit" value="Ask!"><br>
+    </form>
+{% endblock %}

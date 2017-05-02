@@ -1,61 +1,69 @@
+main .page-container {
+    /*
+    padding-top: 10px; padding-bottom: 10px;
+    background: #EEE;
+    border-radius: 3px;
+    box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.35);
+    */
+}
+
 .req {
     color: #FF0000;
 }
 
 form {
-    margin: 0 20px;
+    width: 100%;
 }
 
 label {
-    font-size: 24px;
+    display: block;
 }
-
-input, textarea {font-size: 22px;}
 
 input[type="text"], textarea {
     width: 100%;
-    padding: 10px;
+    padding: 0 20px;
     background: #E0E0E0;
-    border: none;
-
-    font-family: sans-serif;
-    letter-spacing: 1px;
-}
-
-#message {
     resize: none;
+
+    font-size: 20px; line-height: 2em;
 }
 
-hr{
+hr {
     width: 0; height: 3px;
     margin-bottom: 35px;
     background: #4CAF50;
-    border: none;
 
     transition: width 0.5s ease-in-out;
 }
 
-    input[type="text"]:focus+hr, textarea:focus+hr {
-        width: 100%;
-    }
+input[type="text"]:focus+hr, textarea:focus+hr {
+    width: 100%;
+}
+
+label+p {
+    color: #616161;
+    font-size: calc(1em - 2px);
+}
+
+input[type="file"] {
+    font-size: calc(1em - 4px);
+}
 
 input[type="submit"] {
     display: block;
-    margin: 0 auto 30px; padding: 15px 25px;
+    margin: 15px auto 0; padding: 10px 15px;
     background: #BDBDBD;
     border: 1px solid #9E9E9E;
     border-radius: 3px;
+    
+    font-size: 1em;
 
     cursor: pointer;
 
     transition: background 0.3s, border-color 0.3s;
 }
 
-input[type="submit"]:hover {
-    background: #4CAF50;
-    border-color: #388E3C;
-}
-
-p:first-of-type {
-    color: #616161;
-}
+    input[type="submit"]:hover {
+        background: #81C784;
+        border-color: #4CAF50;
+    }

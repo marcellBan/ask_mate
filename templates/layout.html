@@ -14,17 +14,21 @@
 <!--{% endblock %}-->
 </head>
 <body>
-    <header>
-        <div class="page-container">
-        <a href="#" id="to-home">AskMate</a>
-        <a href="#" id="new-question"  >i have a question</a>
-        </div>
+    <header id="top">
+    <div class="page-container">
+        <a href="#" id="ask-mate"><span style="color: #4CAF50;">Ask</span>Mate</a>
+        <a href="#">I have a question</a>
+    </div>
     </header>
-    <main class="page-container">
+    <main>
+    <div class="page-container">
         {% block main %}{% endblock %}
+    </div>
     </main>
     <footer>
+    <div class="page-container">
         SzószKód
+    </div>
     </footer>
 </body>
 </html>

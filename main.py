@@ -32,7 +32,7 @@ def display_question(q_id=0):
 
 @app.route('/question/<int:q_id>/new-answer', methods=['GET', 'POST'])
 def new_answer(q_id=0):
-    return 'New answer to question with id {}.'.format(q_id)
+    return entry_manager.add_answer(q_id)
 
 
 @app.errorhandler(404)

@@ -4,11 +4,11 @@
 
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="../static/css/new_question.css">
+    <link rel="stylesheet" href="/static/css/new_question.css">
 {% endblock %}
 
 {% block main %}
-    <form action="" method="get">
+    <form action="/question/new" method="post">
         <label for="title">Summary<span class="req">*</span>:</label><br>
         <input type="text" name="title" id="title" required autofocus>
         <hr>
@@ -16,6 +16,7 @@
         <p>Make sure your question is at least 10 characters long!</p>
         <textarea name="message" id="message" rows="5" required></textarea>
         <hr>
+        <input type="hidden" name="image" value="">
         <input type="submit" value="Ask!"><br>
     </form>
 {% endblock %}

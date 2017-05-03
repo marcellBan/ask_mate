@@ -1,19 +1,32 @@
 {% extends "layout.html" %}
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="/static/css/new_question.css">
     <style>
-        table{margin:0px auto;}
+        table{
+            margin:0px auto;
+            margin-bottom: 20px;
+            }
         td:nth-child(2){border-left:1px solid black;}
-        td{vertical-align: middle;}
+        td{padding: 10px;}
+        table a:link,table a:visited {
+                            background-color: #4CAF50;
+                            color: white;
+                            padding: 14px 25px;
+                            text-align: center; 
+                            text-decoration: none;
+                            float:right;
+        }
     </style>
 {% endblock %}
 {% block main %}
-    {% for dict in question_list %}
+    {% for qdict in question_list %}
         <p><table width="80%">
         <tr>
-        <td colspan="1" width="5%">{{ dict['vote_number'] }}</td>
-        <td rowspan="2" width="95%">{{ dict['title'] }} {{ dict['message'] }}</td>
+        <td colspan="1" width="5%">{{ qdict['vote_number'] }}</td>
+        <td rowspan="2" width="95%">
+            <p><h3>{{ qdict['title'] }}</h3></p> <p>{{ qdict['message'] }}</p>
+            <a href="/question/{{ qdict['id'] }}">See Answers</a>
+        </td>
         </tr>
         <tr>
         <td width="5%">2</td>

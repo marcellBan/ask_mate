@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="/static/css/new_question.css">
 {% endblock %}
 {% block main %}
-{{ question }}
+<h3>{{ question['title'] }}</h3>
+{{ question['message'] }}
 {% for answ in answers %}
     {{ answ }}
 {% endfor %}

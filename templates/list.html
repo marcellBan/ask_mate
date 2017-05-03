@@ -1,17 +1,17 @@
-{% extends layout.html%}
+{% extends "layout.html" %}
 {% block head %}
     {{ super() }}
     <link rel="stylesheet" href="/static/css/new_question.css">
 {% endblock %}
 {% block main %}
     {% for dict in question_list %}
-        <p><table border=1>
+        <p><table border=1 width="100%">
         <tr>
-        <td colspan="1">{{ dict.get(vote_number) }}</td>
-        <td rowspan="2">{{ dict.get(title) }} {{ dict.get(message) }}</td>
+        <td colspan="1" width="20%">{{ dict[vote_number] }}</td>
+        <td rowspan="2" width="20%">{{ dict[title] }} {{ dict[message] }}</td>
         </tr>
         <tr>
-        <td>{{ len(question_list) }}</td>
+        <td width="80%">{{ len(answer_list) }}</td>
         </tr>
         </table></p>
     {% endfor %}

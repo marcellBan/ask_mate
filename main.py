@@ -21,7 +21,7 @@ def sorted_index():
 
 
 @app.route('/question/new', methods=['GET', 'POST'])
-def new_question(form_title=None, form_message=None, form_image=None):
+def new_question():
     return entry_manager.add_question()
 
 

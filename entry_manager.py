@@ -16,11 +16,11 @@ def add_question():
             flash('Your question isn\'t long enough!')
             return render_template(
                 'new_question.html',
-                form_title=request.form['title'], form_message=request.form['message']
+                form_title=request.form.get('title'), form_message=request.form.get('message')
             )
         else:
             data = load_data()
-            maxid = max(data.keys())  # TODO Throws an error for empty sequence.
+            maxid = -1 if len(data) == 0 else max(data.keys())
             data[maxid + 1] = {
                 'id': maxid + 1,
                 'submission_time': int(time.time()),

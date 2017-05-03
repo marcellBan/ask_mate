@@ -1,12 +1,51 @@
 {% extends "layout.html" %}
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="/static/css/new_question.css">
+    <style>
+        table{
+            margin:0px;
+            margin-bottom: 20px;
+            }
+       td{padding: 10px;}
+       table a:link, table a:visited {
+                            background-color: #4CAF50;
+                            color: white;
+                            padding: 14px 25px;
+                            text-align: center; 
+                            text-decoration: none;
+                            float:right;
+        }
+        th, td {
+                border-left: 1px solid black;
+        }
+        
+    </style>
 {% endblock %}
 {% block main %}
-<h3>{{ question['title'] }}</h3>
-{{ question['message'] }}
+<p><table width="80%">
+        <tr>
+        <td colspan="1" width="5%">qdict['vote_number']</td>
+        <td rowspan="2" width="95%">
+            <p><h3>{{ question['title'] }}</h3>
+            {{ question['message'] }}
+            <a href="/question/{{ question['id'] }}/new-answer">I have an Answer</a></p>
+        </td>
+        </tr>
+        <tr>
+        <td width="5%">qdict['answer_count']</td>
+        </tr>
+        </table></p>
 {% for answ in answers %}
-    {{ answ }}
+<p><table width="80%">
+        <tr>
+        <td colspan="1" width="5%">qdict['vote_number']</td>
+        <td rowspan="2" width="95%">
+            <p>{{ answ['message'] }}
+        </td>
+        </tr>
+        <tr>
+        <td width="5%">??</td>
+        </tr>
+        </table></p>
 {% endfor %}
 {% endblock %}

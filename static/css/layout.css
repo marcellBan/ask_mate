@@ -39,7 +39,7 @@ header {
 
     header nav {
         display: inline-block;
-        float:right;
+        float: right;
     }
 
         header nav::after {
@@ -47,6 +47,10 @@ header {
             clear: both;
             content: "";
         }
+    
+    #ask {
+        color: #4CAF50;
+    }
     
     header nav a {
         margin-left: 20px; padding: 10px 15px;
@@ -69,9 +73,16 @@ header {
     }
 
 main {
-    min-height: calc(100vh - 65px);
-    margin-top: 65px; padding-top: 35px;
+    margin-top: 65px; margin-bottom: 10vh; padding-top: 35px;
 }
+
+    main > .page-container {
+        min-height: calc(100vh - 65px - 10vh - 10px - 10px - 2px);
+        padding-top: 35px; padding-bottom: 10vh;
+        background: #EEE;
+        border-radius: 3px;
+        box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.35);
+    }
 
 
 footer {

@@ -1,0 +1,11 @@
+{% extends layout.html%}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/new_question.css">
+{% endblock %}
+{% block main %}
+{{ question }}
+{% for answ in answers %}
+    {{ answ }}
+{% endfor %}
+{% endblock %}

@@ -4,7 +4,7 @@ the needed form of data is: list of dictionaries
 names and definitions:
 question_list: the name of the list which contains dictionaries
     keys:
-    question_id: id of the question
+    id: id of the question
     title: title of the question
     message: the question itself
     vote_number: current standing of the vote (number)

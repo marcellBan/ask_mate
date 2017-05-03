@@ -18,3 +18,9 @@ def display_one_question(q_id):
     answers = list(filter(lambda x: x.get('question_id') == q_id, load_data(answers=True).values()))
     answers.sort(key=lambda x: x.get('submission_time'), reverse=True)
     return render_template('question.html', question=question, answers=answers)
+
+
+def display_sorted_questions():
+    skey = None
+    if skey is None:
+        return redirect(url_for('index'))

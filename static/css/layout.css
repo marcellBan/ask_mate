@@ -106,12 +106,20 @@ footer {
 }
 
     footer .page-container {
-        min-height: 20vh;
-        padding-top: 1.5em;
+        position: relative;
+        min-height: 30vh;
+        background: url("/static/images/layout-footer-background.png");
+        background-size: 25vh 25vh;
+        background-repeat: no-repeat;
+        background-position: center left;
 
         color: #EEE;
         text-align: center;
-        vertical-align: 50%;
+    }
+
+    #footer-vertical-align {
+        position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
     }
 
 @media screen and (min-width: 600px) and (max-width: 959px) {

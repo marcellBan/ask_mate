@@ -35,6 +35,25 @@ def add_question():
 
 
 def add_answer(q_id):
-    # TODO load_data(), look for this question_id and use that dictionary
+    question = load_data().get(q_id)
     if request.method == 'GET':
-        return render_template('new_answer.html')
+        return render_template('new_answer.html', question=question)
+    elif request.method == 'POST':
+        if len(request.form.get('message')) < 10:
+            flash('Your answer isn\'t long enough!')
+            return render_template(
+                'new_answer.html', question=question, form_message=request.form.get('message')
+            )
+        else:
+            answers = load_data(answers=True)
+            maxid = -1 if len(answers) == 0 else max(answers.keys())
+            answers[maxid + 1] = {
+                'id': maxid + 1,
+                'submission_time': int(time.time()),
+                'vote_number': 0,
+                'question_id': q_id,
+                'message': request.form.get('message'),
+                'image': request.form.get('image')
+            }
+            save_data(answers, answers=True)
+            return redirect(url_for('display_question', q_id=q_id))

@@ -10,6 +10,13 @@ from flask import render_template
 def display_questions():
     list_dict = list(load_data().values())
     list_dict.sort(key=lambda x: x.get("submission_time"), reverse=True)
+    loaded_answers = list(load_data(answers=True).values())
+    for dictionary in list_dict:
+        counter = 0
+        for element in loaded_answers:
+            if element['question_id'] == dictionary['id']:
+                counter += 1
+        dictionary['answer_count'] = counter
     return render_template('list.html', question_list=list_dict)
 
 

@@ -4,27 +4,18 @@
 
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="/static/css/new_question.css">
+    <link rel="stylesheet" href="/static/css/new_entry.css">
 {% endblock %}
 
 {% block main %}
-    <div id="flash-messages" class="page-container">
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <div class="flash-message">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    </div>
     <article>
-        <h2>{{ question_title }}</h2>
-        <p>{{ question_message }}</p>
+        <h2>{{ question['title'] }}</h2>
+        <p>{{ question['message'] }}</p>
     </article>
     <form action="" method="post">
         <label for="message">Your answer<span class="req">*</span>:</label>
         <p>Make sure your answer is at least 10 characters long!</p>
-        <textarea name="message" id="message" rows="4" required autofocus></textarea>
+        <textarea name="message" id="message" rows="4" required autofocus>{{ form_message }}</textarea>
         <hr>
         <label for="image">Upload an image of your solution:</label>
         <p>Accepted file formats: .jpg, .png, .gif.</p>

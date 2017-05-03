@@ -8,8 +8,15 @@ from flask import render_template
 
 
 def display_questions():
-    data = load_data()
-    return render_template('.html')
+    dict_list = load_data()
+    list_dict = []
+    for key, value in dict_list.items():
+        new_dict = {}
+        for element in value:
+            new_dict[key] = element
+        list_dict.append(new_dict)
+    # data = [dict(zip(loaded_data, t)) for t in zip(*loaded_data.values())]
+    return render_template('list.html', question_list=list_dict)
 
 
 def display_one_question(q_id):

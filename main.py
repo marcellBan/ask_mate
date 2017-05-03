@@ -39,22 +39,22 @@ def new_answer(q_id=0):
 
 @app.route('/question/<int:q_id>/vote-down')
 def downvote_question(q_id):
-    return vote.downvote_question()
+    return vote.downvote_question(q_id)
 
 
 @app.route('/question/<int:q_id>/vote-up')
 def upvote_question(q_id):
-    return vote.upvote_question()
+    return vote.upvote_question(q_id)
 
 
 @app.route('/answer/<int:a_id>/vote-down')
 def downvote_anwer(a_id):
-    return vote.downvote_answer()
+    return vote.downvote_answer(a_id)
 
 
 @app.route('/answer/<int:a_id>/vote-up')
 def upvote_answer(a_id):
-    return vote.upvote_answer()
+    return vote.upvote_answer(a_id)
 
 
 @app.errorhandler(404)

@@ -27,7 +27,7 @@ def new_question(form_title=None, form_message=None, form_image=None):
 
 @app.route('/question/<int:q_id>')
 def display_question(q_id=0):
-    return 'Display question with id {}.'.format(q_id)
+    return display.display_one_question(q_id)
 
 
 @app.route('/question/<int:q_id>/new-answer', methods=['GET', 'POST'])

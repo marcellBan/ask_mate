@@ -3,10 +3,11 @@ AskMate Q&A website
 by SzószKód
 '''
 # flash import can be deleted later on.
-from flask import Flask, request, render_template, flash
+from flask import Flask, request, render_template
 
 import display
 import entry_manager
+import vote
 app = Flask(__name__)
 app.secret_key = 'I have no idea what I\'m doing'
 
@@ -34,6 +35,26 @@ def display_question(q_id=0):
 @app.route('/question/<int:q_id>/new-answer', methods=['GET', 'POST'])
 def new_answer(q_id=0):
     return entry_manager.add_answer(q_id)
+
+
+@app.route('/question/<int:q_id>/vote-down')
+def downvote_question(q_id):
+    return vote.downvote_question()
+
+
+@app.route('/question/<int:q_id>/vote-up')
+def upvote_question(q_id):
+    return vote.upvote_question()
+
+
+@app.route('/answer/<int:a_id>/vote-down')
+def downvote_anwer(a_id):
+    return vote.downvote_answer()
+
+
+@app.route('/answer/<int:a_id>/vote-up')
+def upvote_answer(a_id):
+    return vote.upvote_answer()
 
 
 @app.errorhandler(404)

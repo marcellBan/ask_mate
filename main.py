@@ -2,7 +2,8 @@
 AskMate Q&A website
 by SzószKód
 '''
-from flask import Flask, request, render_template
+# flash import can be deleted later on.
+from flask import Flask, request, render_template, flash
 
 import display
 import entry_manager
@@ -33,6 +34,13 @@ def display_question(q_id=0):
 @app.route('/question/<int:q_id>/new-answer', methods=['GET', 'POST'])
 def new_answer(q_id=0):
     return entry_manager.add_answer(q_id)
+
+
+@app.route("/test")
+def test():
+    flash("test 1")
+    flash("test 2")
+    return render_template("layout.html")
 
 
 @app.errorhandler(404)

@@ -17,7 +17,7 @@ def index():
 
 @app.route('/sort')
 def sorted_index():
-    return 'Index, sorted by time={} & title={}.'.format(request.args.get('time', request.args.get('title')))
+    return display.display_sorted_questions()
 
 
 @app.route('/question/new', methods=['GET', 'POST'])

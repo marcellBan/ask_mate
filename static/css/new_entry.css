@@ -59,3 +59,11 @@ input[type="submit"] {
         background: #81C784;
         border-color: #4CAF50;
     }
+
+article {
+    margin-bottom: 35px;
+}
+
+form p {
+    font-size: 0.8em;
+}

@@ -12,12 +12,12 @@ app.secret_key = 'I have no idea what I\'m doing'
 
 @app.route('/')
 def index():
-    return render_template("layout.html")
+    return display.display_questions()
 
 
 @app.route('/sort')
 def sorted_index():
-    return 'Index, sorted by time={} & title={}.'.format(request.args.get('time', request.args.get('title')))
+    return display.display_sorted_questions()
 
 
 @app.route('/question/new', methods=['GET', 'POST'])

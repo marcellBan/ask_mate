@@ -8,8 +8,9 @@ from flask import render_template
 
 
 def display_questions():
-    data = load_data()
-    return render_template('.html')
+    list_dict = list(load_data().values())
+    list_dict.sort(key=lambda x: x.get("submission_time"), reverse=True)
+    return render_template('list.html', question_list=list_dict)
 
 
 def display_one_question(q_id):
@@ -17,3 +18,9 @@ def display_one_question(q_id):
     answers = list(filter(lambda x: x.get('question_id') == q_id, load_data(answers=True).values()))
     answers.sort(key=lambda x: x.get('submission_time'), reverse=True)
     return render_template('question.html', question=question, answers=answers)
+
+
+def display_sorted_questions():
+    skey = None
+    if skey is None:
+        return redirect(url_for('index'))

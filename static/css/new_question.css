@@ -1,12 +1,3 @@
-main > .page-container {
-    /*
-    padding-top: 10px; padding-bottom: 10px;
-    background: #EEE;
-    border-radius: 3px;
-    box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.35);
-    */
-}
-
 .req {
     color: #FF0000;
 }
@@ -23,6 +14,7 @@ input[type="text"], textarea {
     width: 100%;
     padding: 0 20px;
     background: #E0E0E0;
+    background: #EEE;
     resize: none;
 
     font-size: 20px; line-height: 2em;

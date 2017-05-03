@@ -36,13 +36,6 @@ def new_answer(q_id=0):
     return entry_manager.add_answer(q_id)
 
 
-@app.route("/test")
-def test():
-    flash("test 1")
-    flash("test 2")
-    return render_template("layout.html")
-
-
 @app.errorhandler(404)
 def page_not_found(error):
     return 'Oops, page not found!', 404

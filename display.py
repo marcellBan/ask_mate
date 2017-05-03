@@ -13,6 +13,7 @@ def display_questions():
 
 
 def display_one_question(q_id):
-    question = filter(lambda x: x.get('id') == q_id, load_data())[0]
-    answers = list(filter(lambda x: x.get('question_id') == q_id, load_data(answers=True)))
+    question = load_data().get(q_id)
+    answers = list(filter(lambda x: x.get('question_id') == q_id, load_data(answers=True).values()))
+    answers.sort(key=lambda x: x.get('submission_time'), reverse=True)
     return render_template('question.html', question=question, answers=answers)

@@ -53,7 +53,7 @@ header {
     }
     
     header nav a {
-        margin-left: 20px; padding: 10px 15px;
+        margin-left: 20px; padding: 5px 10px;
         background: #BDBDBD;
         border: 1px solid #9E9E9E;
         border-radius: 3px;
@@ -84,29 +84,21 @@ main {
         box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.35);
     }
 
-@keyframes flash-message-fade {
-    0% {display:block; opacity: 1;}
-    75% {opacity: 1;}
-    99% {opacity: 0;}
-    100% {display: none;}
-}
-
 .flash-message {
     margin-bottom: 15px; padding: 5px 0;
-    background: #FFD740;
+    background: #FFE57F;
     border: 1px solid #FFAB00;
     border-radius: 3px;
 
     color: #FFAB00;
-    font-weight: 700;
+    letter-spacing: 1px;
     text-align: center;
 
-    animation-name: flash-message-fade;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
+    animation-name: flash-fade;
+    animation-delay: 2s;
+    animation-duration: 3.5s;
     animation-fill-mode: forwards;
 }
-
 
 footer {
     width: 100%;
@@ -131,5 +123,16 @@ footer {
 @media screen and (min-width: 960px) {
     body {
         font-size: 20px;
+    }
+}
+
+@keyframes flash-fade {
+    0% {opacity: 1;}
+    50% {opacity: 0;}
+    100% {
+        position: fixed; z-index: -10;
+        bottom: -100vh; right: -100vw;
+        width: 0; height: 0;
+        opacity: 0;
     }
 }

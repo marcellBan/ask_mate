@@ -29,6 +29,11 @@ def new_question():
 
 @app.route('/question/<int:q_id>')
 def display_question(q_id=0):
+    return display.display_questions()
+
+
+@app.route('/question/<int:q_id>/delete')
+def delete_question(q_id=0):
     return display.display_one_question(q_id)
 
 

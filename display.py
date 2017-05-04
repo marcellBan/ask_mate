@@ -27,6 +27,7 @@ def display_one_question(q_id):
     save_data(questions)
     answers = list(filter(lambda x: x.get('question_id') == q_id, load_data(answers=True).values()))
     answers.sort(key=lambda x: x.get('submission_time'), reverse=True)
+    question['answer_count'] = len(answers)
     return render_template('question.html', question=question, answers=answers)
 
 

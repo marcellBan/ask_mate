@@ -38,9 +38,12 @@ def delete_question(q_id):
     question = load_data()
     answers = load_data(answers=True)
     del question[q_id]
+    atodel = list()
     for row in answers:
         if answers[row]['question_id'] == q_id:
-            del answers[row]
+            atodel.append(row)
+    for ans in atodel:
+        del answers[ans]
     save_data(question)
     save_data(answers, answers=True)
     return redirect(url_for('index'))

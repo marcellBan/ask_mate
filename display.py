@@ -76,8 +76,8 @@ def display_sorted_questions():
             questions.sort(key=lambda x: x.get(skey).lower(), reverse=rev)
         for question in questions:
             counter = 0
-            for answer in loaded_answers:
+            for answer in loaded_answers.values():
                 if answer['question_id'] == question['id']:
                     counter += 1
-            dictionary['answer_count'] = counter
+            question['answer_count'] = counter
         return render_template('list.html', question_list=questions)

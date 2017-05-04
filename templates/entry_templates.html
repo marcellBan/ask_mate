@@ -11,11 +11,11 @@
 <!-- Question on index -->
 <article>
     <div class="numbers">
-        <a href="/question/{{ qdict['id'] }}/vote-up" class="material-icons">keyboard_arrow_up</a><br>
+        <a href="/question/{{ qdict['id'] }}/vote-up" class="material-icons vote-up">keyboard_arrow_up</a><br>
         {{ qdict['vote_number'] }}<br>
-        <a href="/question/{{ qdict['id'] }}/vote-down" class="material-icons">keyboard_arrow_down</a><br>
-        <span class="material-icons">remove_red_eye</span> {{ qdict['view_number'] }}<br>
-        <span class="material-icons">question_answer</span> {{ qdict['answer_count'] }}
+        <a href="/question/{{ qdict['id'] }}/vote-down" class="material-icons vote-down">keyboard_arrow_down</a><br>
+        <span class="material-icons num-icon">remove_red_eye</span> {{ qdict['view_number'] }}<br>
+        <span class="material-icons num-icon">question_answer</span> {{ qdict['answer_count'] }}
     </div><!--
     --><div class="question">
         <h2>{{ qdict['title'] }}</h2>
@@ -30,11 +30,11 @@
 <!-- Question on own page -->
 <article>
     <div class="numbers">
-        <a href="/question/{{ question['id'] }}/vote-up?next=this" class="material-icons">keyboard_arrow_up</a><br>
+        <a href="/question/{{ question['id'] }}/vote-up?next=this" class="material-icons vote-up">keyboard_arrow_up</a><br>
         {{ question['vote_number'] }}<br>
-        <a href="/question/{{ question['id'] }}/vote-down?next=this" class="material-icons">keyboard_arrow_down</a><br>
-        <span class="material-icons">remove_red_eye</span> {{ question['view_number'] }}<br>
-        <span class="material-icons">question_answer</span> {{ question['answer_count'] }}
+        <a href="/question/{{ question['id'] }}/vote-down?next=this" class="material-icons vote-down">keyboard_arrow_down</a><br>
+        <span class="material-icons num-icon">remove_red_eye</span> {{ question['view_number'] }}<br>
+        <span class="material-icons num-icon">question_answer</span> {{ question['answer_count'] }}
     </div><!--
     --><div class="question">
         <h2>{{ question['title'] }}</h2>
@@ -53,9 +53,9 @@
 <!-- Answer on questions page -->
 <article>
     <div class="numbers">
-        <a href="/answer/{{ answ['id'] }}/vote-up" class="material-icons">keyboard_arrow_up</a><br>
+        <a href="/answer/{{ answ['id'] }}/vote-up" class="material-icons  vote-up">keyboard_arrow_up</a><br>
         {{ answ['vote_number'] }}<br>
-        <a href="/answer/{{ answ['id'] }}/vote-down" class="material-icons">keyboard_arrow_down</a><br>
+        <a href="/answer/{{ answ['id'] }}/vote-down" class="material-icons vote-down">keyboard_arrow_down</a><br>
     </div><!--
     --><div class="answer">
         <h2>{{ answ['title'] }}</h2>

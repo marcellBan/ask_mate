@@ -72,7 +72,7 @@ def answer_delete(a_id):
     return entry_manager.delete_answer(a_id)
 
 
-@app.route('/answer/<int:a_id>/edit')
+@app.route('/answer/<int:a_id>/edit', methods=['GET', 'POST'])
 def answer_edit(a_id):
     return entry_manager.edit_answer(a_id)
 

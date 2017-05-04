@@ -64,10 +64,9 @@ def add_answer(q_id):
 
 
 def delete_answer(a_id):
-    load_data(answers=True)
-
-    # id
-    # save_data(data, answers=False)
-
-if __name__ == '__main__':
-    ()
+    imported_data = load_data(answers=True)
+    q_id = imported_data[a_id].get('question_id')
+    del imported_data[a_id]
+    save_data(imported_data, answers=True)
+    print(load_data(answers=True))
+    return redirect(url_for('display_question', q_id=q_id))

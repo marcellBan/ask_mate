@@ -63,7 +63,7 @@ def upvote_answer(a_id):
 
 
 @app.route('/answer/<int:a_id>/delete')
-def answer_delete():
+def answer_delete(a_id):
     return entry_manager.delete_answer(a_id)
 
 

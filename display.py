@@ -3,7 +3,7 @@ Display the questions from questions.csv file
 For AskMate by SzószKód
 '''
 
-from data_manager import load_data
+from data_manager import load_data, save_data
 from flask import render_template
 
 
@@ -21,7 +21,10 @@ def display_questions():
 
 
 def display_one_question(q_id):
-    question = load_data().get(q_id)
+    questions = load_data()
+    question = questions.get(q_id)
+    question['view_number'] += 1
+    save_data(questions)
     answers = list(filter(lambda x: x.get('question_id') == q_id, load_data(answers=True).values()))
     answers.sort(key=lambda x: x.get('submission_time'), reverse=True)
     return render_template('question.html', question=question, answers=answers)

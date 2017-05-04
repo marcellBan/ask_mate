@@ -78,8 +78,11 @@ def delete_answer(a_id):
     save_data(imported_data, answers=True)
     return redirect(url_for('new_', q_id=q_id))
 
+
 def edit_answer(a_id):
     imported_data = load_data(answers=True)
+    q_id = imported_data[a_id].get('question_id')
+    question = load_data().get(q_id)
     if request.method == 'GET':
         return render_template('new_answer.html', question=question, form_message=imported_data[a_id].get('message'))
     """elif request.method == 'POST':

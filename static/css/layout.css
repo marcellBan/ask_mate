@@ -144,3 +144,7 @@ footer {
         opacity: 0;
     }
 }
+
+a {
+    cursor: pointer;
+}

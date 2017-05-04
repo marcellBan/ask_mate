@@ -24,7 +24,7 @@
 {% block main %}
 <p><table width="80%">
         <tr>
-        <td colspan="1" width="5%">qdict['vote_number']</td>
+        <td colspan="1" width="5%">{{ question['vote_number'] }}</td>
         <td rowspan="2" width="95%">
             <p><h3>{{ question['title'] }}</h3>
             {{ question['message'] }}
@@ -32,19 +32,16 @@
         </td>
         </tr>
         <tr>
-        <td width="5%">qdict['answer_count']</td>
+        <td width="5%">{{ question['answer_count'] }}</td>
         </tr>
         </table></p>
 {% for answ in answers %}
 <p><table width="80%">
         <tr>
-        <td colspan="1" width="5%">qdict['vote_number']</td>
-        <td rowspan="2" width="95%">
-            <p>{{ answ['message'] }}
+        <td width="5%">{{ answ['vote_number'] }}</td>
+        <td width="95%">
+            <p>{{ answ['message'] }}</p>
         </td>
-        </tr>
-        <tr>
-        <td width="5%">??</td>
         </tr>
         </table></p>
 {% endfor %}

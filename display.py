@@ -22,8 +22,8 @@ def display_questions():
 
 def display_one_question(q_id):
     questions = load_data()
-    question = questions.get(q_id)
-    question['view_number'] += 1
+    questions[q_id]['view_number'] += 1
+    question = dict(questions.get(q_id))
     save_data(questions)
     answers = list(filter(lambda x: x.get('question_id') == q_id, load_data(answers=True).values()))
     answers.sort(key=lambda x: x.get('submission_time'), reverse=True)

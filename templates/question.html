@@ -21,6 +21,13 @@
         
     </style>
     <link rel="stylesheet" href="/static/css/entry_display.css">
+    <style>
+        hr {
+            width: 95%; height: 3px;
+            margin: 0 auto 35px;
+            background: #BDBDBD;
+        }
+    </style>
 {% endblock %}
 {% block main %}
 <article>
@@ -40,20 +47,26 @@
         <div class="entry-links">
             <a href="/question/{{ question['id'] }}/new-answer">I have an answer</a><br>
             <a href="/question/{{ question['id'] }}/edit">Edit</a>
-            <a href="/question/{{ question['id'] }}/delete">Delete</a>
+            <a href="/question/{{ question['id'] }}/delete" id="see-answers">Delete</a>
         </div>
     </div>
 </article>
+{% if question['answer_count'] %}
+<hr>
+{% endif %}
 <div id="answers">
 {% for answ in answers %}
-<article>
+<article class="article-card">
     <div class="numbers">
         <a href="/answer/{{ answ['id'] }}/vote-up" class="material-icons vote-up">keyboard_arrow_up</a><br>
         {{ answ['vote_number'] }}<br>
         <a href="/answer/{{ answ['id'] }}/vote-down" class="material-icons vote-down">keyboard_arrow_down</a><br>
     </div><!--
     --><div class="answer">
-        <p>{{ answ['message'] }}</p>
+        <p>A: {{ answ['message'] }}</p>
+        <p class="meta-data">
+            Post time: {{ answ['submission_time']|time }}
+        </p>
         <div class="entry-links">
             <a href="/answer/{{ answ['id'] }}/edit">Edit</a>
             <a href="/answer/{{ answ['id'] }}/delete">Delete</a>

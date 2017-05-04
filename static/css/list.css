@@ -1,16 +1,27 @@
-#sort-dropdown {
+#sort-menu-container {
     position: relative;
-    background: red;
+    width: 95%;
+    margin: 0 auto 35px;
+    text-align: right
+}
+
+#sort-dropdown {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #F5F5F5;
+    box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.35);
+    line-height: 1.5em;
 }
 
 #sort-values {
-    position: absolute; top: 100%; left: 0;
+    position: absolute; top: 100%; right: 0;
     display: none;
-    background: #E0E0E0;
     padding: 10px;
+    background: #F5F5F5;
+    box-shadow: 0 6px 24px -3px rgba(0, 0, 0, 0.35);
     text-align: right;
 }
 
-#sort-dropdown:hover #sort-values {
+#sort-dropdown:hover+#sort-values, #sort-values:hover {
     display: block;
 }

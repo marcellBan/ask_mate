@@ -37,10 +37,10 @@ def add_question():
 def delete_question(q_id):
     question = load_data()
     answers = load_data(answers=True)
-    del(question[q_id])
+    del question[q_id]
     for row in answers:
         if answers[row]['question_id'] == q_id:
-            del(answers[row])
+            del answers[row]
     save_data(question)
     save_data(answers, answers=True)
     return redirect(url_for('index'))

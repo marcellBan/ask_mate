@@ -12,9 +12,9 @@ def downvote_question(q_id):
     data_manager.save_data(questions)
     flash('Successfully downvoted this question!')
     if request.args.get('next') is not None:
-        return redirect(url_for('index'))
-    else:
         return redirect(url_for('display_question', q_id=q_id))
+    else:
+        return redirect(url_for('index'))
 
 
 def upvote_question(q_id):
@@ -23,9 +23,9 @@ def upvote_question(q_id):
     data_manager.save_data(questions)
     flash('Successfully upvoted this question!')
     if request.args.get('next') is not None:
-        return redirect(url_for('index'))
-    else:
         return redirect(url_for('display_question', q_id=q_id))
+    else:
+        return redirect(url_for('index'))
 
 
 def downvote_answer(a_id):

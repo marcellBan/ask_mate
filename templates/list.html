@@ -2,21 +2,39 @@
 {% block title %}AskMate{% endblock %}
 {% block head %}
     {{ super() }}
+    <link rel="stylesheet" href="/static/css/entry_display.css">
     <link rel="stylesheet" href="/static/css/list.css">
 {% endblock %}
 {% block main %}
+    <div id="sort-dropdown" style="display: none;">
+        Sort by <span class="material-icons">keyboard_arrow_down</span>
+        <div id="sort-values">
+            <a href="/sort?id=asc">ID ascending</a><br>
+            <a href="/sort?id=desc">ID descending</a><br>
+            <a href="/sort?title=asc">Title ascending</a><br>
+            <a href="/sort?title=desc">Title descending</a><br>
+            <a href="/sort?rating=asc">Rating ascending</a><br>
+            <a href="/sort?rating=desc">Rating descending</a><br>
+            <a href="/sort?time=asc">Time ascending</a><br>
+            <a href="/sort?time=desc">Time descending</a><br>
+            <a href="/sort?views=asc">Views ascending</a><br>
+            <a href="/sort?views=desc">Views descending</a><br>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
     {% for qdict in question_list %}
     <article>
-        <div class="question-numbers">
-            <a href="/question/{{ qdict['id'] }}/vote-up" class="material-icons">keyboard_arrow_up</a><br>
+        <div class="numbers">
+            <a href="/question/{{ qdict['id'] }}/vote-up" class="material-icons vote-up">keyboard_arrow_up</a><br>
             {{ qdict['vote_number'] }}<br>
-            <a href="/question/{{ qdict['id'] }}/vote-down" class="material-icons">keyboard_arrow_down</a><br>
-            <span class="material-icons">question_answer</span> {{ qdict['answer_count'] }}
+            <a href="/question/{{ qdict['id'] }}/vote-down" class="material-icons vote-down">keyboard_arrow_down</a><br>
+            <span class="material-icons num-icon">remove_red_eye</span> {{ qdict['view_number'] }}<br>
+            <span class="material-icons num-icon">question_answer</span> {{ qdict['answer_count'] }}
         </div><!--
         --><div class="question">
             <h2>{{ qdict['title'] }}</h2>
             <p>{{ qdict['message'] }}</p>
-            <div class="question-links">
+            <div class="entry-links">
                 <a href="/question/{{ qdict['id'] }}">See answers</a>
                 <a href="/question/{{ qdict['id'] }}/new-answer">I have an answer</a>
             </div>

@@ -29,7 +29,7 @@ def new_question():
 
 @app.route('/question/<int:q_id>')
 def display_question(q_id=0):
-    return display.display_questions()
+    return display.display_one_question(q_id)
 
 
 @app.route('/question/<int:q_id>/edit')

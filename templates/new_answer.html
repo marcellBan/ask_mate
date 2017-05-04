@@ -12,7 +12,7 @@
         <h2>{{ question['title'] }}</h2>
         <p>{{ question['message'] }}</p>
     </article>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <label for="message">Your answer<span class="req">*</span>:</label>
         <p>Make sure your answer is at least 10 characters long!</p>
         <textarea name="message" id="message" rows="4" required autofocus>{{ form_message }}</textarea>

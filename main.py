@@ -91,4 +91,4 @@ def _jinja2_time_filter(value):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

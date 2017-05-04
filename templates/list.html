@@ -23,7 +23,9 @@
         <div style="clear: both;"></div>
     </div>
     {% for qdict in question_list %}
-    <a href="/question/{{ qdict['id'] }}"><article>
+    {% with id = qdict['id'] %}
+    <article onclick="location='/question/{{ id }}'">
+    {% endwith %}
         <div class="numbers">
             <a href="/question/{{ qdict['id'] }}/vote-up" class="material-icons vote-up">keyboard_arrow_up</a><br>
             {{ qdict['vote_number'] }}<br>
@@ -39,6 +41,7 @@
                 <a href="/question/{{ qdict['id'] }}/new-answer">I have an answer</a>
             </div>
         </div>
-    </article></a>
+    </article>
     {% endfor %}
+
 {% endblock %}

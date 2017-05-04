@@ -13,8 +13,8 @@ def display_questions():
     loaded_answers = list(load_data(answers=True).values())
     for dictionary in list_dict:
         counter = 0
-        for element in loaded_answers:
-            if element['question_id'] == dictionary['id']:
+        for answer in loaded_answers:
+            if answer['question_id'] == dictionary['id']:
                 counter += 1
         dictionary['answer_count'] = counter
     return render_template('list.html', question_list=list_dict)
@@ -69,8 +69,15 @@ def display_sorted_questions():
         return redirect(url_for('index'))
     else:
         questions = list(load_data().values())
+        loaded_answers = load_data(answers=True)
         if skey != 'title':
             questions.sort(key=lambda x: x.get(skey), reverse=rev)
         else:
             questions.sort(key=lambda x: x.get(skey).lower(), reverse=rev)
+        for question in questions:
+            counter = 0
+            for answer in loaded_answers:
+                if answer['question_id'] == question['id']:
+                    counter += 1
+            dictionary['answer_count'] = counter
         return render_template('list.html', question_list=questions)

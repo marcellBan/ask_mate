@@ -28,7 +28,7 @@ def add_question():
                 'vote_number': 0,
                 'title': request.form.get('title'),
                 'message': request.form.get('message'),
-                'image': request.form.get('image')
+                'image': request.files.get('image').filename
             }
             save_data(data)
             return redirect(url_for('display_question', q_id=maxid + 1))
@@ -65,7 +65,7 @@ def add_answer(q_id):
                 'vote_number': 0,
                 'question_id': q_id,
                 'message': request.form.get('message'),
-                'image': request.form.get('image')
+                'image': request.files.get('image').filename
             }
             save_data(answers, answers=True)
             return redirect(url_for('display_question', q_id=q_id))

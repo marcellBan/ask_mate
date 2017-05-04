@@ -37,6 +37,12 @@ def add_question():
 def delete_question(q_id):
     question = load_data()
     answers = load_data(answers=True)
+    del(question[q_id])
+    for row in answers:
+        if answers[row]['question_id'] == q_id:
+            del(answers[row])
+    save_data(question)
+    save_data(answers, answers=True)
     return redirect(url_for('index'))
 
 
@@ -63,6 +69,8 @@ def add_answer(q_id):
             }
             save_data(answers, answers=True)
             return redirect(url_for('display_question', q_id=q_id))
+<<<<<<< HEAD
+=======
 
 
 def delete_answer(a_id):
@@ -71,3 +79,4 @@ def delete_answer(a_id):
     del imported_data[a_id]
     save_data(imported_data, answers=True)
     return redirect(url_for('display_question', q_id=q_id))
+>>>>>>> 4eccb0d58c8f647c79cd36178ee1479e9d709b30

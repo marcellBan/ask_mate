@@ -69,5 +69,8 @@ def display_sorted_questions():
         return redirect(url_for('index'))
     else:
         questions = list(load_data().values())
-        questions.sort(key=lambda x: x.get(skey), reverse=rev)
+        if skey != 'title':
+            questions.sort(key=lambda x: x.get(skey), reverse=rev)
+        else:
+            questions.sort(key=lambda x: x.get(skey).lower(), reverse=rev)
         return render_template('list.html', question_list=questions)

@@ -24,11 +24,6 @@ article .question, article .numbers, article .entry-links, article .answer {
     content: "Q: ";
 }
 
-.answer p::before {
-    content: "A: ";
-    font-weight: 700;
-}
-
 .entry-links {
     float: right;
     text-align: right;
@@ -79,4 +74,8 @@ article .question, article .numbers, article .entry-links, article .answer {
 .entry-links a:hover, .entry-links a:active {
     background: #81C784;
     border-color: #4CAF50;
+}
+
+.article-card {
+    margin-bottom: 15px;
 }

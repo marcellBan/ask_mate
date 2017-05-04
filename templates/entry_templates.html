@@ -41,7 +41,7 @@
         <p>{{ question['message'] }}</p>
         <p class="meta-data">
             {{ question['id'] }},
-            {{ question['submission_time'] }}
+            {{ question['submission_time']|time }}
         <div class="entry-links">
             <a href="/question/{{ question['id'] }}/new-answer">I have an answer</a><br>
             <a href="/question/{{ question['id'] }}/edit">Edit</a>
@@ -58,8 +58,10 @@
         <a href="/answer/{{ answ['id'] }}/vote-down" class="material-icons vote-down">keyboard_arrow_down</a><br>
     </div><!--
     --><div class="answer">
-        <h2>{{ answ['title'] }}</h2>
         <p>{{ answ['message'] }}</p>
+        <p class="meta-data">
+            Post time: {{ answ['submission_time']|time }}
+        </p>
         <div class="entry-links">
             <a href="/answer/{{ answ['id'] }}/edit">Edit</a>
             <a href="/answer/{{ answ['id'] }}/delete">Delete</a>

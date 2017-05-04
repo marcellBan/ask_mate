@@ -1,14 +1,5 @@
 #sort-dropdown {
     position: relative;
-    float: right;
-    background: red;
-}
-
-#sort-dropdown::after {
-    content: "clear";
-    position: relative;
-    display: none;
-    clear: both;
     background: red;
 }
 
@@ -17,6 +8,7 @@
     display: none;
     background: #E0E0E0;
     padding: 10px;
+    text-align: right;
 }
 
 #sort-dropdown:hover #sort-values {

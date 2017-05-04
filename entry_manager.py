@@ -69,3 +69,15 @@ def add_answer(q_id):
             }
             save_data(answers, answers=True)
             return redirect(url_for('display_question', q_id=q_id))
+<<<<<<< HEAD
+=======
+
+
+def delete_answer(a_id):
+    imported_data = load_data(answers=True)
+    q_id = imported_data[a_id].get('question_id')
+    del imported_data[a_id]
+    save_data(imported_data, answers=True)
+    print(load_data(answers=True))
+    return redirect(url_for('display_question', q_id=q_id))
+>>>>>>> 4eccb0d58c8f647c79cd36178ee1479e9d709b30

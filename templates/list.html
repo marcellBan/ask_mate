@@ -1,36 +1,26 @@
 {% extends "layout.html" %}
+{% block title %}AskMate{% endblock %}
 {% block head %}
     {{ super() }}
-    <style>
-        table{
-            margin:0px auto;
-            margin-bottom: 20px;
-            }
-        td:nth-child(2){border-left:1px solid black;}
-        td{padding: 10px;}
-        table a:link,table a:visited {
-                            background-color: #4CAF50;
-                            color: white;
-                            padding: 14px 25px;
-                            text-align: center; 
-                            text-decoration: none;
-                            float:right;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/css/list.css">
 {% endblock %}
 {% block main %}
     {% for qdict in question_list %}
-        <p><table width="80%">
-        <tr>
-        <td colspan="1" width="5%">{{ qdict['vote_number'] }}</td>
-        <td rowspan="2" width="95%">
-            <p><h3>{{ qdict['title'] }}</h3></p> <p>{{ qdict['message'] }}</p>
-            <a href="/question/{{ qdict['id'] }}">See Answers</a>
-        </td>
-        </tr>
-        <tr>
-        <td width="5%">{{ qdict['answer_count'] }}</td>
-        </tr>
-        </table></p>
+    <article>
+        <div class="question-numbers">
+            <a href="/question/{{ qdict['id'] }}/vote-up" class="material-icons">keyboard_arrow_up</a><br>
+            {{ qdict['vote_number'] }}<br>
+            <a href="/question/{{ qdict['id'] }}/vote-down" class="material-icons">keyboard_arrow_down</a><br>
+            <span class="material-icons">question_answer</span> {{ qdict['answer_count'] }}
+        </div><!--
+        --><div class="question">
+            <h2>{{ qdict['title'] }}</h2>
+            <p>{{ qdict['message'] }}</p>
+            <div class="question-links">
+                <a href="/question/{{ qdict['id'] }}">See answers</a>
+                <a href="/question/{{ qdict['id'] }}/new-answer">I have an answer</a>
+            </div>
+        </div>
+    </article>
     {% endfor %}
 {% endblock %}

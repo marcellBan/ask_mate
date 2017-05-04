@@ -86,7 +86,7 @@ def page_not_found(error):
 @app.template_filter('time')
 def _jinja2_time_filter(value):
     dt = datetime.datetime.fromtimestamp(value)
-    ret = '{}-{}-{} {}:{}'.format(dt.day, dt.month, dt.year, dt.hour, dt.minute)
+    ret = '{:02}-{:02}-{} {}:{:02}'.format(dt.day, dt.month, dt.year, dt.hour, dt.minute)
     return ret
 
 

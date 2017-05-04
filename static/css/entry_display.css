@@ -63,13 +63,20 @@ article .question, article .numbers, article .entry-links, article .answer {
 .meta-data {
     margin-top: 20px;
     color: #9E9E9E;
-    font-size: 0.8em;
+    font-size: 0.8em; line-height: 1;
 }
 
 .entry-links a:link, .entry-links a:visited {
-    padding: 5px 10px;
+    display: inline-block;
+    margin-bottom: 10px; padding: 0 10px;
     background: #BDBDBD;
     border: 1px solid #9E9E9E;
     border-radius: 3px;
     color: #000;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.entry-links a:hover, .entry-links a:active {
+    background: #81C784;
+    border-color: #4CAF50;
 }

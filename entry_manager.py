@@ -128,4 +128,3 @@ def edit_answer(a_id):
             }
             save_data(imported_data, answers=True)
             return redirect(url_for('display_question', q_id=q_id))
-

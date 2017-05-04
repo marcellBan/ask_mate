@@ -70,5 +70,4 @@ def delete_answer(a_id):
     q_id = imported_data[a_id].get('question_id')
     del imported_data[a_id]
     save_data(imported_data, answers=True)
-    print(load_data(answers=True))
     return redirect(url_for('display_question', q_id=q_id))

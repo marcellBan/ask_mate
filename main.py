@@ -32,7 +32,7 @@ def display_question(q_id=0):
     return display.display_one_question(q_id)
 
 
-@app.route('/question/<int:q_id>/edit')
+@app.route('/question/<int:q_id>/edit', methods=['GET', 'POST'])
 def question_edit(q_id=0):
     return entry_manager.edit_question(q_id)
 

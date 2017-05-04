@@ -46,20 +46,24 @@ def delete_question(q_id):
     return redirect(url_for('index'))
 
 
-def edit_question():
+def edit_question(q_id):
     questions = load_data()
-    form_title = 'placeholder 1'
-    form_message = 'placeholder 2'
-
+    form_title = questions[q_id]['title']
+    form_message = questions[q_id]['message']
     if request.method == 'GET':
-        return render_template('new_question.html')
+        return render_template('new_question.html', form_title=form_title, form_message=form_message)
     elif request.method == 'POST':
         if len(request.form.get('message')) < 10:
             flash('Your question isn\'t long enough!')
             return render_template(
                 'new_question.html',
-                form_title=form_title, form_message=form_message
-            )
+                form_title=request.form.get('title'), form_message=request.form.get('message'))
+        else:
+            questions[q_id]['title'] = request.form.get('title')
+            questions[q_id]['message'] = request.form.get('message')
+            questions[q_id]['submission_time'] = int(time.time())
+            save_data(questions)
+            return redirect(url_for('display_question', q_id=q_id))
 
 
 def add_answer(q_id):

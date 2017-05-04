@@ -72,6 +72,11 @@ def answer_delete(a_id):
     return entry_manager.delete_answer(a_id)
 
 
+@app.route('/answer/<int:a_id>/edit')
+def answer_edit(a_id):
+    return entry_manager.edit_answer(a_id)
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return 'Oops, page not found!', 404

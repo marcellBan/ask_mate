@@ -92,5 +92,32 @@ def delete_answer(a_id):
     q_id = imported_data[a_id].get('question_id')
     del imported_data[a_id]
     save_data(imported_data, answers=True)
+
     return redirect(url_for('display_question', q_id=q_id))
+
+    return redirect(url_for('new_', q_id=q_id))
+
+def edit_answer(a_id):
+    imported_data = load_data(answers=True)
+    if request.method == 'GET':
+        return render_template('new_answer.html', question=question, form_message=imported_data[a_id].get('message'))
+    """elif request.method == 'POST':
+        if len(request.form.get('message')) < 10:
+            flash('Your answer isn\'t long enough!')
+            return render_template(
+                'new_answer.html', question=question, form_message=request.form.get('message')
+            )
+        else:
+            answers = load_data(answers=True)
+            maxid = -1 if len(answers) == 0 else max(answers.keys())
+            answers[maxid + 1] = {
+                'id': maxid + 1,
+                'submission_time': int(time.time()),
+                'vote_number': 0,
+                'question_id': q_id,
+                'message': request.form.get('message'),
+                'image': request.files.get('image').filename
+            }
+            save_data(answers, answers=True)
+            return redirect(url_for('display_question', q_id=q_id))"""
 

@@ -34,6 +34,10 @@ def add_question():
             return redirect(url_for('display_question', q_id=maxid + 1))
 
 
+def delete_question():
+    pass
+
+
 def add_answer(q_id):
     question = load_data().get(q_id)
     if request.method == 'GET':
@@ -57,3 +61,13 @@ def add_answer(q_id):
             }
             save_data(answers, answers=True)
             return redirect(url_for('display_question', q_id=q_id))
+
+
+def delete_answer(a_id):
+    load_data(answers=True)
+
+    # id
+    # save_data(data, answers=False)
+
+if __name__ == '__main__':
+    ()

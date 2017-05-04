@@ -29,6 +29,11 @@ def new_question():
 
 @app.route('/question/<int:q_id>')
 def display_question(q_id=0):
+    return display.display_questions()
+
+
+@app.route('/question/<int:q_id>/delete')
+def delete_question(q_id=0):
     return display.display_one_question(q_id)
 
 
@@ -55,6 +60,11 @@ def downvote_anwer(a_id):
 @app.route('/answer/<int:a_id>/vote-up')
 def upvote_answer(a_id):
     return vote.upvote_answer(a_id)
+
+
+@app.route('/answer/<int:a_id>/delete')
+def answer_delete():
+    return entry_manager.delete_answer(a_id)
 
 
 @app.errorhandler(404)

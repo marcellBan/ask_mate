@@ -4,7 +4,7 @@ For AskMate by SzószKód
 '''
 
 from data_manager import load_data, save_data
-from flask import render_template
+from flask import render_template, redirect, request
 
 
 def display_questions():
@@ -32,5 +32,41 @@ def display_one_question(q_id):
 
 def display_sorted_questions():
     skey = None
+    rev = False
+    if request.args.get('id') is not None:
+        skey = 'id'
+        if request.args.get('id') == 'desc':
+            rev = True
+        elif request.args.get('id') != 'asc':
+            skey = None
+    elif request.args.get('time') is not None:
+        skey = 'submission_time'
+        if request.args.get('time') == 'desc':
+            rev = True
+        elif request.args.get('time') != 'asc':
+            skey = None
+    elif request.args.get('title') is not None:
+        skey = 'title'
+        if request.args.get('title') == 'desc':
+            rev = True
+        elif request.args.get('title') != 'asc':
+            skey = None
+    elif request.args.get('views') is not None:
+        skey = 'view_number'
+        if request.args.get('views') == 'desc':
+            rev = True
+        elif request.args.get('views') != 'asc':
+            skey = None
+    elif request.args.get('rating') is not None:
+        skey = 'vote_number'
+        if request.args.get('rating') == 'desc':
+            rev = True
+        elif request.args.get('rating') != 'asc':
+            skey = None
+
     if skey is None:
         return redirect(url_for('index'))
+    else:
+        questions = list(load_data().values())
+        questions.sort(key=lambda x: x.get(skey), reverse=rev)
+        return render_template('list.html', question_list=questions)

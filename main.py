@@ -32,6 +32,11 @@ def display_question(q_id=0):
     return display.display_one_question(q_id)
 
 
+@app.route('/question/<int:q_id>/edit')
+def question_edit(q_id=0):
+    return entry_manager.edit_question(q_id)
+
+
 @app.route('/question/<int:q_id>/delete')
 def question_delete(q_id=0):
     return entry_manager.delete_question(q_id)
@@ -65,6 +70,11 @@ def upvote_answer(a_id):
 @app.route('/answer/<int:a_id>/delete')
 def answer_delete(a_id):
     return entry_manager.delete_answer(a_id)
+
+
+@app.route('/answer/<int:a_id>/edit')
+def answer_edit(a_id):
+    return entry_manager.edit_answer(a_id)
 
 
 @app.errorhandler(404)

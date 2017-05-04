@@ -1,0 +1,55 @@
+table{
+    margin:0px auto;
+    margin-bottom: 20px;
+}
+td:nth-child(2){border-left:1px solid black;}
+td{padding: 10px;}
+table a:link,table a:visited {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 25px;
+    text-align: center; 
+    text-decoration: none;
+    float:right;
+}
+
+article {
+    width: 95%;
+    margin: 0 auto 50px;
+    background: #F5F5F5;
+    box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.35);
+}
+
+article:last-child {
+    border-bottom: none;
+}
+
+article .question, article .question-numbers, article .question-links {
+    display: inline-block;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.question-numbers {
+    width: 15%;
+    text-align: center;
+}
+
+.question {
+    width: 85%;
+}
+
+.question h2::before {
+    content: "Q: ";
+}
+
+.question-links {
+    float: right;
+}
+
+.question::after {
+    content: "clear";
+    display: none;
+    clear: both;
+    background: red;
+}

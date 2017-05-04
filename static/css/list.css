@@ -18,10 +18,15 @@
     display: none;
     padding: 10px;
     background: #F5F5F5;
-    box-shadow: 0 6px 24px -3px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 8px 18px -3px rgba(0, 0, 0, 0.35);
     text-align: right;
 }
 
 #sort-dropdown:hover+#sort-values, #sort-values:hover {
     display: block;
+}
+
+#sort-values a {
+    color: #000;
+    font-weight: 700;
 }

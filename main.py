@@ -4,6 +4,7 @@ by SzószKód
 '''
 # flash import can be deleted later on.
 from flask import Flask, request, render_template
+import datetime
 
 import display
 import entry_manager
@@ -80,6 +81,13 @@ def answer_edit(a_id):
 @app.errorhandler(404)
 def page_not_found(error):
     return 'Oops, page not found!', 404
+
+
+@app.template_filter('time')
+def _jinja2_time_filter(value):
+    dt = datetime.datetime.fromtimestamp(value)
+    ret = '{}-{}-{} {}:{}'.format(dt.day, dt.month, dt.year, dt.hour, dt.minute)
+    return ret
 
 
 if __name__ == "__main__":

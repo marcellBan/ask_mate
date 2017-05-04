@@ -1,0 +1,75 @@
+article {
+    width: 95%;
+    margin: 0 auto 50px;
+    background: #F5F5F5;
+    box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.35);
+}
+
+article .question, article .numbers, article .entry-links, article .answer {
+    display: inline-block;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.numbers {
+    width: 12.5%;
+    text-align: center;
+}
+
+.question, .answer {
+    width: 87.5%;
+}
+
+.question h2::before {
+    content: "Q: ";
+}
+
+.answer p::before {
+    content: "A: ";
+    font-weight: 700;
+}
+
+.entry-links {
+    float: right;
+    text-align: right;
+}
+
+.question::after, .answer::after {
+    content: "clear";
+    display: none;
+    clear: both;
+    background: red;
+}
+
+.num-icon {
+    color: #4CAF50;
+}
+
+*[class*="vote"] {
+    color: #9E9E9E;
+    font-size: 36px;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.vote-up:hover {
+    color: #4CAF50;
+}
+
+.vote-down:hover {
+    color: #FF6D00;
+}
+
+.meta-data {
+    margin-top: 20px;
+    color: #9E9E9E;
+    font-size: 0.8em;
+}
+
+.entry-links a:link, .entry-links a:visited {
+    padding: 5px 10px;
+    background: #BDBDBD;
+    border: 1px solid #9E9E9E;
+    border-radius: 3px;
+    color: #000;
+}

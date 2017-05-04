@@ -62,6 +62,11 @@ def upvote_answer(a_id):
     return vote.upvote_answer(a_id)
 
 
+@app.route('/answer/<int:a_id>/delete')
+def answer_delete():
+    return entry_manager.delete_answer(a_id)
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return 'Oops, page not found!', 404

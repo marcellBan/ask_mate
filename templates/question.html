@@ -35,7 +35,7 @@
         <h2>{{ question['title'] }}</h2>
         <p>{{ question['message'] }}</p>
         <p class="meta-data">
-            ID: {{ question['id'] }},
+            ID: {{ question['id'] }}<br>
             Post time: {{ question['submission_time']|time }}
         <div class="entry-links">
             <a href="/question/{{ question['id'] }}/new-answer">I have an answer</a><br>

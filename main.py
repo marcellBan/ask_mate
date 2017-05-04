@@ -33,8 +33,8 @@ def display_question(q_id=0):
 
 
 @app.route('/question/<int:q_id>/delete')
-def delete_question(q_id=0):
-    return display.display_one_question(q_id)
+def question_delete(q_id=0):
+    return entry_manager.delete_question(q_id)
 
 
 @app.route('/question/<int:q_id>/new-answer', methods=['GET', 'POST'])

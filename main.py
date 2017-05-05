@@ -2,8 +2,7 @@
 AskMate Q&A website
 by SzószKód
 '''
-# flash import can be deleted later on.
-from flask import Flask, request, render_template
+from flask import Flask
 import datetime
 
 import display

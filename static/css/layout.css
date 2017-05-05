@@ -119,14 +119,19 @@ footer {
 
     footer .page-container {
         position: relative;
-        min-height: calc(10vh + 30vh);
         background: url("/static/images/layout-footer-background.png");
         background-size: 25vh 25vh;
         background-repeat: no-repeat;
-        background-position: bottom center;
 
         color: #EEE;
         text-align: center;
+    }
+
+    @media screen and (max-width:499px) {
+        footer .page-container {
+            min-height: calc(10vh + 30vh);
+            background-position: bottom center;
+        }
     }
 
     @media screen and (min-width:500px) {
@@ -137,8 +142,14 @@ footer {
     }
 
     #footer-vertical-align {
-        position: absolute; top: 2em; left: 50%;
-        transform: translateX(-50%);
+        position: absolute;
+    }
+
+    @media screen and (max-width:499px) {
+        #footer-vertical-align {
+            top: 2em; left: 50%;
+            transform: translateX(-50%);
+        }
     }
 
     @media screen and (min-width:500px) {

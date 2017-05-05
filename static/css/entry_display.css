@@ -1,6 +1,11 @@
 main .page-container {
-    padding-right: 0; padding-left: 0;
     transition: all 0.3s;
+}
+
+@media screen and (max-width:749px) {
+    main .page-container {
+        padding-right: 0; padding-left: 0;
+    }
 }
 
 @media screen and (min-width:750px) {
@@ -10,11 +15,16 @@ main .page-container {
 }
 
 article {
-    width: 100%;
     margin: 0 auto 50px;
     background: #F5F5F5;
     box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.35);
     transition: width 0.3s;
+}
+
+@media screen and (max-width:749px) {
+    article {
+        width: 100%;
+    }
 }
 
 @media screen and (min-width:750px) {
@@ -30,9 +40,14 @@ article .question, article .numbers, article .entry-links, article .answer {
 }
 
 .numbers {
-    width: 20%;
     text-align: center;
     transition: width 0.3s;
+}
+
+@media screen and (max-width:959px) {
+    .numbers {
+        width: 20%;
+    }
 }
 
 @media screen and (min-width:960px) {
@@ -42,8 +57,13 @@ article .question, article .numbers, article .entry-links, article .answer {
 }
 
 .question, .answer {
-    width: 80%;
     transition: width 0.3s;
+}
+
+@media screen and (max-width:959px) {
+    .question, .answer {
+        width: 80%;
+    }
 }
 
 @media screen and (min-width:960px) {

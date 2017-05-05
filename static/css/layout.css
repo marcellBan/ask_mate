@@ -13,7 +13,7 @@ body {
     background: #E0E0E0;
 
     font-family: sans-serif;
-    font-size: 16px; line-height: 1.5em;
+    line-height: 1.5em;
 
     cursor: default;
 }
@@ -158,6 +158,12 @@ footer {
             transform: translate(-50%, -50%);
         }
     }
+
+@media screen and (max-width:599px) {
+    body {
+        font-size: 16px;
+    }
+}
 
 @media screen and (min-width: 600px) and (max-width: 959px) {
     body {

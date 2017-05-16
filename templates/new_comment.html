@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}Add a comment!{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/new_entry.css">
+{% endblock %}
+
+{% block main %}
+    <article>
+        {% if entry.get('title') %}
+          <h2>{{ entry['title'] }}</h2>
+        {% endif %}
+        <p>{{ entry['message'] }}</p>
+    </article>
+    <form action="" method="post">
+        <label for="message">Your comment<span class="req">*</span>:</label>
+        <textarea name="message" id="message" rows="4" required autofocus>{{ form_message }}</textarea>
+        <hr>
+        <input type="submit" value="Comment!"><br>
+    </form>
+{% endblock %}

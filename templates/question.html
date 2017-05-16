@@ -1,25 +1,6 @@
 {% extends "layout.html" %}
 {% block head %}
     {{ super() }}
-    <style>
-        table{
-            margin:0px;
-            margin-bottom: 20px;
-            }
-       td{padding: 10px;}
-       table a:link, table a:visited {
-                            background-color: #4CAF50;
-                            color: white;
-                            padding: 14px 25px;
-                            text-align: center; 
-                            text-decoration: none;
-                            float:right;
-        }
-        th, td {
-                border-left: 1px solid black;
-        }
-        
-    </style>
     <link rel="stylesheet" href="/static/css/entry_display.css">
     <style>
         hr {
@@ -50,6 +31,13 @@
             <a href="/question/{{ question['id'] }}/delete" id="see-answers">Delete</a>
         </div>
     </div>
+    {% if question.get('comments') %}
+        <ul>
+        {% for comment in question['comments'] %}
+            <li>{{ comment }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 </article>
 {% if question['answer_count'] %}
 <hr>
@@ -72,6 +60,13 @@
             <a href="/answer/{{ answ['id'] }}/delete">Delete</a>
         </div>
     </div>
+    {% if answ.get('comments') %}
+        <ul>
+        {% for comment in answ['comments'] %}
+            <li>{{ comment }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 </article>
 {% endfor %}
 </div>

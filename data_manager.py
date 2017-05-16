@@ -7,10 +7,38 @@ by SzószKód
 import csv
 import os
 import base64
+import psycopg2
 from constants import (QUESTIONS_FILE, ANSWERS_FILE,
                        QUESTION_FIELDS, ANSWER_FIELDS,
                        ENCODE_QUESTION_FIELDS, ENCODE_ANSWER_FIELDS,
                        CONVERT_QUESTION_FIELDS, CONVERT_ANSWER_FIELDS)
+
+_db_connection = None
+_cursor = None
+
+
+def connect_to_database():
+    connection_data = {
+        'dbname': os.environ.get('MY_PSQL_DBNAME'),
+        'user': os.environ.get('MY_PSQL_USER'),
+        'host': os.environ.get('MY_PSQL_HOST'),
+        'password': os.environ.get('MY_PSQL_PASSWORD')
+    }
+    connect_string = "dbname='{dbname}' user='{user}' host='{host}' password='{password}'"
+    connect_string = connect_string.format(**connection_data)
+    _db_connection = psycopg2.connect(connect_string)
+    _db_connection.autocommit = True
+    _cursor = _db_connection.cursor()
+
+
+def close_database_connection():
+    if _cursor is not None:
+        _cursor.close()
+    if _db_connection is not None:
+        _db_connection.close()
+
+
+# FIXME: Deprecated TODO: complete rewrite
 
 
 def load_data(answers=False):

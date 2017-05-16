@@ -5,6 +5,7 @@ by SzószKód
 from flask import Flask
 import datetime
 
+import data_manager
 import display
 import entry_manager
 import vote
@@ -90,4 +91,10 @@ def _jinja2_time_filter(value):
 
 
 if __name__ == "__main__":
-    app.run()
+    try:
+        data_manager.connect_to_database()
+        app.run()
+    except:
+        pass  # TODO: what do we want to do here
+    finally:
+        data_manager.close_database_connection()

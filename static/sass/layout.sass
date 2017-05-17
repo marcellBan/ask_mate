@@ -6,6 +6,7 @@
   margin: 0
   padding: 0
   box-sizing: border-box
+  outline: none
 
 header,
 main,
@@ -50,7 +51,6 @@ header
   min-height: $header-height
   background: $grey200
   border-bottom: calc(#{$one-px-rem} * 2) solid $grey400
-  line-height: $header-height
 
   .page-wrapper
     padding: 0 1ch
@@ -58,6 +58,7 @@ header
   #header-logo
     float: left
     font-size: 2em
+    line-height: $header-height
   
   #ask-mate
     color: $black
@@ -68,7 +69,44 @@ header
     color: $theme500
   
   #header-content
+    position: relative
     float: right
+    line-height: $header-height
+
+    *
+      display: inline-block
+  
+  form
+    @extend .s-border
+    @extend .s-rad
+
+    padding: 0 1ch
+    background: $grey400
+    border-color: $grey500
+    line-height: 1.5em
+
+    input[type="text"]
+      width: 8ch
+      background: $grey400
+      border: none
+      color: $grey700
+      font-size: 1em
+      line-height: 1
+      transition: width 0.3s
+
+      &:focus
+        width: 20ch
+    
+    input[type="submit"].material-icons
+      display: inline-block
+      margin-top: -0.15ch
+      background: $grey400
+      border: none
+      vertical-align: middle
+      color: $grey700
+      font-size: 1.2em
+      line-height: 1
+      font-weight: 700
   
   &::after
     @extend .clear

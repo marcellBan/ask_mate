@@ -73,6 +73,9 @@ def new_question(question):
     query = "INSERT INTO question (submission_time, view_number, vote_number, title, message, image) \
              VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s);"
     DatabaseConnection._cursor.execute(query, final_question)
+    query = "SELECT id FROM question ORDER BY id DESC LIMIT 1;"
+    DatabaseConnection._cursor.execute(query)
+    return DatabaseConnection._cursor.fetchall()[0][0]
 
 
 def new_answer(answer):

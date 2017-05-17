@@ -1,16 +1,112 @@
 {% extends "layout.html" %}
+
 {% block head %}
-    {{ super() }}
-    <link rel="stylesheet" href="/static/css/entry_display.css">
-    <style>
-        hr {
-            width: 95%; height: 3px;
-            margin: 0 auto 35px;
-            background: #BDBDBD;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/css/cards.css">
 {% endblock %}
+
 {% block main %}
+<!-- question -->
+<article class="question-card">
+    <div class="numbers-wrapper">
+    <div class="numbers">
+        <div class="votes">
+            <a href="/question/{{ question['id'] }}/vote-up?next=this" class="material-icons vote-button vote-up">arrow_upward</a><br>
+            {{ question['vote_number'] }}<br>
+            <a href="/question/{{ question['id'] }}/vote-down?next=this" class="material-icons vote-button vote-down">arrow_downward</a>
+        </div>
+        <span class="material-icons num-icon">remove_red_eye</span> {{ question['view_number'] }}<br>
+        <span class="material-icons num-icon">question_answer</span> {{ question['answer_count']}}
+    </div>
+    </div>
+    <div class="question-wrapper">
+        <h2>{{ question['title'] }}</h2>
+        <p>{{ question['message'] }}</p>
+        <section class="edit-buttons">
+                <a href="/question/{{ question['id'] }}/edit"><button class="material-icons">mode_edit</button></a>
+                <a href="/question/{{ question['id'] }}/delete"><button class="material-icons">delete</button></a>
+            </section>
+        <section class="question-meta-info">
+            ID: {{ question['id'] }}<br>
+            Submission Time: {{ question['sumbission_time'] }}
+        </section>
+        <section class="comments">
+            <ul>
+                {% if question.get('comments') %}
+                {% for comment in question['comments'] %}
+                <li>
+                    <p>{{ comment['sumbission_time'] }}</p>
+                    <section class="comment-meta-info">
+                        Sumbission Time: {{ comment['sumbission_time'] }}
+                        <section class="edit-buttons">
+                            <a href="/UNIMPLEMENTED"><button class="material-icons">mode_edit</button></a>
+                            <a href="/UNIMPLEMENTED"><button class="material-icons">delete</button></a>
+                        </section>
+                    </section>
+                </li>
+                {% endfor %}
+                {% endif %}
+                <a href="/UNIMPLEMENTED"><li class="new-comment">Add a comment</li></a>
+            </ul>
+        </section>
+    </div>
+</article>
+{% if question['answer_count'] %}
+<hr>
+{% endif %}
+<!-- answers -->
+<div id="answers">
+    {% for answer in answers %}
+    <article class="answer-card">
+        <div class="numbers-wrapper">
+        <div class="numbers">
+            <div class="votes">
+                <a href="/answer/{{ answer['id'] }}/vote-up" class="material-icons vote-up">arrow_upward</a><br>
+                {{ answer['vote_number'] }}<br>
+                <a href="/answer/{{ answer['id'] }}/vote-down" class="material-icons vote-down">arrow_downward</a><br>
+            </div>
+        </div>
+        </div>
+        <div class="answer-wrapper">
+            <p class="answer-message">{{ answer['message'] }}</p>
+            <section class="edit-buttons">
+                <a href=""><button class="material-icons">mode_edit</button></a>
+                <a href=""><button class="material-icons">delete</button></a>
+            </section>
+            <section class="answer-meta-info">
+                Submission time: {{ answer['sumbission_time'] }}
+            </section>
+            <section class="comments">
+                <ul>
+                    {% if answer.get('comments') %}
+                    {% for comment in answer['comments'] %}
+                    <li>
+                        <p>{{ comment['message'] }}</p>
+                        <section class="comment-meta-info">
+                            Sumbission Time: {{ comment['sumbission_time'] }}
+                            <section class="edit-buttons">
+                                <a href="/UNIMPLEMENTED"><button class="material-icons">mode_edit</button></a>
+                                <a href="/UNIMPLEMENTED"><button class="material-icons">delete</button></a>
+                            </section>
+                        </section>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                    <a href="/UNIMPLEMENTED"><li class="new-comment">Add a comment</li></a>
+                </ul>
+            </section>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block floating_buttons %}
+    <a href="/question/{{ question['id'] }}/new-answer"><button class="material-icons floating-button">question_answer</button></a>
+{% endblock %}
+
+
+
+<!-- ORIGINAL QUESTION
 <article>
     <div class="numbers">
         <a href="/question/{{ question['id'] }}/vote-up?next=this" class="material-icons vote-up">keyboard_arrow_up</a><br>
@@ -18,15 +114,15 @@
         <a href="/question/{{ question['id'] }}/vote-down?next=this" class="material-icons vote-down">keyboard_arrow_down</a><br>
         <span class="material-icons num-icon">remove_red_eye</span> {{ question['view_number'] }}<br>
         <span class="material-icons num-icon">question_answer</span> {{ question['answer_count'] }}
-    </div><!--
-    --><div class="question">
+    </div><!-- CHANGE THIS BIT -->
+    <!--CHAGE THIS BIT<div class="question">
         <h2>{{ question['title'] }}</h2>
         <p>{{ question['message'] }}</p>
         <p class="meta-data">
             ID: {{ question['id'] }}<br>
             Post time: {{ question['submission_time']|time }}
         <div class="entry-links">
-            <a href="/question/{{ question['id'] }}/new-answer">I have an answer</a><br>
+            <a href="">I have an answer</a><br>
             <a href="/question/{{ question['id'] }}/edit">Edit</a>
             <a href="/question/{{ question['id'] }}/delete" id="see-answers">Delete</a>
         </div>
@@ -42,9 +138,11 @@
         </ul>
     {% endif %}
 </article>
-{% if question['answer_count'] %}
-<hr>
-{% endif %}
+-->
+
+
+
+<!-- ORIGINAL ANSWER
 <div id="answers">
 {% for answ in answers %}
 <article class="article-card">
@@ -52,8 +150,8 @@
         <a href="/answer/{{ answ['id'] }}/vote-up" class="material-icons vote-up">keyboard_arrow_up</a><br>
         {{ answ['vote_number'] }}<br>
         <a href="/answer/{{ answ['id'] }}/vote-down" class="material-icons vote-down">keyboard_arrow_down</a><br>
-    </div><!--
-    --><div class="answer">
+    </div><!-- CHANGE THIS BIT -->
+    <!-- CHANGE THIS BIT<div class="answer">
         <p>A: {{ answ['message'] }}</p>
         <p class="meta-data">
             Post time: {{ answ['submission_time']|time }}
@@ -76,4 +174,10 @@
 </article>
 {% endfor %}
 </div>
-{% endblock %}
+-->
+
+
+
+<!-- ONCLICK FOR LIST QUESTION
+onclick="location='/question/{{ id }}'" 
+-->

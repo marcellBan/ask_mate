@@ -1,13 +1,11 @@
 {% extends "layout.html" %}
+
 {% block title %}AskMate{% endblock %}
 {% block head %}
-    {{ super() }}
-    <link rel="stylesheet" href="/static/css/entry_display.css">
+    <link rel="stylesheet" href="/static/css/cards.css">
     <link rel="stylesheet" href="/static/css/list.css">
-    <style>
-        article {cursor: pointer;}
-    </style>
 {% endblock %}
+
 {% block main %}
     <div id="sort-menu-container">
         <div id="sort-dropdown">
@@ -26,26 +24,28 @@
             <a href="/sort?views=desc" class="material-icons">keyboard_arrow_down</a><br>
         </div>
     </div>
-    {% for qdict in question_list %}
-    {% with id = qdict['id'] %}
-    <article onclick="location='/question/{{ id }}'">
+    {% for question in question_list %}
+    {% with id = question['id'] %}
+    <article onclick="location='/question/{{ id }}'"class="question-card">
     {% endwith %}
-        <div class="numbers">
-            <a href="/question/{{ qdict['id'] }}/vote-up" class="material-icons vote-up">keyboard_arrow_up</a><br>
-            {{ qdict['vote_number'] }}<br>
-            <a href="/question/{{ qdict['id'] }}/vote-down" class="material-icons vote-down">keyboard_arrow_down</a><br>
-            <span class="material-icons num-icon">remove_red_eye</span> {{ qdict['view_number'] }}<br>
-            <span class="material-icons num-icon">question_answer</span> {{ qdict['answer_count'] }}
-        </div><!--
-        --><div class="question">
-            <h2>{{ qdict['title'] }}</h2>
-            <p>{{ qdict['message'] }}</p>
-            <div class="entry-links">
-                <a href="/question/{{ qdict['id'] }}#see-answers">See answers</a>
-                <a href="/question/{{ qdict['id'] }}/new-answer">I have an answer</a>
+        <div class="numbers-wrapper">
+        <section class="numbers">
+            <div class="votes">
+                <a href="/question/{{ question['id'] }}/vote-up?next=this" class="material-icons vote-button vote-up">arrow_upward</a><br>
+                {{ question['vote_number'] }}<br>
+                <a href="/question/{{ question['id'] }}/vote-down?next=this" class="material-icons vote-button vote-down">arrow_downward</a>
             </div>
+            <span class="material-icons num-icon">remove_red_eye</span> {{ question['view_number'] }}<br>
+            <span class="material-icons num-icon">question_answer</span> {{ question['answer_count']}}
+        </section>
+        </div>
+        <div class="question-wrapper">
+            <h2>{{ question['title'] }}</h2>
+            <p>{{ question['message'] }}</p>
         </div>
     </article>
     {% endfor %}
-
+    {% if index %}
+    <a href="/UNIMPLEMENTED"><button>Load more questions</button></a>
+    {% endif %}
 {% endblock %}

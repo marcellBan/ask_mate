@@ -1,32 +1,89 @@
+.clear {
+  content: "";
+  display: block;
+  clear: both;
+  width: 0;
+  height: 0;
+}
+
+.s-border {
+  border-style: solid;
+  border-width: 0.0625rem;
+}
+
+.s-rad {
+  border-radius: calc(0.0625rem * 3);
+}
+
+.s-shadow {
+  -webkit-box-shadow: 0 calc(0.0625rem * 3) calc(0.0625rem * 6) calc(-0.0625rem * 2) rgba(0, 0, 0, 0.5);
+          box-shadow: 0 calc(0.0625rem * 3) calc(0.0625rem * 6) calc(-0.0625rem * 2) rgba(0, 0, 0, 0.5);
+}
+
 #sort-menu-container {
-    position: relative;
-    width: 95%;
-    margin: 0 auto 35px;
-    text-align: right
+  position: relative;
+  text-align: right;
 }
 
 #sort-dropdown {
-    display: inline-block;
-    padding: 5px 10px;
-    background: #F5F5F5;
-    box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.35);
-    line-height: 1.5em;
+  padding: 0 1ch;
+  line-height: calc(55px + (0.0625rem * 5));
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+#sort-dropdown:hover, #sort-dropdown:active {
+  background: #E0E0E0;
+}
+#sort-dropdown:hover + #sort-values {
+  display: block;
 }
 
 #sort-values {
-    position: absolute; top: 100%; right: 0;
-    display: none;
-    padding: 10px;
-    background: #F5F5F5;
-    box-shadow: 0 8px 18px -3px rgba(0, 0, 0, 0.35);
-    text-align: right;
+  position: absolute;
+  top: calc(100% - (one-px-rem * 5));
+  right: 0;
+  display: none;
+  background: #EEE;
+  -webkit-box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+#sort-values:hover {
+  display: block;
+  background: #E0E0E0;
 }
 
-#sort-dropdown:hover+#sort-values, #sort-values:hover {
-    display: block;
-}
-
-#sort-values a {
-    color: #000;
-    font-weight: 700;
-}
+/* #sort-menu-container {
+ *     position: relative;
+ *     width: 95%;
+ *     margin: 0 auto 35px;
+ *     text-align: right
+ * }
+ *
+ * #sort-dropdown {
+ *     display: inline-block;
+ *     padding: 5px 10px;
+ *     background: #F5F5F5;
+ *     box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.35);
+ *     line-height: 1.5em;
+ * }
+ *
+ * #sort-values {
+ *     position: absolute; top: 100%; right: 0;
+ *     display: none;
+ *     padding: 10px;
+ *     background: #F5F5F5;
+ *     box-shadow: 0 8px 18px -3px rgba(0, 0, 0, 0.35);
+ *     text-align: right;
+ * }
+ *
+ * #sort-dropdown:hover+#sort-values, #sort-values:hover {
+ *     display: block;
+ * }
+ *
+ * #sort-values a {
+ *     color: #000;
+ *     font-weight: 700;
+ * }
+ */

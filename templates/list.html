@@ -8,45 +8,26 @@
 {% endblock %}
 
 {% block header_content %}
-<!-- FIX STYLE, UNCOMMENT
-            <div id="sort-menu-container">
-                <div id="sort-dropdown">
-                    Sort by <span class="material-icons">keyboard_arrow_down</span>
-                </div>
-                <div id="sort-values">
-                    ID: <a href="/sort?id=asc" class="material-icons">keyboard_arrow_up</a>
-                    <a href="/sort?id=desc" class="material-icons">keyboard_arrow_down</a><br>
-                    Title: <a href="/sort?title=asc" class="material-icons">keyboard_arrow_up</a>
-                    <a href="/sort?title=desc" class="material-icons">keyboard_arrow_down</a><br>
-                    Rating: <a href="/sort?rating=asc" class="material-icons">keyboard_arrow_up</a>
-                    <a href="/sort?rating=desc" class="material-icons">keyboard_arrow_down</a><br>
-                    Time posted: <a href="/sort?time=asc" class="material-icons">keyboard_arrow_up</a>
-                    <a href="/sort?time=desc" class="material-icons">keyboard_arrow_down</a><br>
-                    Views: <a href="/sort?views=asc" class="material-icons">keyboard_arrow_up</a>
-                    <a href="/sort?views=desc" class="material-icons">keyboard_arrow_down</a><br>
-                </div>
-            </div>
-            -->
+    <div id="sort-menu-container">
+        <div id="sort-dropdown">
+            Sort by
+        </div>
+        <div id="sort-values">
+            ID: <a href="/sort?id=asc" class="material-icons">arrow_upward</a>
+            <a href="/sort?id=desc" class="material-icons">arrow_downward</a><br>
+            Title: <a href="/sort?title=asc" class="material-icons">arrow_upward</a>
+            <a href="/sort?title=desc" class="material-icons">arrow_downward</a><br>
+            Rating: <a href="/sort?rating=asc" class="material-icons">arrow_upward</a>
+            <a href="/sort?rating=desc" class="material-icons">arrow_downward</a><br>
+            Time posted: <a href="/sort?time=asc" class="material-icons">arrow_upward</a>
+            <a href="/sort?time=desc" class="material-icons">arrow_downward</a><br>
+            Views: <a href="/sort?views=asc" class="material-icons">arrow_upward</a>
+            <a href="/sort?views=desc" class="material-icons">arrow_downward</a><br>
+        </div>
+    </div>
 {% endblock %}
 
 {% block main %}
-    <div id="sort-menu-container">
-        <div id="sort-dropdown">
-            Sort by <span class="material-icons">keyboard_arrow_down</span>
-        </div>
-        <div id="sort-values">
-            ID: <a href="/sort?id=asc" class="material-icons">keyboard_arrow_up</a>
-            <a href="/sort?id=desc" class="material-icons">keyboard_arrow_down</a><br>
-            Title: <a href="/sort?title=asc" class="material-icons">keyboard_arrow_up</a>
-            <a href="/sort?title=desc" class="material-icons">keyboard_arrow_down</a><br>
-            Rating: <a href="/sort?rating=asc" class="material-icons">keyboard_arrow_up</a>
-            <a href="/sort?rating=desc" class="material-icons">keyboard_arrow_down</a><br>
-            Time posted: <a href="/sort?time=asc" class="material-icons">keyboard_arrow_up</a>
-            <a href="/sort?time=desc" class="material-icons">keyboard_arrow_down</a><br>
-            Views: <a href="/sort?views=asc" class="material-icons">keyboard_arrow_up</a>
-            <a href="/sort?views=desc" class="material-icons">keyboard_arrow_down</a><br>
-        </div>
-    </div>
     {% for question in question_list %}
     {% with id = question['id'] %}
     <article onclick="location='/question/{{ id }}'"class="question-card">

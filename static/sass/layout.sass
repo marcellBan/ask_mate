@@ -73,8 +73,20 @@ header
     float: right
     line-height: $header-height
 
-    *
+    > *
       display: inline-block
+      margin-left: 1ch
+  
+  .header-new-question
+    padding: 0 1ch
+    color: $black
+    line-height: calc(#{$header-height} + (#{$one-px-rem} * 5))
+    text-decoration: none
+    transition: background 0.3s
+
+    &:hover,
+    &:active
+      background: $grey300
   
   form
     @extend .s-border

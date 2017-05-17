@@ -7,10 +7,6 @@ by SzószKód
 import os
 import datetime
 import psycopg2
-from constants import (QUESTIONS_FILE, ANSWERS_FILE,
-                       QUESTION_FIELDS, ANSWER_FIELDS,
-                       ENCODE_QUESTION_FIELDS, ENCODE_ANSWER_FIELDS,
-                       CONVERT_QUESTION_FIELDS, CONVERT_ANSWER_FIELDS)
 
 
 class DatabaseConnection(object):

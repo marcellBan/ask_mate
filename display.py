@@ -12,7 +12,7 @@ def display_questions():
     questions_list.sort(key=lambda x: x.get("submission_time"), reverse=True)
     for question in questions_list:
         question['answer_count'] = len(data_manager.get_answers(question['id']))
-    return render_template('list.html', question_list=questions_list)
+    return render_template('list.html', question_list=questions_list, index=False)
 
 
 def display_one_question(q_id):

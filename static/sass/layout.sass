@@ -122,6 +122,27 @@ main
   padding-top: calc(#{$one-px-rem} * 10)
   min-height: calc(100vh - (#{$header-height} + (#{$one-px-rem} * 2)) - 10vh)
 
+.more-q-link
+  text-decoration: none
+
+.more-questions
+  @extend .s-rad
+
+  display: block
+  margin: 10vh auto 0
+  padding: 1ch 1.5ch
+  background: $theme300
+  border: none
+  color: $white
+  font-size: 1em
+  font-weight: 700
+  cursor: pointer
+  transition: background 0.3s
+
+  &:hover,
+  &:active
+    background: $theme500
+
 
 
 // PGE FOOTER

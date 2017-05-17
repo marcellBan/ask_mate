@@ -38,6 +38,41 @@ class DatabaseConnection(object):
             DatabaseConnection._db_connection.close()
 
 
+def get_question(question_id):
+    pass
+
+
+def get_questions(sorting=None, limit=None):
+    pass
+
+
+def get_answers(question_id):
+    pass
+
+
+def new_question(question):
+    pass
+
+
+def new_answer(answer):
+    pass
+
+
+def update_question(question):
+    pass
+
+
+def update_answer(answer):
+    pass
+
+
+def construct_question_list(result_set):
+    pass
+
+
+def contruct_answer_list(result_set):
+    pass
+
 # FIXME: Deprecated TODO: complete rewrite
 
 

@@ -6,39 +6,39 @@ from flask import flash, redirect, request, url_for
 import data_manager
 
 
-def downvote_question(q_id):
-    question = data_manager.get_question(q_id)
+def downvote_question(question_id):
+    question = data_manager.get_question(question_id)
     question['vote_number'] -= 1
     data_manager.update_question(question)
     flash('Successfully downvoted this question!')
     if request.args.get('next') is not None:
-        return redirect(url_for('display_question', q_id=q_id))
+        return redirect(url_for('display_question', q_id=question_id))
     else:
         return redirect(url_for('index'))
 
 
-def upvote_question(q_id):
-    question = data_manager.get_question(q_id)
+def upvote_question(question_id):
+    question = data_manager.get_question(question_id)
     question['vote_number'] += 1
     data_manager.update_question(question)
     flash('Successfully upvoted this question!')
     if request.args.get('next') is not None:
-        return redirect(url_for('display_question', q_id=q_id))
+        return redirect(url_for('display_question', q_id=question_id))
     else:
         return redirect(url_for('index'))
 
 
-def downvote_answer(a_id):
-    answer = data_manager.get_answer(a_id)
+def downvote_answer(answer_id):
+    answer = data_manager.get_answer(answer_id)
     answer['vote_number'] -= 1
     data_manager.update_answer(answer)
-    flash('Successfully downvoted the answer: ({})'.format(a_id))
+    flash('Successfully downvoted the answer: ({})'.format(answer_id))
     return redirect(url_for('display_question', q_id=answer['question_id']))
 
 
-def upvote_answer(a_id):
-    answer = data_manager.get_answer(a_id)
+def upvote_answer(answer_id):
+    answer = data_manager.get_answer(answer_id)
     answer['vote_number'] += 1
     data_manager.update_answer(answer)
-    flash('Successfully upvoted the answer ({})'.format(a_id))
+    flash('Successfully upvoted the answer ({})'.format(answer_id))
     return redirect(url_for('display_question', q_id=answer['question_id']))

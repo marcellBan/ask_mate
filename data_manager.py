@@ -84,9 +84,12 @@ def new_answer(answer):
 
 
 def update_question(question):
-    
-    query = "WHERE id="
-    DatabaseConnection._cursor.execute(query, question)
+    final_question = dict(question)
+    final_question['submission_time'] = datetime.datetime.fromtimestamp(final_question['submission_time'])
+    query = "UPDATE question \
+             SET submission_time = %(submission_time)s, vote_number = %(vote_number)s, \
+             message = %(message)s, image = %(image)s WHERE id = %(id)s"
+    DatabaseConnection._cursor.execute(query, final_question)
 
 
 def update_answer(answer):

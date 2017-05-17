@@ -86,6 +86,14 @@ def update_answer(answer):
     pass
 
 
+def delete_question(question_id):
+    pass
+
+
+def delete_answer(answer_id):
+    pass
+
+
 def construct_question_dicts(result_set):
     questions = dict()
     for question in result_set:

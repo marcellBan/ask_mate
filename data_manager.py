@@ -84,6 +84,7 @@ def new_answer(answer):
 
 
 def update_question(question):
+    
     query = "WHERE id="
     DatabaseConnection._cursor.execute(query, question)
 

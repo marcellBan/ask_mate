@@ -3,7 +3,6 @@
 {% block title %}Ask a question!{% endblock %}
 
 {% block head %}
-    {{ super() }}
     <link rel="stylesheet" href="/static/css/new_entry.css">
 {% endblock %}
 
@@ -15,7 +14,7 @@
         <hr>
         <label for="message">Detailed question<span class="req">*</span>:</label>
         <p>Make sure your question is at least 10 characters long!</p>
-        <textarea name="message" id="message" rows="4" required
+        <textarea name="message" id="message" rows="4" required minlength="10"
             {% if form_message %}autofocus{% endif %}>{{ form_message }}</textarea>
         <hr>
         <label for="image">Upload an image of your problem:</label>

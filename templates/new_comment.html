@@ -16,7 +16,7 @@
     </article>
     <form action="" method="post">
         <label for="message">Your comment<span class="req">*</span>:</label>
-        <textarea name="message" id="message" rows="4" required autofocus>{{ form_message }}</textarea>
+        <textarea name="message" id="message" rows="4" required autofocus minlength="10">{{ form_message }}</textarea>
         <hr>
         <input type="submit" value="Comment!"><br>
     </form>

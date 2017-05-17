@@ -7,6 +7,7 @@ by SzószKód
 import csv
 import os
 import base64
+import datetime
 import psycopg2
 from constants import (QUESTIONS_FILE, ANSWERS_FILE,
                        QUESTION_FIELDS, ANSWER_FIELDS,
@@ -93,7 +94,12 @@ def update_question(question):
 
 
 def update_answer(answer):
-    pass
+    submitted_answer = dict(answer)
+    submitted_answer['submission_time'] = datetime.datetime.fromtimestamp(submitted_answer['submission_time'])
+    query = "UPDATE answer \
+             SET submission_time = %(submission_time)s, vote_number = %(vote_number)s, \
+             message = %(message)s, image = %(image)s WHERE id = %(id)s"
+    DatabaseConnection._cursor.execute(query, submitted_answer)
 
 
 def delete_question(question_id):

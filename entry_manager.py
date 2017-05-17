@@ -27,17 +27,17 @@ def add_question():
                 'message': request.form.get('message'),
                 'image': request.files.get('image').filename
             }
-            q_id = data_manager.new_question(question)
-            return redirect(url_for('display_question', q_id=q_id))
+            question_id = data_manager.new_question(question)
+            return redirect(url_for('display_question', q_id=question_id))
 
 
-def delete_question(q_id):
-    data_manager.delete_question(q_id)
+def delete_question(question_id):
+    data_manager.delete_question(question_id)
     return redirect(url_for('index'))
 
 
-def edit_question(q_id):
-    question = data_manager.get_question(q_id)
+def edit_question(question_id):
+    question = data_manager.get_question(question_id)
     form_title = question['title']
     form_message = question['message']
     if request.method == 'GET':
@@ -53,11 +53,11 @@ def edit_question(q_id):
             question['message'] = request.form.get('message')
             question['submission_time'] = int(time.time())
             data_manager.update_question(question)
-            return redirect(url_for('display_question', q_id=q_id))
+            return redirect(url_for('display_question', q_id=question_id))
 
 
-def add_answer(q_id):
-    question = data_manager.get_question(q_id)
+def add_answer(question_id):
+    question = data_manager.get_question(question_id)
     if request.method == 'GET':
         return render_template('new_answer.html', question=question)
     elif request.method == 'POST':
@@ -70,24 +70,24 @@ def add_answer(q_id):
             answer = {
                 'submission_time': int(time.time()),
                 'vote_number': 0,
-                'question_id': q_id,
+                'question_id': question_id,
                 'message': request.form.get('message'),
                 'image': request.files.get('image').filename
             }
             data_manager.new_answer(answer)
-            return redirect(url_for('display_question', q_id=q_id))
+            return redirect(url_for('display_question', q_id=question_id))
 
 
-def delete_answer(a_id):
-    q_id = data_manager.get_answer(a_id).get('question_id')
-    data_manager.delete_answer(a_id)
-    return redirect(url_for('display_question', q_id=q_id))
+def delete_answer(answer_id):
+    question_id = data_manager.get_answer(answer_id).get('question_id')
+    data_manager.delete_answer(answer_id)
+    return redirect(url_for('display_question', q_id=question_id))
 
 
-def edit_answer(a_id):
-    answer = data_manager.get_answer(a_id)
-    q_id = answer.get('question_id')
-    question = data_manager.get_question(q_id)
+def edit_answer(answer_id):
+    answer = data_manager.get_answer(answer_id)
+    question_id = answer.get('question_id')
+    question = data_manager.get_question(question_id)
     if request.method == 'GET':
         return render_template('new_answer.html', question=question, form_message=answer.get('message'))
     elif request.method == 'POST':
@@ -101,4 +101,4 @@ def edit_answer(a_id):
             answer['message'] = request.form.get('message')
             answer['image'] = request.files.get('image').filename
             data_manager.update_answer(answer)
-            return redirect(url_for('display_question', q_id=q_id))
+            return redirect(url_for('display_question', q_id=question_id))

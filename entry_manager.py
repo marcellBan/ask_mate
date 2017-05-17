@@ -28,7 +28,7 @@ def add_question():
                 'image': request.files.get('image').filename
             }
             question_id = data_manager.new_question(question)
-            return redirect(url_for('display_question', q_id=question_id))
+            return redirect(url_for('display_question', question_id=question_id))
 
 
 def delete_question(question_id):
@@ -53,7 +53,7 @@ def edit_question(question_id):
             question['message'] = request.form.get('message')
             question['submission_time'] = int(time.time())
             data_manager.update_question(question)
-            return redirect(url_for('display_question', q_id=question_id))
+            return redirect(url_for('display_question', question_id=question_id))
 
 
 def add_answer(question_id):
@@ -75,13 +75,13 @@ def add_answer(question_id):
                 'image': request.files.get('image').filename
             }
             data_manager.new_answer(answer)
-            return redirect(url_for('display_question', q_id=question_id))
+            return redirect(url_for('display_question', question_id=question_id))
 
 
 def delete_answer(answer_id):
     question_id = data_manager.get_answer(answer_id).get('question_id')
     data_manager.delete_answer(answer_id)
-    return redirect(url_for('display_question', q_id=question_id))
+    return redirect(url_for('display_question', question_id=question_id))
 
 
 def edit_answer(answer_id):
@@ -101,4 +101,4 @@ def edit_answer(answer_id):
             answer['message'] = request.form.get('message')
             answer['image'] = request.files.get('image').filename
             data_manager.update_answer(answer)
-            return redirect(url_for('display_question', q_id=question_id))
+            return redirect(url_for('display_question', question_id=question_id))

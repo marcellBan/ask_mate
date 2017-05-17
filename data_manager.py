@@ -9,7 +9,9 @@ import datetime
 import psycopg2
 
 
+# TODO: do we want to change to a per query based connection system?
 class DatabaseConnection(object):
+    '''static class for handling one database connection'''
     _db_connection = None
     _cursor = None
 
@@ -36,6 +38,7 @@ class DatabaseConnection(object):
 
 
 def get_question(question_id):
+    '''returns a dictionary containing all the information of a question with the given id'''
     DatabaseConnection._cursor.execute("SELECT * FROM question WHERE id = %s;", [question_id])
     question = DatabaseConnection._cursor.fetchall()[0]
     dict_of_question = {'id': question[0],
@@ -49,6 +52,11 @@ def get_question(question_id):
 
 
 def get_questions(sorting=None, limit=None):
+    '''
+    returns a dictionary of dictionaries containing all the questions\n
+    the amount of questions returened can be limited with the limit parameter\n
+    the sorting parameter is should be None or a list of tuples containing the column and the sorting order
+    '''
     if sorting is None:
         DatabaseConnection._cursor.execute("SELECT * FROM question ORDER BY submission_time DESC;")
         questions = DatabaseConnection._cursor.fetchall()
@@ -59,6 +67,7 @@ def get_questions(sorting=None, limit=None):
 
 
 def get_answer(answer_id):
+    '''returns a dictionary containing all the information of an answer with the given id'''
     DatabaseConnection._cursor.execute("SELECT * FROM answer WHERE id = %s;", [answer_id])
     answer = DatabaseConnection._cursor.fetchall()[0]
     dict_of_answer = {'id': answer[0],
@@ -71,6 +80,7 @@ def get_answer(answer_id):
 
 
 def get_answers(question_id):
+    '''returns a dictionary of ditionaries containing all the answers with the given question_id'''
     DatabaseConnection._cursor.execute("SELECT * FROM answer WHERE question_id = %s;", [question_id])
     result_set = DatabaseConnection._cursor.fetchall()
     answers = construct_answer_dicts(result_set)
@@ -78,6 +88,11 @@ def get_answers(question_id):
 
 
 def new_question(question):
+    '''
+    adds a new question to the database\n
+    the parameter should be a dictionary with the following keys:\n
+    submission_time::timestamp, view_number::int, vote_number::int, title::str, message::str, image::str
+    '''
     final_question = dict(question)
     final_question['submission_time'] = datetime.datetime.fromtimestamp(final_question['submission_time'])
     query = "INSERT INTO question (submission_time, view_number, vote_number, title, message, image) \
@@ -89,6 +104,11 @@ def new_question(question):
 
 
 def new_answer(answer):
+    '''
+    adds a new answer to the database\n
+    the parameter should be a dictionary with the following keys:\n
+    submission_time::timestamp, vote_number::int, question_id::int, message::str, image::str
+    '''
     final_answer = dict(answer)
     final_answer['submission_time'] = datetime.datetime.fromtimestamp(final_answer['submission_time'])
     query = "INSERT INTO answer (submission_time, vote_number, question_id, message, image) \
@@ -96,7 +116,13 @@ def new_answer(answer):
     DatabaseConnection._cursor.execute(query, final_answer)
 
 
+# TODO: we need to update the title and view_number too
 def update_question(question):
+    '''
+    updates a question in the database
+    the parameter should be a dictionary with the following keys:\n
+    id::int, submission_time::timestamp, view_number::int, vote_number::int, title::str, message::str, image::str
+    '''
     final_question = dict(question)
     final_question['submission_time'] = datetime.datetime.fromtimestamp(final_question['submission_time'])
     query = "UPDATE question \
@@ -106,6 +132,11 @@ def update_question(question):
 
 
 def update_answer(answer):
+    '''
+    updates an answer in the database
+    the parameter should be a dictionary with the following keys:\n
+    id::int, submission_time::timestamp, vote_number::int, message::str, image::str
+    '''
     submitted_answer = dict(answer)
     submitted_answer['submission_time'] = datetime.datetime.fromtimestamp(submitted_answer['submission_time'])
     query = "UPDATE answer \
@@ -115,6 +146,10 @@ def update_answer(answer):
 
 
 def delete_question(question_id):
+    '''
+    deletes a question from the database with the given id\n
+    also deletes al the answers that are for that question
+    '''
     query_answer = 'DELETE FROM answer WHERE question_id = %s;'
     DatabaseConnection._cursor.execute(query_answer, [question_id])
     query_question = 'DELETE FROM question WHERE id = %s;'
@@ -122,11 +157,13 @@ def delete_question(question_id):
 
 
 def delete_answer(answer_id):
+    '''deletes an answer from the database with the given id'''
     query = "DELETE FROM answer WHERE id = %s;"
     DatabaseConnection._cursor.execute(query, [answer_id])
 
 
 def construct_question_dicts(result_set):
+    '''constructs a dictionary of dictionaries from an SQL Query result set (list of tuples) representing questions'''
     questions = dict()
     for question in result_set:
         questions[question[0]] = {
@@ -142,6 +179,7 @@ def construct_question_dicts(result_set):
 
 
 def construct_answer_dicts(result_set):
+    '''constructs a dictionary of dictionaries from an SQL Query result set (list of tuples) representing answers'''
     answers = dict()
     for answer in result_set:
         answers[answer[0]] = {

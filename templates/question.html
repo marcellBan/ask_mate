@@ -34,7 +34,10 @@
     {% if question.get('comments') %}
         <ul>
         {% for comment in question['comments'] %}
-            <li>{{ comment }}</li>
+            <li>
+                {{ comment['message'] }}<br>
+                {{ comment['submission_time'] }}
+            </li>
         {% endfor %}
         </ul>
     {% endif %}
@@ -63,7 +66,10 @@
     {% if answ.get('comments') %}
         <ul>
         {% for comment in answ['comments'] %}
-            <li>{{ comment }}</li>
+            <li>
+                {{ comment['message'] }}<br>
+                {{ comment['submission_time'] }}
+            </li>
         {% endfor %}
         </ul>
     {% endif %}

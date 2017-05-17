@@ -36,7 +36,7 @@ class DatabaseConnection(object):
 
 
 def get_question(question_id):
-    DatabaseConnection._cursor.execute('''SELECT * FROM question WHERE id = %s;''', [question_id])
+    DatabaseConnection._cursor.execute("SELECT * FROM question WHERE id = %s;", [question_id])
     question = DatabaseConnection._cursor.fetchall()[0]
     dict_of_question = {'id': question[0],
                         'submission_time': question[1].timestamp(),
@@ -49,14 +49,14 @@ def get_question(question_id):
 
 
 def get_questions(sorting=None, limit=None):
-    DatabaseConnection._cursor.execute('''SELECT * FROM question;''')
+    DatabaseConnection._cursor.execute("SELECT * FROM question;")
     questions = DatabaseConnection._cursor.fetchall()
     questions = construct_question_dicts(questions)
     return questions
 
 
 def get_answer(answer_id):
-    DatabaseConnection._cursor.execute('''SELECT * FROM answer WHERE id = %s;''', [answer_id])
+    DatabaseConnection._cursor.execute("SELECT * FROM answer WHERE id = %s;", [answer_id])
     answer = DatabaseConnection._cursor.fetchall()[0]
     dict_of_answer = {'id': answer[0],
                       'submission_time': answer[1].timestamp(),
@@ -68,9 +68,9 @@ def get_answer(answer_id):
 
 
 def get_answers(question_id):
-    DatabaseConnection._cursor.execute('''SELECT * FROM answer WHERE id = %s;''', [question_id])
-    answers = DatabaseConnection._cursor.fetchall()
-    answers = construct_answer_dicts(answers)
+    DatabaseConnection._cursor.execute("SELECT * FROM answer WHERE question_id = %s;", [question_id])
+    result_set = DatabaseConnection._cursor.fetchall()
+    answers = construct_answer_dicts(result_set)
     return answers
 
 
@@ -112,14 +112,14 @@ def update_answer(answer):
 
 
 def delete_question(question_id):
-    query_question = 'DELETE * FROM question WHERE id = %s;'
-    DatabaseConnection._cursor.execute(query_question, [question_id])
-    query_answer = 'DELETE * FROM answer WHERE question_id = %s;'
+    query_answer = 'DELETE FROM answer WHERE question_id = %s;'
     DatabaseConnection._cursor.execute(query_answer, [question_id])
+    query_question = 'DELETE FROM question WHERE id = %s;'
+    DatabaseConnection._cursor.execute(query_question, [question_id])
 
 
 def delete_answer(answer_id):
-    query = "DELETE * FROM answer WHERE id = %s;"
+    query = "DELETE FROM answer WHERE id = %s;"
     DatabaseConnection._cursor.execute(query, [answer_id])
 
 
@@ -145,7 +145,8 @@ def construct_answer_dicts(result_set):
             'id': answer[0],
             'submission_time': answer[1].timestamp(),
             'vote_number': answer[2],
-            'message': answer[3],
-            'image': answer[4]
+            'question_id': answer[3],
+            'message': answer[4],
+            'image': answer[5]
         }
     return answers

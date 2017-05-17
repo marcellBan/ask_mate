@@ -19,7 +19,7 @@ def display_one_question(q_id):
     question = data_manager.get_question(q_id)
     question['view_number'] += 1
     data_manager.update_question(question)
-    answers = data_manager.get_answers(q_id)
+    answers = list(data_manager.get_answers(q_id).values())
     answers.sort(key=lambda x: x.get('submission_time'), reverse=True)
     question['answer_count'] = len(answers)
     return render_template('question.html', question=question, answers=answers)

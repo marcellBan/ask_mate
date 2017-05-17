@@ -49,10 +49,13 @@ def get_question(question_id):
 
 
 def get_questions(sorting=None, limit=None):
-    DatabaseConnection._cursor.execute("SELECT * FROM question;")
-    questions = DatabaseConnection._cursor.fetchall()
-    questions = construct_question_dicts(questions)
-    return questions
+    if sorting is None:
+        DatabaseConnection._cursor.execute("SELECT * FROM question ORDER BY submission_time DESC;")
+        questions = DatabaseConnection._cursor.fetchall()
+        questions = construct_question_dicts(questions)
+        return questions
+    else:
+        pass
 
 
 def get_answer(answer_id):

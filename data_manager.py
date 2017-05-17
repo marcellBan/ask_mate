@@ -44,7 +44,7 @@ def get_question(question_id):
     DatabaseConnection._cursor.execute('''SELECT * FROM question WHERE id = %s;''', [question_id])
     question = DatabaseConnection._cursor.fetchall()[0]
     dict_of_question = {'id': question[0],
-                        'submission_time': question[1],
+                        'submission_time': question[1].timestamp(),
                         'view_number': question[2],
                         'vote_number': question[3],
                         'title': question[4],
@@ -68,18 +68,28 @@ def get_answers(question_id):
 
 
 def new_question(question):
-    query = "INSERT INTO question (submission_time, view_number, vote_number, title, message, image) VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s);"
-    DatabaseConnection._cursor.execute(query, question)
+    final_question = dict(question)
+    final_question['submission_time'] = datetime.datetime.fromtimestamp(final_question['submission_time'])
+    query = "INSERT INTO question (submission_time, view_number, vote_number, title, message, image) \
+             VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s);"
+    DatabaseConnection._cursor.execute(query, final_question)
 
 
 def new_answer(answer):
-    query = "INSERT INTO answer (submission_time, vote_number, question_id, message, image) VALUES (%(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s);"
-    DatabaseConnection._cursor.execute(query, answer)
+    final_answer = dict(answer)
+    final_answer['submission_time'] = datetime.datetime.fromtimestamp(final_answer['submission_time'])
+    query = "INSERT INTO answer (submission_time, vote_number, question_id, message, image) \
+             VALUES (%(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s);"
+    DatabaseConnection._cursor.execute(query, final_answer)
 
 
 def update_question(question):
-    query = "WHERE id="
-    DatabaseConnection._cursor.execute(query, question)
+    final_question = dict(question)
+    final_question['submission_time'] = datetime.datetime.fromtimestamp(final_question['submission_time'])
+    query = "UPDATE question \
+             SET submission_time = %(submission_time)s, vote_number = %(vote_number)s, \
+             message = %(message)s, image = %(image)s WHERE id = %(id)s"
+    DatabaseConnection._cursor.execute(query, final_question)
 
 
 def update_answer(answer):

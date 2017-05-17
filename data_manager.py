@@ -44,7 +44,7 @@ def get_question(question_id):
     DatabaseConnection._cursor.execute('''SELECT * FROM question WHERE id = %s;''', [question_id])
     question = DatabaseConnection._cursor.fetchall()[0]
     dict_of_question = {'id': question[0],
-                        'submission_time': question[1],
+                        'submission_time': question[1].timestamp(),
                         'view_number': question[2],
                         'vote_number': question[3],
                         'title': question[4],

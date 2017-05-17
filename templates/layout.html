@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{% block head %}
     <meta charset="UTF-8">
     <meta name="author" content="Marcell Bán, Miklós Torbics, Péter Ősz, Márton Mészáros">
     <meta name="description" content=
@@ -15,40 +14,63 @@
     -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="icon" href="/static/images/favicon.png">
-    <link rel="stylesheet" href="/static/css/layout.css">
-{% endblock %}
+    <link rel="stylesheet" href="layout.css">
+    {% block head %}{% endblock %}
 </head>
 <body>
-    <header id="top">
-    <div class="page-container">
-        <a href="{{ url_for('index') }}" id="ask-mate"><span id="ask">Ask</span>Mate</a>
-        <nav>
-            <a href="{{ url_for('index') }}" style="display: none;">Questions</a>
-            <a href="{{ url_for('new_question') }}">I have a question!</a>
-        </nav>
+    <!-- PAGE HEADER -->
+    <header>
+    <div class="page-wrapper">
+        <div id="header-logo">
+            <a href="/" id="ask-mate"><span id="ask">Ask</span>Mate</a>
+        </div>
+        <div id="header-content">
+            {% block header_content %}{% endblock %}
+        </div>
     </div>
     </header>
+
+
+
+    <!-- FLASH MESSAGES -->
+    <div id="flash-messages">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    </div>
+
+
+
+    <!-- MAIN -->
+    <div id="top"></div>
     <main>
-    <div class="page-container">
-        <div id="flash-messages">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-            <div class="flash-message">{{ message }}</div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-        </div>
+    <div class="page-wrapper">
         {% block main %}{% endblock %}
     </div>
     </main>
+
+
+
+    <!-- PAGE FOOTER -->
     <footer>
-    <div class="page-container">
+    <div class="page-wrapper">
     <div id="footer-vertical-align">
         Created by SzószKód<br>
         Copyright &copy; 2017
     </div>
     </div>
     </footer>
+
+
+
+    <!-- FLOATING BUTTONS -->
+    <div id="floating-buttons">
+        {% block floating_buttons %}{% endblock %}
+        <a href="#top"><button class="material-icons floating-button">arrow_upward</button></a>
+    </div>
 </body>
 </html>

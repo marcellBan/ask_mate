@@ -1,6 +1,6 @@
 '''
 data manager for AskMate
-persists data in local csv files
+persists data in postgres database
 by SzószKód
 '''
 
@@ -13,29 +13,31 @@ from constants import (QUESTIONS_FILE, ANSWERS_FILE,
                        ENCODE_QUESTION_FIELDS, ENCODE_ANSWER_FIELDS,
                        CONVERT_QUESTION_FIELDS, CONVERT_ANSWER_FIELDS)
 
-_db_connection = None
-_cursor = None
 
+class DatabaseConnection(object):
 
-def connect_to_database():
-    connection_data = {
-        'dbname': os.environ.get('MY_PSQL_DBNAME'),
-        'user': os.environ.get('MY_PSQL_USER'),
-        'host': os.environ.get('MY_PSQL_HOST'),
-        'password': os.environ.get('MY_PSQL_PASSWORD')
-    }
-    connect_string = "dbname='{dbname}' user='{user}' host='{host}' password='{password}'"
-    connect_string = connect_string.format(**connection_data)
-    _db_connection = psycopg2.connect(connect_string)
-    _db_connection.autocommit = True
-    _cursor = _db_connection.cursor()
+    def __init__(self):
+        self._db_connection = None
+        self._cursor = None
 
+    def connect_to_database(self):
+        connection_data = {
+            'dbname': os.environ.get('MY_PSQL_DBNAME'),
+            'user': os.environ.get('MY_PSQL_USER'),
+            'host': os.environ.get('MY_PSQL_HOST'),
+            'password': os.environ.get('MY_PSQL_PASSWORD')
+        }
+        connect_string = "dbname='{dbname}' user='{user}' host='{host}' password='{password}'"
+        connect_string = connect_string.format(**connection_data)
+        self._db_connection = psycopg2.connect(connect_string)
+        self._db_connection.autocommit = True
+        self._cursor = self._db_connection.cursor()
 
-def close_database_connection():
-    if _cursor is not None:
-        _cursor.close()
-    if _db_connection is not None:
-        _db_connection.close()
+    def close_database_connection(self):
+        if self._cursor is not None:
+            self._cursor.close()
+        if self._db_connection is not None:
+            self._db_connection.close()
 
 
 # FIXME: Deprecated TODO: complete rewrite

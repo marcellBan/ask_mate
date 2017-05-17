@@ -1,0 +1,150 @@
+@import variables
+@import meta-selectors
+
+// COMMON SETTINGS
+*[class*="card"]
+  @extend .s-shadow
+  
+  display: flex
+  margin-bottom: 1em
+  background: $grey200
+
+  .material-icons
+    font-size: 1em
+    line-height: 1.25em
+
+  .numbers-wrapper
+    position: relative
+    width: 14%
+
+  .numbers
+    position: absolute
+    top: 0
+    left: 50%
+    width: 100%
+    padding: 1ch
+    transform: translateX(-50%)
+  
+  .votes
+    margin-bottom: 1.5em
+    text-align: center
+
+    a
+      display: inline-block
+      color: $black
+      font-size: 2em
+      font-weight: 700
+      text-decoration: none
+      transition: color 0.3s
+  
+  .vote-up:hover
+    color: $theme500
+
+  .vote-down:hover
+    color: $acc400
+  
+  .question-wrapper,
+  .answer-wrapper
+    width: 86%
+    padding: 1ch
+  
+  h2
+    margin: 1ch 0
+  
+  .edit-buttons
+    text-align: right
+
+    button
+      margin-left: 0.5em
+      background: $grey200
+      border: none
+      color: $acc100
+      font-size: 1.25em
+      font-weight: 700
+      cursor: pointer
+      transition: color 0.3s
+
+      &:hover
+        color: $acc400
+
+
+
+// SINGLE QUESTION ONLY
+.question-meta-info,
+.answer-meta-info
+  margin-bottom: 1em
+  color: $grey500
+  font-size: 0.8em
+  line-height: 1.25em
+  text-align: right
+
+.num-icon
+  margin-left: 1ch
+  color: $theme500
+  font-size: 1.25em
+  transition: color 0.3s
+
+
+
+// COMMENTS
+.comments
+  margin-left: 1ch
+
+  ul
+    list-style-type: none
+  
+  a
+    text-decoration: none
+  
+  li
+    margin-top: 0.5em
+    padding: 0.5em 0 0.5em 1ch
+    border-left: calc(#{$one-px-rem} * 3) solid $theme500
+    overflow: hidden
+    font-size: 0.8em
+    line-height: 1.25em
+
+    &:nth-child(odd)
+      background: $grey350
+
+      button
+        background: $grey350
+        color: $acc200
+    
+    &:last-child
+      background: $theme200
+      color: $white
+      font-size: 1em
+      font-weight: 700
+      transition: background 0.3s
+
+      &:hover
+        background: $theme300
+
+  .comment-meta-info
+    padding-right: 1ch
+    color: $grey700
+    font-size: 0.9em
+    text-align: right
+
+    .edit-buttons
+      float: right
+
+      &::after
+        @extend .clear
+
+
+
+// ANSWER
+.answer-card
+  .answer-message
+    margin: 1ch 0
+
+
+
+hr
+  width: 85%
+  height: calc(#{$one-px} * 3)
+  margin: 2em auto 2em
+  background: $grey400
+  border: none

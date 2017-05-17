@@ -10,7 +10,6 @@ from flask import render_template, redirect, request
 def display_questions():
     questions_list = list(data_manager.get_questions().values())
     questions_list.sort(key=lambda x: x.get("submission_time"), reverse=True)
-    loaded_answers = list(data_manager.get_answers().values())
     for question in questions_list:
         question['answer_count'] = len(data_manager.get_answers(question['id']))
     return render_template('list.html', question_list=questions_list)
@@ -65,7 +64,6 @@ def display_sorted_questions():
         return redirect(url_for('index'))
     else:
         questions = list(data_manager.get_questions().values())
-        loaded_answers = data_manager.get_answers()
         if skey != 'title':
             questions.sort(key=lambda x: x.get(skey), reverse=rev)
         else:

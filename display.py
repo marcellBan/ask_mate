@@ -1,5 +1,5 @@
 '''
-Display the questions from questions.csv file
+Display the questions from the database
 For AskMate by SzószKód
 '''
 

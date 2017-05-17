@@ -55,6 +55,18 @@ def get_questions(sorting=None, limit=None):
     return questions
 
 
+def get_answer(answer_id):
+    DatabaseConnection._cursor.execute('''SELECT * FROM answer WHERE id = %s;''', [answer_id])
+    answer = DatabaseConnection._cursor.fetchall()[0]
+    dict_of_answer = {'id': answer[0],
+                      'submission_time': answer[1].timestamp(),
+                      'vote_number': answer[2],
+                      'question_id': answer[3],
+                      'message': answer[4],
+                      'image': answer[5]}
+    return dict_of_answer
+
+
 def get_answers(question_id):
     DatabaseConnection._cursor.execute('''SELECT * FROM answer WHERE id = %s;''', [question_id])
     answers = DatabaseConnection._cursor.fetchall()

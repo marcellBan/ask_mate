@@ -62,6 +62,11 @@ def get_questions(sorting=None, limit=None):
         questions = DatabaseConnection._cursor.fetchall()
         questions = construct_question_dicts(questions)
         return questions
+    elif limit is not None:
+        DatabaseConnection._cursor.execute("SELECT * FROM question ORDER BY submission_time DESC LIMIT %s;", [limit])
+        questions = DatabaseConnection._cursor.fetchall()
+        questions = construct_question_dicts(questions)
+        return questions
     else:
         pass
 

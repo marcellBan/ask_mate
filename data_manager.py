@@ -66,15 +66,18 @@ def get_answers(question_id):
 
 
 def new_question(question):
-    pass
+    query = "INSERT INTO question (submission_time, view_number, vote_number, title, message, image) VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s);"
+    DatabaseConnection._cursor.execute(query, question)
 
 
 def new_answer(answer):
-    pass
+    query = "INSERT INTO answer (submission_time, vote_number, question_id, message, image) VALUES (%(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s);"
+    DatabaseConnection._cursor.execute(query, answer)
 
 
 def update_question(question):
-    pass
+    query = "WHERE id="
+    DatabaseConnection._cursor.execute(query, question)
 
 
 def update_answer(answer):

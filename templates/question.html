@@ -22,7 +22,7 @@
     </div>
     <div class="question-wrapper">
         <h2>{{ question['title'] }}</h2>
-        <p>{{ question['message'] }}</p>
+        <p class="entry-message">{{ question['message'] }}</p>
         <section class="edit-buttons">
                 <a href="/question/{{ question['id'] }}/edit"><button class="material-icons">mode_edit</button></a>
                 <a href="/question/{{ question['id'] }}/delete"><button class="material-icons">delete</button></a>
@@ -36,7 +36,7 @@
                 {% if question.get('comments') %}
                 {% for comment in question['comments'] %}
                 <li>
-                    <p>{{ comment['sumbission_time'] }}</p>
+                    <p class="entry-message">{{ comment['sumbission_time'] }}</p>
                     <section class="comment-meta-info">
                         Sumbission Time: {{ comment['sumbission_time'] }}
                         <section class="edit-buttons">
@@ -69,7 +69,7 @@
         </div>
         </div>
         <div class="answer-wrapper">
-            <p class="answer-message">{{ answer['message'] }}</p>
+            <p class="answer-message entry-message">{{ answer['message'] }}</p>
             <section class="edit-buttons">
                 <a href=""><button class="material-icons">mode_edit</button></a>
                 <a href=""><button class="material-icons">delete</button></a>
@@ -82,7 +82,7 @@
                     {% if answer.get('comments') %}
                     {% for comment in answer['comments'] %}
                     <li>
-                        <p>{{ comment['message'] }}</p>
+                        <p class="entry-message">{{ comment['message'] }}</p>
                         <section class="comment-meta-info">
                             Sumbission Time: {{ comment['sumbission_time'] }}
                             <section class="edit-buttons">

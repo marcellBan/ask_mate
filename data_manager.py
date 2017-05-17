@@ -15,10 +15,11 @@ from constants import (QUESTIONS_FILE, ANSWERS_FILE,
 
 
 class DatabaseConnection(object):
-    self._db_connection = None
-    self._cursor = None
+    _db_connection = None
+    _cursor = None
 
-    def connect_to_database(self):
+    @staticmethod
+    def connect_to_database():
         connection_data = {
             'dbname': os.environ.get('MY_PSQL_DBNAME'),
             'user': os.environ.get('MY_PSQL_USER'),
@@ -31,7 +32,8 @@ class DatabaseConnection(object):
         DatabaseConnection._db_connection.autocommit = True
         DatabaseConnection._cursor = DatabaseConnection._db_connection.cursor()
 
-    def close_database_connection(self):
+    @staticmethod
+    def close_database_connection():
         if DatabaseConnection._cursor is not None:
             DatabaseConnection._cursor.close()
         if DatabaseConnection._db_connection is not None:
@@ -90,12 +92,32 @@ def update_answer(answer):
     pass
 
 
-def construct_question_list(result_set):
-    pass
+def construct_question_dicts(result_set):
+    questions = dict()
+    for question in result_set:
+        questions[question[0]] = {
+            'id': question[0],
+            'submission_time': question[1].timestamp(),
+            'view_number': question[2],
+            'vote_number': question[3],
+            'title': question[4],
+            'message': question[5],
+            'image': question[6]
+        }
+    return questions
 
 
-def contruct_answer_list(result_set):
-    pass
+def construct_answer_dicts(result_set):
+    answers = dict()
+    for answer in result_set:
+        answers[answer[0]] = {
+            'id': answer[0],
+            'submission_time': answer[1].timestamp(),
+            'vote_number': answer[2],
+            'message': answer[3],
+            'image': answer[4]
+        }
+    return answers
 
 # FIXME: Deprecated TODO: complete rewrite
 
@@ -142,3 +164,9 @@ def save_data(data, answers=False):
             for field in encode:
                 data[row][field] = base64.b64encode(bytearray(data[row][field], encoding='utf-8')).decode()
             writer.writerow(data[row])
+
+if __name__ == '__main__':
+    DatabaseConnection.connect_to_database()
+    DatabaseConnection._cursor.execute('SELECT * FROM answer')
+    print(DatabaseConnection._cursor.fetchall())
+    DatabaseConnection.close_database_connection()

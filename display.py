@@ -12,11 +12,7 @@ def display_questions():
     questions_list.sort(key=lambda x: x.get("submission_time"), reverse=True)
     loaded_answers = list(data_manager.get_answers().values())
     for question in questions_list:
-        counter = 0
-        for answer in loaded_answers:
-            if answer['question_id'] == question['id']:
-                counter += 1
-        question['answer_count'] = counter
+        question['answer_count'] = len(data_manager.get_answers(question['id']))
     return render_template('list.html', question_list=questions_list)
 
 
@@ -75,9 +71,5 @@ def display_sorted_questions():
         else:
             questions.sort(key=lambda x: x.get(skey).lower(), reverse=rev)
         for question in questions:
-            counter = 0
-            for answer in loaded_answers.values():
-                if answer['question_id'] == question['id']:
-                    counter += 1
-            question['answer_count'] = counter
+            question['answer_count'] = len(data_manager.get_answers(question['id']))
         return render_template('list.html', question_list=questions)

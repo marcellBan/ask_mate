@@ -15,17 +15,17 @@ def display_questions():
     return render_template('list.html', question_list=questions_list, index=False)
 
 
-def display_one_question(q_id):
-    question = data_manager.get_question(q_id)
+def display_one_question(question_id):
+    question = data_manager.get_question(question_id)
     question['view_number'] += 1
     data_manager.update_question(question)
-    answers = list(data_manager.get_answers(q_id).values())
+    answers = list(data_manager.get_answers(question_id).values())
     answers.sort(key=lambda x: x.get('submission_time'), reverse=True)
     question['answer_count'] = len(answers)
     return render_template('question.html', question=question, answers=answers)
 
 
-# TODO: this needs total refactoring to data_manager
+# TODO: this needs total refactoring into data_manager
 def display_sorted_questions():
     skey = None
     rev = False

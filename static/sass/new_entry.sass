@@ -1,0 +1,67 @@
+@import meta-selectors
+@import variables
+
+.req
+  color: $acc400
+
+form
+  @extend .s-rad
+  @extend .s-shadow
+
+  width: 100%
+
+  label
+    display: block
+
+    &+p
+      font-size: 0.8em
+  
+  input[type="text"],
+  textarea
+    width: 100%
+    padding: 0 1.25em
+    background: $grey200
+    resize: none
+
+    font-size: 1.25em
+    line-height: 2em
+
+    &:focus+hr
+      width: 100%
+  
+  hr
+    width: 0%
+    height: calc(#{one-px-rem} * 3)
+    margin-bottom: 2em
+    background: $theme500
+    transition: width 0.5s ease-in-out
+  
+  input[type="submit"]
+    @extend .s-border
+    @extend .s-rad
+
+    display: block
+    margin: 0.75em auto
+    padding: 1ch 1.5ch
+    background: $grey400
+    border-color: $grey500
+    font-size: 1em
+    cursor: pointer
+    transition: background 0.3s, border-color 0.3s
+
+    &:hover,
+    &:active
+      background: $theme300
+      border-collapse: $theme500
+
+article
+  margin-bottom: 2em
+
+  h2
+    padding-bottom: 0.5em
+
+    &::before
+      content: "Q"
+  
+  p
+    font-size: 0.8em

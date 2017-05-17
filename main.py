@@ -15,6 +15,11 @@ app.secret_key = 'I have no idea what I\'m doing'
 
 @app.route('/')
 def index():
+    return display.display_five_latest_questions()
+
+
+@app.route('/list')
+def list_index():
     return display.display_questions()
 
 

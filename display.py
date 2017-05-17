@@ -25,6 +25,14 @@ def display_one_question(question_id):
     return render_template('question.html', question=question, answers=answers)
 
 
+def display_five_latest_questions():
+    questions_list = list(data_manager.get_questions(limit=5).values())
+    questions_list.sort(key=lambda x: x.get("submission_time"), reverse=True)
+    for question in questions_list:
+        question['answer_count'] = len(data_manager.get_answers(question['id']))
+    return render_template('list.html', question_list=questions_list, index=True)
+
+
 # TODO: this needs total refactoring into data_manager
 def display_sorted_questions():
     skey = None

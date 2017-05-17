@@ -3,34 +3,34 @@ Display the questions from questions.csv file
 For AskMate by SzószKód
 '''
 
-from data_manager import load_data, save_data
+import data_manager
 from flask import render_template, redirect, request
 
 
 def display_questions():
-    list_dict = list(load_data().values())
-    list_dict.sort(key=lambda x: x.get("submission_time"), reverse=True)
-    loaded_answers = list(load_data(answers=True).values())
-    for dictionary in list_dict:
+    questions_list = list(data_manager.get_questions().values())
+    questions_list.sort(key=lambda x: x.get("submission_time"), reverse=True)
+    loaded_answers = list(data_manager.get_answers().values())
+    for question in questions_list:
         counter = 0
         for answer in loaded_answers:
-            if answer['question_id'] == dictionary['id']:
+            if answer['question_id'] == question['id']:
                 counter += 1
-        dictionary['answer_count'] = counter
-    return render_template('list.html', question_list=list_dict)
+        question['answer_count'] = counter
+    return render_template('list.html', question_list=questions_list)
 
 
 def display_one_question(q_id):
-    questions = load_data()
-    questions[q_id]['view_number'] += 1
-    question = dict(questions.get(q_id))
-    save_data(questions)
-    answers = list(filter(lambda x: x.get('question_id') == q_id, load_data(answers=True).values()))
+    question = data_manager.get_question(q_id)
+    question['view_number'] += 1
+    data_manager.update_question(question)
+    answers = data_manager.get_answers(q_id)
     answers.sort(key=lambda x: x.get('submission_time'), reverse=True)
     question['answer_count'] = len(answers)
     return render_template('question.html', question=question, answers=answers)
 
 
+# TODO: this needs total refactoring to data_manager
 def display_sorted_questions():
     skey = None
     rev = False
@@ -68,8 +68,8 @@ def display_sorted_questions():
     if skey is None:
         return redirect(url_for('index'))
     else:
-        questions = list(load_data().values())
-        loaded_answers = load_data(answers=True)
+        questions = list(data_manager.get_questions().values())
+        loaded_answers = data_manager.get_answers()
         if skey != 'title':
             questions.sort(key=lambda x: x.get(skey), reverse=rev)
         else:

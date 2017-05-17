@@ -102,8 +102,6 @@ def delete_answer(a_id):
 
     return redirect(url_for('display_question', q_id=q_id))
 
-    return redirect(url_for('new_', q_id=q_id))
-
 
 def edit_answer(a_id):
     imported_data = load_data(answers=True)

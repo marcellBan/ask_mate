@@ -39,15 +39,30 @@ class DatabaseConnection(object):
 
 
 def get_question(question_id):
-    pass
+    DatabaseConnection._cursor.execute('''SELECT * FROM question WHERE id = %s;''', [question_id])
+    question = DatabaseConnection._cursor.fetchall()[0]
+    dict_of_question = {'id': question[0],
+                        'submission_time': question[1],
+                        'view_number': question[2],
+                        'vote_number': question[3],
+                        'title': question[4],
+                        'message': question[5],
+                        'image': question[6]}
+    return dict_of_question
 
 
 def get_questions(sorting=None, limit=None):
-    pass
+    DatabaseConnection._cursor.execute('''SELECT * FROM question''')
+    questions = DatabaseConnection._cursor.fetchall()
+    questions = construct_question_dicts(questions)
+    return questions
 
 
 def get_answers(question_id):
-    pass
+    DatabaseConnection._cursor.execute('''SELECT * FROM answer WHERE id = %s;''', [question_id])
+    answers = DatabaseConnection._cursor.fetchall()
+    answers = construct_answer_dicts(answers)
+    return answers
 
 
 def new_question(question):

@@ -28,54 +28,54 @@ def new_question():
     return entry_manager.add_question()
 
 
-@app.route('/question/<int:q_id>')
-def display_question(q_id):
-    return display.display_one_question(q_id)
+@app.route('/question/<int:question_id>')
+def display_question(question_id):
+    return display.display_one_question(question_id)
 
 
-@app.route('/question/<int:q_id>/edit', methods=['GET', 'POST'])
-def question_edit(q_id):
-    return entry_manager.edit_question(q_id)
+@app.route('/question/<int:question_id>/edit', methods=['GET', 'POST'])
+def question_edit(question_id):
+    return entry_manager.edit_question(question_id)
 
 
-@app.route('/question/<int:q_id>/delete')
-def question_delete(q_id):
-    return entry_manager.delete_question(q_id)
+@app.route('/question/<int:question_id>/delete')
+def question_delete(question_id):
+    return entry_manager.delete_question(question_id)
 
 
-@app.route('/question/<int:q_id>/new-answer', methods=['GET', 'POST'])
-def new_answer(q_id):
-    return entry_manager.add_answer(q_id)
+@app.route('/question/<int:question_id>/new-answer', methods=['GET', 'POST'])
+def new_answer(question_id):
+    return entry_manager.add_answer(question_id)
 
 
-@app.route('/question/<int:q_id>/vote-down')
-def downvote_question(q_id):
-    return vote.downvote_question(q_id)
+@app.route('/question/<int:question_id>/vote-down')
+def downvote_question(question_id):
+    return vote.downvote_question(question_id)
 
 
-@app.route('/question/<int:q_id>/vote-up')
-def upvote_question(q_id):
-    return vote.upvote_question(q_id)
+@app.route('/question/<int:question_id>/vote-up')
+def upvote_question(question_id):
+    return vote.upvote_question(question_id)
 
 
-@app.route('/answer/<int:a_id>/vote-down')
-def downvote_anwer(a_id):
-    return vote.downvote_answer(a_id)
+@app.route('/answer/<int:answer_id>/vote-down')
+def downvote_anwer(answer_id):
+    return vote.downvote_answer(answer_id)
 
 
-@app.route('/answer/<int:a_id>/vote-up')
-def upvote_answer(a_id):
-    return vote.upvote_answer(a_id)
+@app.route('/answer/<int:answer_id>/vote-up')
+def upvote_answer(answer_id):
+    return vote.upvote_answer(answer_id)
 
 
-@app.route('/answer/<int:a_id>/delete')
-def answer_delete(a_id):
-    return entry_manager.delete_answer(a_id)
+@app.route('/answer/<int:answer_id>/delete')
+def answer_delete(answer_id):
+    return entry_manager.delete_answer(answer_id)
 
 
-@app.route('/answer/<int:a_id>/edit', methods=['GET', 'POST'])
-def answer_edit(a_id):
-    return entry_manager.edit_answer(a_id)
+@app.route('/answer/<int:answer_id>/edit', methods=['GET', 'POST'])
+def answer_edit(answer_id):
+    return entry_manager.edit_answer(answer_id)
 
 
 @app.errorhandler(404)
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     try:
         data_manager.DatabaseConnection.connect_to_database()
         app.run()
-    except:
-        pass  # TODO: what do we want to do here
+    except Exception as e:
+        print(e)
     finally:
         data_manager.DatabaseConnection.close_database_connection()

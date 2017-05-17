@@ -49,7 +49,7 @@ def get_question(question_id):
 
 
 def get_questions(sorting=None, limit=None):
-    DatabaseConnection._cursor.execute('''SELECT * FROM question''')
+    DatabaseConnection._cursor.execute('''SELECT * FROM question;''')
     questions = DatabaseConnection._cursor.fetchall()
     questions = construct_question_dicts(questions)
     return questions
@@ -92,16 +92,20 @@ def update_answer(answer):
     submitted_answer['submission_time'] = datetime.datetime.fromtimestamp(submitted_answer['submission_time'])
     query = "UPDATE answer \
              SET submission_time = %(submission_time)s, vote_number = %(vote_number)s, \
-             message = %(message)s, image = %(image)s WHERE id = %(id)s"
+             message = %(message)s, image = %(image)s WHERE id = %(id)s;"
     DatabaseConnection._cursor.execute(query, submitted_answer)
 
 
 def delete_question(question_id):
-    pass
+    query_question = 'DELETE * FROM question WHERE id = %s;'
+    DatabaseConnection._cursor.execute(query_question, [question_id])
+    query_answer = 'DELETE * FROM answer WHERE question_id = %s;'
+    DatabaseConnection._cursor.execute(query_answer, [question_id])
 
 
 def delete_answer(answer_id):
-    pass
+    query = "DELETE * FROM answer WHERE id = %s;"
+    DatabaseConnection._cursor.execute(query, [answer_id])
 
 
 def construct_question_dicts(result_set):

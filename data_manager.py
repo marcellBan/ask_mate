@@ -15,10 +15,8 @@ from constants import (QUESTIONS_FILE, ANSWERS_FILE,
 
 
 class DatabaseConnection(object):
-
-    def __init__(self):
-        self._db_connection = None
-        self._cursor = None
+    self._db_connection = None
+    self._cursor = None
 
     def connect_to_database(self):
         connection_data = {
@@ -29,15 +27,15 @@ class DatabaseConnection(object):
         }
         connect_string = "dbname='{dbname}' user='{user}' host='{host}' password='{password}'"
         connect_string = connect_string.format(**connection_data)
-        self._db_connection = psycopg2.connect(connect_string)
-        self._db_connection.autocommit = True
-        self._cursor = self._db_connection.cursor()
+        DatabaseConnection._db_connection = psycopg2.connect(connect_string)
+        DatabaseConnection._db_connection.autocommit = True
+        DatabaseConnection._cursor = DatabaseConnection._db_connection.cursor()
 
     def close_database_connection(self):
-        if self._cursor is not None:
-            self._cursor.close()
-        if self._db_connection is not None:
-            self._db_connection.close()
+        if DatabaseConnection._cursor is not None:
+            DatabaseConnection._cursor.close()
+        if DatabaseConnection._db_connection is not None:
+            DatabaseConnection._db_connection.close()
 
 
 # FIXME: Deprecated TODO: complete rewrite

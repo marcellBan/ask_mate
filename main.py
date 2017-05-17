@@ -29,22 +29,22 @@ def new_question():
 
 
 @app.route('/question/<int:q_id>')
-def display_question(q_id=0):
+def display_question(q_id):
     return display.display_one_question(q_id)
 
 
 @app.route('/question/<int:q_id>/edit', methods=['GET', 'POST'])
-def question_edit(q_id=0):
+def question_edit(q_id):
     return entry_manager.edit_question(q_id)
 
 
 @app.route('/question/<int:q_id>/delete')
-def question_delete(q_id=0):
+def question_delete(q_id):
     return entry_manager.delete_question(q_id)
 
 
 @app.route('/question/<int:q_id>/new-answer', methods=['GET', 'POST'])
-def new_answer(q_id=0):
+def new_answer(q_id):
     return entry_manager.add_answer(q_id)
 
 

@@ -29,16 +29,16 @@
             </section>
         <section class="question-meta-info">
             ID: {{ question['id'] }}<br>
-            Submission Time: {{ question['sumbission_time'] }}
+            Post Time: {{ question['submission_time']|time }}
         </section>
         <section class="comments">
             <ul>
                 {% if question.get('comments') %}
                 {% for comment in question['comments'] %}
                 <li>
-                    <p class="entry-message">{{ comment['sumbission_time'] }}</p>
+                    <p class="entry-message">{{ comment['message'] }}</p>
                     <section class="comment-meta-info">
-                        Sumbission Time: {{ comment['sumbission_time'] }}
+                        Post Time: {{ comment['submission_time']|time }}
                         <section class="edit-buttons">
                             <a href="/UNIMPLEMENTED"><button class="material-icons">mode_edit</button></a>
                             <a href="/UNIMPLEMENTED"><button class="material-icons">delete</button></a>
@@ -75,7 +75,7 @@
                 <a href=""><button class="material-icons">delete</button></a>
             </section>
             <section class="answer-meta-info">
-                Submission time: {{ answer['sumbission_time'] }}
+                Post time: {{ answer['submission_time']|time }}
             </section>
             <section class="comments">
                 <ul>
@@ -84,7 +84,7 @@
                     <li>
                         <p class="entry-message">{{ comment['message'] }}</p>
                         <section class="comment-meta-info">
-                            Sumbission Time: {{ comment['sumbission_time'] }}
+                            Post Time: {{ comment['submission_time']|time }}
                             <section class="edit-buttons">
                                 <a href="/UNIMPLEMENTED"><button class="material-icons">mode_edit</button></a>
                                 <a href="/UNIMPLEMENTED"><button class="material-icons">delete</button></a>

@@ -40,8 +40,8 @@
                     <section class="comment-meta-info">
                         Post Time: {{ comment['submission_time']|time }}
                         <section class="edit-buttons">
-                            <a href="/UNIMPLEMENTED"><button class="material-icons">mode_edit</button></a>
-                            <a href="/UNIMPLEMENTED"><button class="material-icons">delete</button></a>
+                            <a href="/comments/{{ comment['id'] }}/edit"><button class="material-icons">mode_edit</button></a>
+                            <a href="/comments/{{ comment['id'] }}/delete"><button class="material-icons">delete</button></a>
                         </section>
                     </section>
                 </li>
@@ -52,11 +52,13 @@
         </section>
     </div>
 </article>
-{% if question['answer_count'] %}
 <hr>
-{% endif %}
 <!-- answers -->
+<section class="add-new-answer">
+    Add an answer
+</section>
 <div id="answers">
+    {% if answers %}
     {% for answer in answers %}
     <article class="answer-card">
         <div class="numbers-wrapper">
@@ -86,8 +88,8 @@
                         <section class="comment-meta-info">
                             Post Time: {{ comment['submission_time']|time }}
                             <section class="edit-buttons">
-                                <a href="/UNIMPLEMENTED"><button class="material-icons">mode_edit</button></a>
-                                <a href="/UNIMPLEMENTED"><button class="material-icons">delete</button></a>
+                                <a href="/question/{{ question['id'] }}/edit"><button class="material-icons">mode_edit</button></a>
+                                <a href="/questions/{{ question['id'] }}/delete"><button class="material-icons">delete</button></a>
                             </section>
                         </section>
                     </li>
@@ -99,6 +101,10 @@
         </div>
     </article>
     {% endfor %}
+    <section class="add-new-answer">
+        Add an answer
+    </section>
+    {% endif %}
 </div>
 {% endblock %}
 

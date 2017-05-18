@@ -8,13 +8,13 @@
 {% endblock %}
 
 {% block main %}
-    <article>
+    <form action="" method="post">
+        <article>
         {% if entry.get('title') %}
           <h2>{{ entry['title'] }}</h2>
         {% endif %}
         <p>{{ entry['message'] }}</p>
     </article>
-    <form action="" method="post">
         <label for="message">Your comment<span class="req">*</span>:</label>
         <textarea name="message" id="message" rows="4" required autofocus minlength="10">{{ form_message }}</textarea>
         <hr>

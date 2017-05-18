@@ -102,3 +102,19 @@ def edit_answer(answer_id):
             answer['image'] = request.files.get('image').filename
             data_manager.update_answer(answer)
             return redirect(url_for('display_question', question_id=question_id))
+
+
+def new_question_comment(question_id):
+    question = data_manager.get_question(question_id)
+    if request.method == 'POST':
+        if len(request.form.get('message')) < 10:
+                flash('Your comment isn\'t long enough!')
+                return render_template(
+                    'new_comment.html', entry=question, form_message=request.form.get('message')
+                )
+        else:
+            return redirect(
+                url_for('display_question', question_id=question.get('id'))
+            )
+    else:
+        return render_template('new_comment.html', entry=question)

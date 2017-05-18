@@ -28,6 +28,11 @@ def sorted_index():
     return display.display_sorted_questions()
 
 
+@app.route('/sort/clear')
+def clear_sort():
+    return display.clear_sorting()
+
+
 @app.route('/question/new', methods=['GET', 'POST'])
 def new_question():
     return entry_manager.add_question()
@@ -96,6 +101,11 @@ def comment_delete(comment_id):
 @app.route('/answer/<int:answer_id>/new-comment', methods=['GET', 'POST'])
 def new_comment_for_answer(answer_id):
     return entry_manager.new_comment_for_answer(answer_id)
+
+
+@app.route('/comments/<int:comment_id>/edit', methods=['GET', 'POST'])
+def edit_comment(comment_id):
+    return entry_manager.edit_comment(comment_id)
 
 
 @app.errorhandler(404)

@@ -77,7 +77,30 @@
     <!-- FLOATING BUTTONS -->
     <div id="floating-buttons">
         {% block floating_buttons %}{% endblock %}
-        <a href="#top"><button class="material-icons floating-button">arrow_upward</button></a>
+        <a href="#top"><button id="to-top" class="material-icons floating-button">arrow_upward</button></a>
     </div>
+
+
+
+    <!-- SCRIPTS -->
+    {% block js %}{% endblock %}
+    <script>
+        // to-top displaying
+        var toTop = document.getElementById('to-top')
+        var scrollEvent = function(){
+            wScroll = window.scrollY;
+            if(wScroll > window.innerHeight * 1.25){
+                toTop.classList.add("visible");
+            }else{
+                toTop.classList.remove("visible");
+            }
+        };
+
+        // Running all scroll events
+        scrollEvent();
+        window.addEventListener("scroll", function(){
+            scrollEvent();
+        });
+    </script>
 </body>
 </html>

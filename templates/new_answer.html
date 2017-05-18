@@ -8,18 +8,18 @@
 {% endblock %}
 
 {% block main %}
-    <article>
-        <h2>{{ question['title'] }}</h2>
-        <p>{{ question['message'] }}</p>
-    </article>
     <form action="" method="post" enctype="multipart/form-data">
+        <article>
+            <h2>{{ question['title'] }}</h2>
+            <p>{{ question['message'] }}</p>
+        </article>
         <label for="message">Your answer<span class="req">*</span>:</label>
         <p>Make sure your answer is at least 10 characters long!</p>
         <textarea name="message" id="message" rows="4" required autofocus minlength="10">{{ form_message }}</textarea>
         <hr>
         <label for="image" class="hide">Upload an image of your solution:</label>
         <p class="hide">Accepted file formats: .jpg, .png, .gif.</p>
-        <input class="hide" type="file" name="image" id="image" accept="image/*" disabled>
+        <input class="hide" type="file" name="image" id="image" accept="image/*">
         <input type="submit" value="Reply!"><br>
     </form>
 {% endblock %}

@@ -15,11 +15,11 @@ def connect_to_database(func_to_be_connected):
         _db_connection = None
         _cursor = None
         connection_data = {
-                'dbname': os.environ.get('MY_PSQL_DBNAME'),
-                'user': os.environ.get('MY_PSQL_USER'),
-                'host': os.environ.get('MY_PSQL_HOST'),
-                'password': os.environ.get('MY_PSQL_PASSWORD')
-            }
+            'dbname': os.environ.get('MY_PSQL_DBNAME'),
+            'user': os.environ.get('MY_PSQL_USER'),
+            'host': os.environ.get('MY_PSQL_HOST'),
+            'password': os.environ.get('MY_PSQL_PASSWORD')
+        }
         connect_string = "dbname='{dbname}' user='{user}' host='{host}' password='{password}'"
         connect_string = connect_string.format(**connection_data)
         _db_connection = psycopg2.connect(connect_string)
@@ -126,7 +126,6 @@ def new_answer(answer):
     _cursor.execute(query, final_answer)
 
 
-# TODO: we need to update the title and view_number too
 @connect_to_database
 def update_question(question):
     '''
@@ -138,7 +137,9 @@ def update_question(question):
     final_question['submission_time'] = datetime.datetime.fromtimestamp(final_question['submission_time'])
     query = "UPDATE question \
              SET submission_time = %(submission_time)s, vote_number = %(vote_number)s, \
-             message = %(message)s, image = %(image)s WHERE id = %(id)s"
+             message = %(message)s, image = %(image)s, \
+             view_number = %(view_number)s, title = %(title)s \
+             WHERE id = %(id)s;"
     _cursor.execute(query, final_question)
 
 

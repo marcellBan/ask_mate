@@ -27,10 +27,10 @@
         <div id="header-content">
             {% block header_content %}{% endblock %}
             <a href="/question/new" class="header-new-question">New question</a>
-            <form action="" method="get">
-                <input type="text" name="search" placeholder="Search...">
-                <input type="submit" class="material-icons" value="search" disabled>
-            </form>
+            <div class="form">
+                <input id="ee-input" type="text"placeholder="Search...">
+                <input id="ee-submit" type="submit" class="material-icons" value="search">
+            </div>
         </div>
     </div>
     </header>
@@ -82,8 +82,8 @@
 
 
 
-    <audio preload="auto" id="easter-egg-audio">
-        <source src="">
+    <audio preload="auto" id="ee-audio">
+        <source src="/static/audio/searching.mp3">
     </audio>
 
 
@@ -91,8 +91,17 @@
     <!-- SCRIPTS -->
     {% block js %}{% endblock %}
     <script>
-        // to-top displaying
-        var toTop = document.getElementById('to-top')
+        var ee = false
+        var eeInput = document.getElementById('ee-input');
+        var eeSubmit = document.getElementById('ee-submit');
+        var eeAudio = document.getElementById('ee-audio');
+        var toTop = document.getElementById('to-top');
+        var eeEvent = function() {
+            if(!ee){
+                eeAudio.play();
+                ee = true;
+            }
+        };
         var scrollEvent = function(){
             wScroll = window.scrollY;
             if(wScroll > window.innerHeight * 1.25){
@@ -106,6 +115,14 @@
         scrollEvent();
         window.addEventListener("scroll", function(){
             scrollEvent();
+        });
+        eeSubmit.addEventListener("click", eeEvent);
+        eeInput.addEventListener("focus", function(){
+            this.addEventListener("keyup", function(e){
+                if(e.which == 13){
+                    eeEvent();
+                }
+            });
         });
     </script>
 </body>

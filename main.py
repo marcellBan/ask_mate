@@ -63,6 +63,11 @@ def upvote_question(question_id):
     return vote.upvote_question(question_id)
 
 
+@app.route('/question/<int:question_id>/new-comment', methods=['GET', 'POST'])
+def new_question_comment(question_id):
+    return entry_manager.new_question_comment(question_id)
+
+
 @app.route('/answer/<int:answer_id>/vote-down')
 def downvote_anwer(answer_id):
     return vote.downvote_answer(answer_id)

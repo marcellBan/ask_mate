@@ -89,7 +89,7 @@ def get_answer(answer_id):
 def get_answers(question_id):
     '''returns a list of ditionaries containing all the answers with the given question_id'''
     _cursor.execute(
-        "SELECT * FROM answer WHERE question_id = %s ORDER BY submission_time DESC;",
+        "SELECT * FROM answer WHERE question_id = %s ORDER BY vote_number DESC, submission_time ASC;",
         [question_id]
     )
     result_set = _cursor.fetchall()
@@ -250,7 +250,7 @@ def new_comment(comment):
 def get_comments_for_question(question_id):
     '''returns a dictionary of ditionaries containing all the comments with the given question_id'''
     _cursor.execute(
-        "SELECT * FROM comment WHERE question_id = %s ORDER BY submission_time DESC;",
+        "SELECT * FROM comment WHERE question_id = %s ORDER BY submission_time ASC;",
         [question_id]
     )
     result_set = _cursor.fetchall()
@@ -262,7 +262,7 @@ def get_comments_for_question(question_id):
 def get_comments_for_answer(answer_id):
     '''returns a dictionary of dictionaries containing all the comments with the given answer_id'''
     _cursor.execute(
-        "SELECT * FROM comment WHERE answer_id = %s ORDER BY submission_time DESC;",
+        "SELECT * FROM comment WHERE answer_id = %s ORDER BY submission_time ASC;",
         [answer_id]
     )
     result_set = _cursor.fetchall()

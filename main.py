@@ -96,10 +96,4 @@ def _jinja2_time_filter(value):
 
 
 if __name__ == "__main__":
-    try:
-        data_manager.DatabaseConnection.connect_to_database()
-        app.run()
-    except Exception as e:
-        print(e)
-    finally:
-        data_manager.DatabaseConnection.close_database_connection()
+    app.run()

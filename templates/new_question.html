@@ -17,9 +17,9 @@
         <textarea name="message" id="message" rows="4" required minlength="10"
             {% if form_message %}autofocus{% endif %}>{{ form_message }}</textarea>
         <hr>
-        <label for="image">Upload an image of your problem:</label>
-        <p>Accepted file formats: .jpg, .png, .gif.</p>
-        <input type="file" name="image" id="image" accept="image/*">
+        <label class="hide" for="image">Upload an image of your problem:</label>
+        <p class="hide">Accepted file formats: .jpg, .png, .gif.</p>
+        <input class="hide" type="file" name="image" id="image" accept="image/*" disabled>
         <input type="submit" value="Ask!"><br>
     </form>
 {% endblock %}

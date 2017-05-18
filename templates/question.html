@@ -38,7 +38,8 @@
                 <li>
                     <p class="entry-message">{{ comment['message'] }}</p>
                     <section class="comment-meta-info">
-                        Post Time: {{ comment['submission_time']|time }}
+                        Post Time: {{ comment['submission_time']|time }}<br>
+                        Edits: {{ comment['edit_count'] }}
                         <section class="edit-buttons">
                             <a href="/comments/{{ comment['id'] }}/edit"><button class="material-icons">mode_edit</button></a>
                             <a href="/comments/{{ comment['id'] }}/delete"><button class="material-icons">delete</button></a>
@@ -86,7 +87,8 @@
                     <li>
                         <p class="entry-message">{{ comment['message'] }}</p>
                         <section class="comment-meta-info">
-                            Post Time: {{ comment['submission_time']|time }}
+                            Post Time: {{ comment['submission_time']|time }}<br>
+                            Edits: {{ comment['edit_count'] }}
                             <section class="edit-buttons">
                                 <a href="/comments/{{ comment['id'] }}/edit"><button class="material-icons">mode_edit</button></a>
                                 <a href="/comments/{{ comment['id'] }}/delete"><button class="material-icons">delete</button></a>

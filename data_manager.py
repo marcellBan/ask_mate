@@ -47,26 +47,28 @@ def get_question(question_id):
     return dict_of_question
 
 
-# TODO: refactor to use dynamically constructed query string
 @connect_to_database
 def get_questions(sorting=None, limit=None):
     '''
-    returns a dictionary of dictionaries containing all the questions\n
+    returns a list of dictionaries containing all the questions\n
     the amount of questions returened can be limited with the limit parameter\n
     the sorting parameter is should be None or a list of tuples containing the column and the sorting order
     '''
     if sorting is None:
-        _cursor.execute("SELECT * FROM question ORDER BY submission_time DESC;")
-        questions = _cursor.fetchall()
-        questions = construct_question_dicts(questions)
-        return questions
-    elif limit is not None:
-        _cursor.execute("SELECT * FROM question ORDER BY submission_time DESC LIMIT %s;", [limit])
-        questions = _cursor.fetchall()
-        questions = construct_question_dicts(questions)
-        return questions
+        sorting_query = "ORDER BY submission_time DESC"
     else:
-        pass
+        sorting_query = "ORDER BY {} {}".format(sorting[0][0], sorting[0][1].upper())
+        if len(sorting) > 1:
+            for item in sorting[1:]:
+                sorting_query += ", {} {}".format(item[0], item[1].upper())
+    limit_query = ""
+    if limit is not None:
+        limit_query = "LIMIT {}".format(limit)
+    query = "SELECT * FROM question {} {};".format(sorting_query, limit_query)
+    _cursor.execute(query)
+    questions = _cursor.fetchall()
+    questions = construct_question_list(questions)
+    return questions
 
 
 @connect_to_database
@@ -85,13 +87,13 @@ def get_answer(answer_id):
 
 @connect_to_database
 def get_answers(question_id):
-    '''returns a dictionary of ditionaries containing all the answers with the given question_id'''
+    '''returns a list of ditionaries containing all the answers with the given question_id'''
     _cursor.execute(
         "SELECT * FROM answer WHERE question_id = %s ORDER BY submission_time DESC;",
         [question_id]
     )
     result_set = _cursor.fetchall()
-    answers = construct_answer_dicts(result_set)
+    answers = construct_answer_list(result_set)
     return answers
 
 
@@ -177,11 +179,11 @@ def delete_answer(answer_id):
     _cursor.execute(query, [answer_id])
 
 
-def construct_question_dicts(result_set):
-    '''constructs a dictionary of dictionaries from an SQL Query result set (list of tuples) representing questions'''
-    questions = dict()
+def construct_question_list(result_set):
+    '''constructs a list of dictionaries from an SQL Query result set (list of tuples) representing questions'''
+    questions = list()
     for question in result_set:
-        questions[question[0]] = {
+        questions.append({
             'id': question[0],
             'submission_time': question[1].timestamp(),
             'view_number': question[2],
@@ -189,22 +191,22 @@ def construct_question_dicts(result_set):
             'title': question[4],
             'message': question[5],
             'image': question[6]
-        }
+        })
     return questions
 
 
-def construct_answer_dicts(result_set):
+def construct_answer_list(result_set):
     '''constructs a dictionary of dictionaries from an SQL Query result set (list of tuples) representing answers'''
-    answers = dict()
+    answers = list()
     for answer in result_set:
-        answers[answer[0]] = {
+        answers.append({
             'id': answer[0],
             'submission_time': answer[1].timestamp(),
             'vote_number': answer[2],
             'question_id': answer[3],
             'message': answer[4],
             'image': answer[5]
-        }
+        })
     return answers
 
 

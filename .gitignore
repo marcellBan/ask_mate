@@ -3,3 +3,7 @@ __pycache__/*
 data/*
 *.pyc
 setenv.sh
+
+templates/card.css
+templates/layout.css
+templates/new_entry.css

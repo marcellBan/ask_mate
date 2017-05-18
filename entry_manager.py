@@ -121,7 +121,7 @@ def new_comment_for_question(question_id):
                 'message': request.form.get('message'),
                 'submission_time': int(time.time())
             }
-            data_manager.new_comment_for_question(comment)
+            data_manager.new_comment(comment)
             return redirect(
                 url_for('display_question', question_id=question_id)
             )
@@ -131,3 +131,26 @@ def delete_comment(comment_id):
     # TODO: write a get_comment(comment_id) func, it gets the comment from either question or answer
     data_manager.delete_comment(comment_id)
     return redirect(url_for('index'))
+
+
+def new_comment_for_answer(answer_id):
+    answer = data_manager.get_answer(answer_id)
+    if request.method == 'GET':
+        return render_template('new_comment.html', entry=answer)
+    elif request.method == 'POST':
+        if len(request.form.get('message')) < 10:
+            flash('Your comment isn\'t long enough!')
+            render_template(
+                'new_comment.html', entry=answer, form_message=request.form.get('message')
+            )
+        else:
+            comment = {
+                'question_id': None,
+                'answer_id': answer_id,
+                'message': request.form.get('message'),
+                'submission_time': int(time.time())
+            }
+            data_manager.new_comment(comment)
+            return redirect(
+                url_for('display_question', question_id=answer.get('question_id'))
+            )

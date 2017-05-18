@@ -19,8 +19,10 @@ def display_one_question(question_id):
     question['view_number'] += 1
     data_manager.update_question(question)
     answers = data_manager.get_answers(question_id)
+    for answer in answers:
+        answer['comments'] = data_manager.get_comments_for_answer(answer['id'])
     question['answer_count'] = len(answers)
-    question['comments'] = list(data_manager.get_comments_for_question(question_id).values())
+    question['comments'] = data_manager.get_comments_for_question(question_id)
     return render_template('question.html', question=question, answers=answers)
 
 

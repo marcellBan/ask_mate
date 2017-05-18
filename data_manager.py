@@ -217,7 +217,7 @@ def construct_answer_list(result_set):
 
 
 @connect_to_database
-def new_comment_for_question(comment):
+def new_comment(comment):
     '''
     adds a new comment to the database\n
     the parameter should be a dictionary with the following keys:\n
@@ -238,19 +238,31 @@ def get_comments_for_question(question_id):
         [question_id]
     )
     result_set = _cursor.fetchall()
-    comments = construct_comment_dicts(result_set)
+    comments = construct_comment_list(result_set)
     return comments
 
 
-def construct_comment_dicts(result_set):
+@connect_to_database
+def get_comments_for_answer(answer_id):
+    '''returns a dictionary of dictionaries containing all the comments with the given answer_id'''
+    _cursor.execute(
+        "SELECT * FROM comment WHERE answer_id = %s ORDER BY submission_time DESC;",
+        [answer_id]
+    )
+    result_set = _cursor.fetchall()
+    comments = construct_comment_list(result_set)
+    return comments
+
+
+def construct_comment_list(result_set):
     '''constructs a dictionary of dictionaries from an SQL Query result set (list of tuples) representing comments'''
-    comments = dict()
+    comments = list()
     for comment in result_set:
-        comments[comment[0]] = {
+        comments.append({
             'id': comment[0],
             'question_id': comment[1],
             'answer_id': comment[2],
             'message': comment[3],
             'submission_time': comment[4].timestamp()
-        }
+        })
     return comments

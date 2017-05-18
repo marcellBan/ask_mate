@@ -93,6 +93,11 @@ def comment_delete(comment_id):
     return entry_manager.delete_comment(comment_id)
 
 
+@app.route('/answer/<int:answer_id>/new-comment', methods=['GET', 'POST'])
+def new_comment_for_answer(answer_id):
+    return entry_manager.new_comment_for_answer(answer_id)
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return 'Oops, page not found!', 404

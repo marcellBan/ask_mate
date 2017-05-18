@@ -138,6 +138,9 @@ header
   @extend .s-rad
   @extend .s-shadow
 
+  position: relative
+  top: 0
+  left: 0
   margin-bottom: 0.5em
   padding: 0 2ch
   background: $acc100
@@ -153,10 +156,22 @@ header
 
 @keyframes flash-anim
   0%
+    width: initial
+    height: initial
     opacity: 1
+    top: 0
+    left: 0
   99%
+    width: initial
+    height: initial
     opacity: 0
+    top: 0
+    left: 0
   100%
+    width: 0
+    height: 0
+    top: -100vh
+    left: -100vw
     display: none
     opacity: 0
   

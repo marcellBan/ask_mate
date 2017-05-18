@@ -12,12 +12,12 @@
     <div class="numbers-wrapper">
     <div class="numbers">
         <div class="votes">
-            <a href="/question/{{ question['id'] }}/vote-up?next=this" class="material-icons vote-button vote-up">arrow_upward</a><br>
-            {{ question['vote_number'] }}<br>
+            <a href="/question/{{ question['id'] }}/vote-up?next=this" class="material-icons vote-button vote-up">arrow_upward</a>
+            <div class="vote-number">{{ question['vote_number'] }}</div>
             <a href="/question/{{ question['id'] }}/vote-down?next=this" class="material-icons vote-button vote-down">arrow_downward</a>
         </div>
-        <span class="material-icons num-icon">remove_red_eye</span> {{ question['view_number'] }}<br>
-        <span class="material-icons num-icon">question_answer</span> {{ question['answer_count']}}
+        <div><span class="material-icons num-icon">remove_red_eye</span> {{ question['view_number'] }}</div>
+        <div><span class="material-icons num-icon">question_answer</span> {{ question['answer_count']}}</div>
     </div>
     </div>
     <div class="question-wrapper">
@@ -65,9 +65,9 @@
         <div class="numbers-wrapper">
         <div class="numbers">
             <div class="votes">
-                <a href="/answer/{{ answer['id'] }}/vote-up" class="material-icons vote-up">arrow_upward</a><br>
-                {{ answer['vote_number'] }}<br>
-                <a href="/answer/{{ answer['id'] }}/vote-down" class="material-icons vote-down">arrow_downward</a><br>
+                <a href="/answer/{{ answer['id'] }}/vote-up?next=this" class="material-icons vote-button vote-up">arrow_upward</a>
+                <div class="vote-number">{{ answer['vote_number'] }}</div>
+                <a href="/answer/{{ answer['id'] }}/vote-down?next=this" class="material-icons vote-button vote-down">arrow_downward</a>
             </div>
         </div>
         </div>

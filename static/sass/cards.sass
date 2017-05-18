@@ -2,27 +2,76 @@
 @import meta-selectors
 
 // COMMON SETTINGS
+@media screen and (max-width: 959px)
+  *[class*="card"]
+    margin-bottom: 0
+    padding: 1em 0
+    border-bottom: calc(#{$one-px-rem} * 3) solid $grey400
+
+    &:last-of-type
+      margin-bottom: 1em
+      border-bottom: none
+
+@media screen and (min-width: 960px)
+  *[class*="card"]
+    margin-bottom: 1em
+
+@media screen and (max-width: 749px)
+  *[class*="card"]
+    flex-direction: column
+
+    .numbers-wrapper
+      width: 100%
+      text-align: center
+
+      *
+        display: inline-block
+    
+    .numbers
+      padding: 0
+    
+    .votes
+      margin-bottom: 0
+    
+    .question-wrapper,
+    .answer-wrapper
+      width: 100%
+      padding: 1ch
+
+@media screen and (min-width: 750px)
+  *[class*="card"]
+    flex-direction: row
+
+    .numbers-wrapper
+      width: 14%
+    
+    .numbers
+      padding: 1ch
+    
+    .votes
+      margin-bottom: 1.5em
+    
+    .question-wrapper,
+    .answer-wrapper
+      width: 86%
+      padding: 1ch
+
 *[class*="card"]
   @extend .s-shadow
   
   display: flex
-  margin-bottom: 1em
   background: $grey200
   overflow-wrap: break-word
+  transition: margin-bottom 0.3s, padding 0.3s
 
   .material-icons
     font-size: 1em
     line-height: 1.25em
 
-  .numbers-wrapper
-    width: 14%
-
   .numbers
     margin: 0 auto
-    padding: 1ch
   
   .votes
-    margin-bottom: 1.5em
     text-align: center
 
     a
@@ -38,11 +87,6 @@
 
   .vote-down:hover
     color: $acc400
-  
-  .question-wrapper,
-  .answer-wrapper
-    width: 86%
-    padding: 1ch
   
   h2
     margin: 1ch 0

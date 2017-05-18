@@ -183,9 +183,18 @@ header
   height: calc(#{$header-height} + (#{$one-px-rem} * 2))
 
 main
-  margin-bottom: 10vh
-  padding-top: calc(#{$one-px-rem} * 10)
   min-height: calc(100vh - (#{$header-height} + (#{$one-px-rem} * 2)) - 10vh)
+  transition: all 0.3s
+
+@media screen and (max-width: 959px)
+  main
+    margin-bottom: 0
+    padding-top: 0
+
+@media screen and (min-width: 960px)
+  main
+    margin-bottom: 10vh
+    padding-top: calc(#{$one-px-rem} * 10)
 
 .more-q-link
   text-decoration: none

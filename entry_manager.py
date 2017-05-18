@@ -125,3 +125,9 @@ def new_comment_for_question(question_id):
             return redirect(
                 url_for('display_question', question_id=question_id)
             )
+
+
+def delete_comment(comment_id):
+    # TODO: write a get_comment(comment_id) func, it gets the comment from either question or answer
+    data_manager.delete_comment(comment_id)
+    return redirect(url_for('index'))

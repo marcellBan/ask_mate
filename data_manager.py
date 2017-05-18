@@ -179,6 +179,12 @@ def delete_answer(answer_id):
     _cursor.execute(query, [answer_id])
 
 
+@connect_to_database
+def delete_comment(comment_id):
+    query = 'DELETE FROM comment WHERE id = %s;'
+    _cursor.execute(query, [comment_id])
+
+
 def construct_question_list(result_set):
     '''constructs a list of dictionaries from an SQL Query result set (list of tuples) representing questions'''
     questions = list()

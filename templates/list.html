@@ -49,8 +49,8 @@
         </section>
         </div>
         <div class="question-wrapper">
-            <h2>{{ question['title'] }}</h2>
-            <p class="entry-message">{{ question['message'] }}</p>
+            <h2>{{ question['title']|safe }}</h2>
+            <p class="entry-message">{{ question['message']|safe }}</p>
         </div>
     </article>
     {% endfor %}

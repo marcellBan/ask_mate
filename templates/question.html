@@ -21,8 +21,8 @@
     </div>
     </div>
     <div class="question-wrapper">
-        <h2>{{ question['title'] }}</h2>
-        <p class="entry-message">{{ question['message'] }}</p>
+        <h2>{{ question['title']|safe }}</h2>
+        <p class="entry-message">{{ question['message']|safe }}</p>
         <section class="edit-buttons">
                 <a href="/question/{{ question['id'] }}/edit"><button class="material-icons">mode_edit</button></a>
                 <a href="/question/{{ question['id'] }}/delete"><button class="material-icons">delete</button></a>
@@ -36,7 +36,7 @@
                 {% if question.get('comments') %}
                 {% for comment in question['comments'] %}
                 <li>
-                    <p class="entry-message">{{ comment['message'] }}</p>
+                    <p class="entry-message">{{ comment['message']|safe }}</p>
                     <section class="comment-meta-info">
                         Post Time: {{ comment['submission_time']|time }}<br>
                         Edits: {{ comment['edit_count'] }}
@@ -72,7 +72,7 @@
         </div>
         </div>
         <div class="answer-wrapper">
-            <p class="answer-message entry-message">{{ answer['message'] }}</p>
+            <p class="answer-message entry-message">{{ answer['message']|safe }}</p>
             <section class="edit-buttons">
                 <a href=""><button class="material-icons">mode_edit</button></a>
                 <a href=""><button class="material-icons">delete</button></a>
@@ -85,7 +85,7 @@
                     {% if answer.get('comments') %}
                     {% for comment in answer['comments'] %}
                     <li>
-                        <p class="entry-message">{{ comment['message'] }}</p>
+                        <p class="entry-message">{{ comment['message']|safe }}</p>
                         <section class="comment-meta-info">
                             Post Time: {{ comment['submission_time']|time }}<br>
                             Edits: {{ comment['edit_count'] }}

@@ -57,3 +57,9 @@ def display_sorted_questions():
         question['answer_count'] = len(data_manager.get_answers(question['id']))
     print(session['sorting'])
     return render_template('list.html', question_list=questions)
+
+
+def clear_sorting():
+    if session.get('sorting') is not None:
+        session['sorting'] = list()
+    return redirect(url_for('list_index'))

@@ -28,6 +28,11 @@ def sorted_index():
     return display.display_sorted_questions()
 
 
+@app.route('/sort/clear')
+def clear_sort():
+    return display.clear_sorting()
+
+
 @app.route('/question/new', methods=['GET', 'POST'])
 def new_question():
     return entry_manager.add_question()

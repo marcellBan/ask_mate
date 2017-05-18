@@ -34,9 +34,7 @@
 
 {% block main %}
     {% for question in question_list %}
-    {% with id = question['id'] %}
-    <article onclick="location='/question/{{ id }}'"class="question-card">
-    {% endwith %}
+    <article class="question-card">
         <div class="numbers-wrapper">
         <section class="numbers">
             <div class="votes">
@@ -49,8 +47,8 @@
         </section>
         </div>
         <div class="question-wrapper">
-            <h2>{{ question['title']|safe }}</h2>
-            <p class="entry-message">{{ question['message']|safe }}</p>
+            <a href="/question/{{ question['id'] }}" class="link-to-question"><h2>{{ question['title']|safe }}</h2></a>
+            <a href="/question/{{ question['id'] }}" class="link-to-question"><p class="entry-message">{{ question['message']|safe }}</p></a>
         </div>
     </article>
     {% endfor %}
@@ -58,3 +56,7 @@
     <a class="more-q-link" href="/list"><button class="more-questions">Load more questions</button></a>
     {% endif %}
 {% endblock %}
+
+<!-- ONLICK
+onclick="location='/question/{{ id }}'"
+-->

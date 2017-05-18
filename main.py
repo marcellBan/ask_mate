@@ -103,7 +103,7 @@ def new_comment_for_answer(answer_id):
     return entry_manager.new_comment_for_answer(answer_id)
 
 
-@app.route('/comments/<int:comment_id>/edit', method=['GET', 'POST'])
+@app.route('/comments/<int:comment_id>/edit', methods=['GET', 'POST'])
 def edit_comment(comment_id):
     return entry_manager.edit_comment(comment_id)
 

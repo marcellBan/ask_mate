@@ -180,14 +180,6 @@ def delete_answer(answer_id):
 
 
 @connect_to_database
-def get_question_id_of_comment(comment_id):
-    query = 'SELECT question_id FROM comment WHERE id = %s;'
-    _cursor.execute(query, [comment_id])
-    question_id = _cursor.fetchall()
-    return question_id[0][0]
-
-
-@connect_to_database
 def delete_comment(comment_id):
     query = 'DELETE FROM comment WHERE id = %s;'
     _cursor.execute(query, [comment_id])
@@ -197,7 +189,7 @@ def delete_comment(comment_id):
 def get_comment(comment_id):
     query = "SELECT * FROM comment WHERE id = %s;"
     _cursor.execute(query, [comment_id])
-    result_set = _cursor.fetchall()
+    result_set = _cursor.fetchall()[0]
     comment = {
         'id': result_set[0],
         'question_id': result_set[1],
@@ -249,8 +241,8 @@ def new_comment(comment):
     '''
     final_comment = dict(comment)
     final_comment['submission_time'] = datetime.datetime.fromtimestamp(final_comment['submission_time'])
-    query = "INSERT INTO comment (submission_time, message, question_id, answer_id) \
-             VALUES (%(submission_time)s, %(message)s, %(question_id)s, %(answer_id)s);"
+    query = "INSERT INTO comment (submission_time, message, question_id, answer_id, edit_count) \
+             VALUES (%(submission_time)s, %(message)s, %(question_id)s, %(answer_id)s, %(edit_count)s);"
     _cursor.execute(query, final_comment)
 
 

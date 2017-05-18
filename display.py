@@ -31,7 +31,6 @@ def display_five_latest_questions():
     return render_template('list.html', question_list=questions_list, index=True)
 
 
-# TODO: this needs total refactoring into data_manager
 def display_sorted_questions():
     aspect_list = (
         'id',

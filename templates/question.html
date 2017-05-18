@@ -88,8 +88,8 @@
                         <section class="comment-meta-info">
                             Post Time: {{ comment['submission_time']|time }}
                             <section class="edit-buttons">
-                                <a href="/question/{{ question['id'] }}/edit"><button class="material-icons">mode_edit</button></a>
-                                <a href="/questions/{{ question['id'] }}/delete"><button class="material-icons">delete</button></a>
+                                <a href="/comments/{{ comment['id'] }}/edit"><button class="material-icons">mode_edit</button></a>
+                                <a href="/comments/{{ comment['id'] }}/delete"><button class="material-icons">delete</button></a>
                             </section>
                         </section>
                     </li>

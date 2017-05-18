@@ -47,8 +47,8 @@
         </section>
         </div>
         <div class="question-wrapper">
-            <a href="/question/{{ question['id'] }}" class="link-to-question"><h2>{{ question['title']|safe }}</h2></a>
-            <a href="/question/{{ question['id'] }}" class="link-to-question"><p class="entry-message">{{ question['message']|safe }}</p></a>
+            <a href="/question/{{ question['id'] }}" class="link-to-question"><h2>{{ question['title']|nl2br }}</h2></a>
+            <a href="/question/{{ question['id'] }}" class="link-to-question"><p class="entry-message">{{ question['message']|nl2br }}</p></a>
         </div>
     </article>
     {% endfor %}

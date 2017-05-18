@@ -3,6 +3,7 @@ AskMate Q&A website
 by SzószKód
 '''
 from flask import Flask
+from jinja2 import evalcontextfilter, Markup
 import datetime
 
 import data_manager
@@ -119,6 +120,14 @@ def _jinja2_time_filter(value):
     ret = '{:02}-{:02}-{} {}:{:02}'.format(dt.day, dt.month, dt.year, dt.hour, dt.minute)
     return ret
 
+
+@app.template_filter('nl2br')
+@evalcontextfilter
+def _jinja2_new_line_to_line_break_filter(eval_ctx, value):
+    result = value.replace('\n', '<br>\n')
+    if eval_ctx.autoescape:
+        result = Markup(result)
+    return result
 
 if __name__ == "__main__":
     app.run()

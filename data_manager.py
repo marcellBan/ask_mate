@@ -51,6 +51,7 @@ def get_question(question_id):
     return dict_of_question
 
 
+# TODO: refactor to use dynamically constructed query string
 def get_questions(sorting=None, limit=None):
     '''
     returns a dictionary of dictionaries containing all the questions\n
@@ -86,7 +87,10 @@ def get_answer(answer_id):
 
 def get_answers(question_id):
     '''returns a dictionary of ditionaries containing all the answers with the given question_id'''
-    DatabaseConnection._cursor.execute("SELECT * FROM answer WHERE question_id = %s;", [question_id])
+    DatabaseConnection._cursor.execute(
+        "SELECT * FROM answer WHERE question_id = %s ORDER BY submission_time DESC;",
+        [question_id]
+    )
     result_set = DatabaseConnection._cursor.fetchall()
     answers = construct_answer_dicts(result_set)
     return answers

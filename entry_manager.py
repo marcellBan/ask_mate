@@ -128,7 +128,7 @@ def new_comment_for_question(question_id):
 
 
 def delete_comment(comment_id):
-    question_id = get_question_id_of_comment(comment_id)
+    question_id = data_manager.get_question_id_of_comment(comment_id)
     data_manager.delete_comment(comment_id)
     return redirect(url_for('display_question', question_id=question_id))
 

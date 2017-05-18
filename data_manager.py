@@ -184,7 +184,7 @@ def get_question_id_of_comment(comment_id):
     query = 'SELECT question_id FROM comment WHERE id = %s;'
     _cursor.execute(query, [comment_id])
     question_id = _cursor.fetchall()
-    return question_id
+    return question_id[0][0]
 
 
 @connect_to_database

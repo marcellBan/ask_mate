@@ -54,9 +54,9 @@
 </article>
 <hr>
 <!-- answers -->
-<section class="add-new-answer">
+<a href="/question/{{ question['id'] }}/new-answer" class="new-answer-link"><section class="add-new-answer">
     Add an answer
-</section>
+</section></a>
 <div id="answers">
     {% if answers %}
     {% for answer in answers %}
@@ -101,9 +101,9 @@
         </div>
     </article>
     {% endfor %}
-    <section class="add-new-answer">
+    <a href="/question/{{ question['id'] }}/new-answer" class="new-answer-link"><section class="add-new-answer">
         Add an answer
-    </section>
+    </section></a>
     {% endif %}
 </div>
 {% endblock %}

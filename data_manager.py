@@ -180,6 +180,14 @@ def delete_answer(answer_id):
 
 
 @connect_to_database
+def get_question_id_of_comment(comment_id):
+    query = 'SELECT question_id FROM comment WHERE id = %s;'
+    _cursor.execute(query, [comment_id])
+    question_id = _cursor.fetchall()
+    return question_id
+
+
+@connect_to_database
 def delete_comment(comment_id):
     query = 'DELETE FROM comment WHERE id = %s;'
     _cursor.execute(query, [comment_id])

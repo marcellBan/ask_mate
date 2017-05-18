@@ -206,3 +206,43 @@ def construct_answer_dicts(result_set):
             'image': answer[5]
         }
     return answers
+
+
+@connect_to_database
+def new_comment_for_question(comment):
+    '''
+    adds a new comment to the database\n
+    the parameter should be a dictionary with the following keys:\n
+    submission_time::timestamp, message::str, question_id::int, answer_id::None
+    '''
+    final_comment = dict(comment)
+    final_comment['submission_time'] = datetime.datetime.fromtimestamp(final_comment['submission_time'])
+    query = "INSERT INTO comment (submission_time, message, question_id, answer_id) \
+             VALUES (%(submission_time)s, %(message)s, %(question_id)s, %(answer_id)s);"
+    _cursor.execute(query, final_comment)
+
+
+@connect_to_database
+def get_comments_for_question(question_id):
+    '''returns a dictionary of ditionaries containing all the comments with the given question_id'''
+    _cursor.execute(
+        "SELECT * FROM comment WHERE question_id = %s ORDER BY submission_time DESC;",
+        [question_id]
+    )
+    result_set = _cursor.fetchall()
+    comments = construct_comment_dicts(result_set)
+    return comments
+
+
+def construct_comment_dicts(result_set):
+    '''constructs a dictionary of dictionaries from an SQL Query result set (list of tuples) representing comments'''
+    comments = dict()
+    for comment in result_set:
+        comments[comment[0]] = {
+            'id': comment[0],
+            'question_id': comment[1],
+            'answer_id': comment[2],
+            'message': comment[3],
+            'submission_time': comment[4].timestamp()
+        }
+    return comments

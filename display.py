@@ -20,6 +20,7 @@ def display_one_question(question_id):
     data_manager.update_question(question)
     answers = list(data_manager.get_answers(question_id).values())
     question['answer_count'] = len(answers)
+    question['comments'] = list(data_manager.get_comments_for_question(question_id).values())
     return render_template('question.html', question=question, answers=answers)
 
 

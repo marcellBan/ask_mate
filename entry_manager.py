@@ -104,17 +104,24 @@ def edit_answer(answer_id):
             return redirect(url_for('display_question', question_id=question_id))
 
 
-def new_question_comment(question_id):
+def new_comment_for_question(question_id):
     question = data_manager.get_question(question_id)
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render_template('new_comment.html', entry=question)
+    elif request.method == 'POST':
         if len(request.form.get('message')) < 10:
                 flash('Your comment isn\'t long enough!')
                 return render_template(
                     'new_comment.html', entry=question, form_message=request.form.get('message')
                 )
         else:
+            comment = {
+                'question_id': question_id,
+                'answer_id': None,
+                'message': request.form.get('message'),
+                'submission_time': int(time.time())
+            }
+            data_manager.new_comment_for_question(comment)
             return redirect(
-                url_for('display_question', question_id=question.get('id'))
+                url_for('display_question', question_id=question_id)
             )
-    else:
-        return render_template('new_comment.html', entry=question)

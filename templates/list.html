@@ -38,9 +38,9 @@
         <div class="numbers-wrapper">
         <section class="numbers">
             <div class="votes">
-                <a href="/question/{{ question['id'] }}/vote-up?next=this" class="material-icons vote-button vote-up">arrow_upward</a>
+                <a href="/question/{{ question['id'] }}/vote-up" class="material-icons vote-button vote-up">arrow_upward</a>
                 <div class="vote-number">{{ question['vote_number'] }}</div>
-                <a href="/question/{{ question['id'] }}/vote-down?next=this" class="material-icons vote-button vote-down">arrow_downward</a>
+                <a href="/question/{{ question['id'] }}/vote-down" class="material-icons vote-button vote-down">arrow_downward</a>
             </div>
             <div><span class="material-icons num-icon">remove_red_eye</span> {{ question['view_number'] }}</div>
             <div><span class="material-icons num-icon">question_answer</span> {{ question['answer_count']}}</div>

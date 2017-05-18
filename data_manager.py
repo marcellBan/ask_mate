@@ -185,6 +185,22 @@ def delete_comment(comment_id):
     _cursor.execute(query, [comment_id])
 
 
+@connect_to_database
+def get_comment(comment_id):
+    query = "SELECT * FROM comment WHERE id = %s;"
+    _cursor.execute(query, [comment_id])
+    result_set = _cursor.fetchall()
+    comment = {
+        'id': result_set[0],
+        'question_id': result_set[1],
+        'answer_id': result_set[2],
+        'message': result_set[3],
+        'submission_time': result_set[4].timestamp(),
+        'edit_count': result_set[5]
+    }
+    return comment
+
+
 def construct_question_list(result_set):
     '''constructs a list of dictionaries from an SQL Query result set (list of tuples) representing questions'''
     questions = list()
@@ -263,6 +279,22 @@ def construct_comment_list(result_set):
             'question_id': comment[1],
             'answer_id': comment[2],
             'message': comment[3],
-            'submission_time': comment[4].timestamp()
+            'submission_time': comment[4].timestamp(),
+            'edit_count': comment[5]
         })
     return comments
+
+
+@connect_to_database
+def update_comment(comment):
+    '''
+    updates a comment in the database
+    the parameter should be a dictionary with the following keys:\n
+    id::int, submission_time::timestamp, message::str, edit_count::int
+    '''
+    submitted_comment = dict(comment)
+    submitted_comment['submission_time'] = datetime.datetime.fromtimestamp(submitted_comment['submission_time'])
+    query = "UPDATE comment \
+             SET submission_time = %(submission_time)s, edit_count = %(edit_count)s, \
+             message = %(message)s WHERE id = %(id)s;"
+    _cursor.execute(query, submitted_comment)

@@ -103,6 +103,11 @@ def new_comment_for_answer(answer_id):
     return entry_manager.new_comment_for_answer(answer_id)
 
 
+@app.route('/comments/<int:comment_id>/edit', method=['GET', 'POST'])
+def edit_comment(comment_id):
+    return entry_manager.edit_comment(comment_id)
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return 'Oops, page not found!', 404

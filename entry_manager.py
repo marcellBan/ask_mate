@@ -119,7 +119,8 @@ def new_comment_for_question(question_id):
                 'question_id': question_id,
                 'answer_id': None,
                 'message': request.form.get('message'),
-                'submission_time': int(time.time())
+                'submission_time': int(time.time()),
+                'edit_count': 0
             }
             data_manager.new_comment(comment)
             return redirect(
@@ -148,9 +149,42 @@ def new_comment_for_answer(answer_id):
                 'question_id': None,
                 'answer_id': answer_id,
                 'message': request.form.get('message'),
-                'submission_time': int(time.time())
+                'submission_time': int(time.time()),
+                'edit_count': 0
             }
             data_manager.new_comment(comment)
             return redirect(
                 url_for('display_question', question_id=answer.get('question_id'))
             )
+
+
+def get_question_id(comment_id):
+    comment = data_manager.get_comment(comment_id)
+    if comment['answer_id'] is None:
+        return comment['question_id']
+    else:
+        answer = data_manager.get_answer(comment['answer_id'])
+        return answer['question_id']
+
+
+def edit_comment(comment_id):
+    comment = data_manager.get_comment(comment_id)
+    question_id = get_question_id(comment_id)
+    if comment['answer_id'] is None:
+        entry = data_manager.get_question(comment['question_id'])
+    else:
+        entry = data_manager.get_answer(comment['answer_id'])
+    if request.method == 'GET':
+        return render_template('new_comment.html', entry=entry, form_message=comment.get('message'))
+    elif request.method == 'POST':
+        if len(request.form.get('message')) < 10:
+                flash('Your comment isn\'t long enough!')
+                return render_template(
+                    'new_comment.html', entry=entry, form_message=request.form.get('message')
+                )
+        else:
+            comment['submission_time'] = int(time.time())
+            comment['message'] = request.form.get('message')
+            comment['edit_count'] += 1
+            data_manager.update_comment(comment)
+            return redirect(url_for('display_question', question_id=question_id))

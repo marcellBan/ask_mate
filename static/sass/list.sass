@@ -16,18 +16,37 @@
 
   &:hover+#sort-values
     display: block
+    opacity: 1
 
 #sort-values
   position: absolute
   top: calc(100% - (#{one-px-rem} * 5))
   right: 0
   display: none
+  width: 25ch
+  padding: 1ch 2ch
   background: $grey200
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5)
-  transition: background 0.3s
+  opacity: 0
+  transition: background 0.3s, opacity 0.3s
+
+  a
+    color: $black
+    text-decoration: none
 
   &:hover
     display: block
+    background: $grey300
+    opacity: 1
+
+#clear-sort
+  padding: 0 1ch
+  line-height: calc(#{$header-height} + (#{$one-px-rem} * 5))
+  color: $black
+  text-decoration: none
+  transition: background 0.3s
+
+  &:hover
     background: $grey300
 
 /*

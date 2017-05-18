@@ -36,6 +36,7 @@
 }
 #sort-dropdown:hover + #sort-values {
   display: block;
+  opacity: 1;
 }
 
 #sort-values {
@@ -43,14 +44,34 @@
   top: calc(100% - (one-px-rem * 5));
   right: 0;
   display: none;
+  width: 25ch;
+  padding: 1ch 2ch;
   background: #EEE;
   -webkit-box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
           box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-  -webkit-transition: background 0.3s;
-  transition: background 0.3s;
+  opacity: 0;
+  -webkit-transition: background 0.3s, opacity 0.3s;
+  transition: background 0.3s, opacity 0.3s;
+}
+#sort-values a {
+  color: #000;
+  text-decoration: none;
 }
 #sort-values:hover {
   display: block;
+  background: #E0E0E0;
+  opacity: 1;
+}
+
+#clear-sort {
+  padding: 0 1ch;
+  line-height: calc(55px + (0.0625rem * 5));
+  color: #000;
+  text-decoration: none;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+#clear-sort:hover {
   background: #E0E0E0;
 }
 

@@ -4,14 +4,14 @@ For AskMate by SzószKód
 '''
 
 import data_manager
-from flask import render_template, redirect, request, session
+from flask import render_template, redirect, request, session, url_for
 
 
 def display_questions():
     questions_list = data_manager.get_questions()
     for question in questions_list:
         question['answer_count'] = len(data_manager.get_answers(question['id']))
-    return render_template('list.html', question_list=questions_list, index=False)
+    return render_template('list.html', question_list=questions_list, page='')
 
 
 def display_one_question(question_id):
@@ -30,7 +30,7 @@ def display_five_latest_questions():
     questions_list = data_manager.get_questions(limit=5)
     for question in questions_list:
         question['answer_count'] = len(data_manager.get_answers(question['id']))
-    return render_template('list.html', question_list=questions_list, index=True)
+    return render_template('list.html', question_list=questions_list, page='index')
 
 
 def display_sorted_questions():
@@ -56,7 +56,7 @@ def display_sorted_questions():
     for question in questions:
         question['answer_count'] = len(data_manager.get_answers(question['id']))
     print(session['sorting'])
-    return render_template('list.html', question_list=questions)
+    return render_template('list.html', question_list=questions, page='sorted')
 
 
 def clear_sorting():

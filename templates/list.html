@@ -8,6 +8,11 @@
 {% endblock %}
 
 {% block header_content %}
+    {% if page=='sorted' %}
+    <a href="/sort/clear"><div id="">
+        Clear sort
+    </div></a>
+    {% endif %}
     <div id="sort-menu-container">
         <div id="sort-dropdown">
             Sort by
@@ -49,7 +54,7 @@
         </div>
     </article>
     {% endfor %}
-    {% if index %}
+    {% if page=='index' %}
     <a class="more-q-link" href="/list"><button class="more-questions">Load more questions</button></a>
     {% endif %}
 {% endblock %}

@@ -166,8 +166,14 @@ def delete_question(question_id):
     deletes a question from the database with the given id\n
     also deletes al the answers that are for that question
     '''
+    answers = get_answers(question_id)
+    for answer in answers:
+        query = 'DELETE FROM comment WHERE answer_id = %s;'
+        _cursor.execute(query, [answer['id']])
     query_answer = 'DELETE FROM answer WHERE question_id = %s;'
     _cursor.execute(query_answer, [question_id])
+    query = 'DELETE FROM comment WHERE question_id = %s;'
+    _cursor.execute(query, [question_id])
     query_question = 'DELETE FROM question WHERE id = %s;'
     _cursor.execute(query_question, [question_id])
 

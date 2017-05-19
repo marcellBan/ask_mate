@@ -166,10 +166,12 @@ def delete_question(question_id):
     deletes a question from the database with the given id\n
     also deletes al the answers that are for that question
     '''
-    answers = get_answers(question_id)
-    for answer in answers:
+    query = 'SELECT id FROM answer WHERE question_id = %s;'
+    _cursor.execute(query, [question_id])
+    answer_ids = _cursor.fetchall()
+    for answer in answer_ids:
         query = 'DELETE FROM comment WHERE answer_id = %s;'
-        _cursor.execute(query, [answer['id']])
+        _cursor.execute(query, [answer[0]])
     query_answer = 'DELETE FROM answer WHERE question_id = %s;'
     _cursor.execute(query_answer, [question_id])
     query = 'DELETE FROM comment WHERE question_id = %s;'
@@ -181,6 +183,8 @@ def delete_question(question_id):
 @connect_to_database
 def delete_answer(answer_id):
     '''deletes an answer from the database with the given id'''
+    query = "DELETE FROM comment WHERE answer_id = %s;"
+    _cursor.execute(query, [answer_id])
     query = "DELETE FROM answer WHERE id = %s;"
     _cursor.execute(query, [answer_id])
 

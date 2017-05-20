@@ -1,129 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Marcell Bán, Miklós Torbics, Péter Ősz, Márton Mészáros">
-    <meta name="description" content=
-        "Questions from developers, to developers. Easy to use platform to get quick answers when you're stuck!'">
-    <meta name="keywords" content="AskMate, ask, mate, question, answer, codecool, 2017, SzószKód, szósz, kód">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% endblock %}</title>
-
-    <!-- to use material icons, use the class: material-icons
-    https://material.io/icons/
-    -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="icon" href="/static/images/favicon.png">
-    <link rel="stylesheet" href="/static/css/layout.css">
-    {% block head %}{% endblock %}
+  <meta charset="UTF-8">
+  <meta name="author" content="Marcell Bán, Miklós Torbics, Péter Ősz, Márton Mészáros">
+  <meta name="description" content="Minimalistic Q&A website for software developers. Have a question? Ask away!">
+  <meta name="keywords" content="Codecool, code, cool, Budapest, 2017, AskMate, ask, mate, software, developer,
+    development, question, answer, comment, SzószKód, szósz, kód">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}AskMate{% endblock %}</title>
+  <!-- .material-icons
+  https://material.io/icons/
+  -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="icon" href="/static/images/favicon.png">
+  <link rel="stylesheet" href="/static/css/layout.css">
+  {% block head %}{% endblock %}
 </head>
-<body>
-    <!-- PAGE HEADER -->
-    <header>
-    <div class="page-wrapper">
-        <div id="header-logo">
-            <a href="/" id="ask-mate"><span id="ask">Ask</span>Mate</a>
-        </div>
-        <div id="header-content">
-            {% block header_content %}{% endblock %}
-            <a href="/question/new" class="header-new-question">New question</a>
-            <div class="form">
-                <input id="ee-input" type="text"placeholder="Search...">
-                <input id="ee-submit" type="submit" class="material-icons" value="search">
-            </div>
-        </div>
+<body class="">
+  <!-- page header -->
+  <header id="page-header" class="">
+  <div class="page-wrapper">
+    <div id="header-logo-wrapper">
+      <a id="header-logo" class="no-underline" href="/"><span class="">Ask</span>Mata</a>
     </div>
-    </header>
-
-
-
-    <!-- FLASH MESSAGES -->
-    <div id="flash-messages">
-    <div class="page-wrapper">
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for message in messages %}
-        <div class="flash-message">{{ message }}</div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+    <div id="header-content-wrapper">
+      {% block header_content %}{% endblock %}
+      <a class="header-link no-underline" href="/question/new">New question</a>
+      <div id="fake-search-form">
+        <input id="easter-egg-input" type="text" placeholder="Search...">
+        <input id="easter-egg-submit" class="material-icons" type="submit" value="search">
+      </div>
     </div>
-    </div>
-
-
-
-    <!-- MAIN -->
-    <div id="top"></div>
-    <main>
-    <div class="page-wrapper">
-        {% block main %}{% endblock %}
-    </div>
-    </main>
-
-
-
-    <!-- PAGE FOOTER -->
-    <footer>
-    <div class="page-wrapper">
-    <div id="footer-vertical-align">
-        Created by SzószKód<br>
-        Copyright &copy; 2017
-    </div>
-    </div>
-    </footer>
-
-
-
-    <!-- FLOATING BUTTONS -->
-    <div id="floating-buttons">
-        {% block floating_buttons %}{% endblock %}
-        <a href="#top"><button id="to-top" class="material-icons floating-button">arrow_upward</button></a>
-    </div>
-
-
-
-    <audio preload="auto" id="ee-audio">
-        <source src="/static/audio/searching.mp3">
-    </audio>
-
-
-
-    <!-- SCRIPTS -->
-    {% block js %}{% endblock %}
-    <script>
-        var ee = false
-        var eeInput = document.getElementById('ee-input');
-        var eeSubmit = document.getElementById('ee-submit');
-        var eeAudio = document.getElementById('ee-audio');
-        var toTop = document.getElementById('to-top');
-        var eeEvent = function() {
-            if(!ee){
-                eeAudio.play();
-                ee = true;
-            }
-        };
-        var scrollEvent = function(){
-            wScroll = window.scrollY;
-            if(wScroll > window.innerHeight * 1.25){
-                toTop.classList.add("visible");
-            }else{
-                toTop.classList.remove("visible");
-            }
-        };
-
-        // Running all scroll events
-        scrollEvent();
-        window.addEventListener("scroll", function(){
-            scrollEvent();
-        });
-        eeSubmit.addEventListener("click", eeEvent);
-        eeInput.addEventListener("focus", function(){
-            this.addEventListener("keyup", function(e){
-                if(e.which == 13){
-                    eeEvent();
-                }
-            });
-        });
-    </script>
+  </div>
+  </header>
+  <div id="top"></div>
+  <!-- flash messages -->
+  <aside id="flash-messages">
+  <div class="page-wrapper">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for message in messages %}
+    <article class="flash-message">{{ message }}</article>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  </div>
+  </aside>
+  <!-- main -->
+  <main>
+  <div class="page-wrapper">
+    {% block main %}{% endblock %}
+  </div>
+  </main>
+  <!-- page footer -->
+  <footer id="page-footer" class="">
+  <div class="page-wrapper">
+  <div id="footer-vertical-align">
+    Created by SzószKód<br>
+    Copyright &copy; <time>2017</time>
+  </div>
+  </div>
+  </footer>
+  <!-- floating buttons -->
+  <div id="floating-buttons">
+    {% block floating_buttons %}{% endblock %}
+    <a href="#top" class="no-underline"><button id="to-top" class="material-icons floating-button">arrow_upward</button></a>
+  </div>
+  <!-- easter egg audio -->
+  <audio id="easter-egg-audio" preload="auto">
+    <source src="/static/audio/searching.mp3">
+  </audio>
+  <!-- scrips -->
+  {% block js %}{% endblock %}
+  <script src="/static/script/easter_egg.js"></script>
+  <script src="/static/script/scroll_event.js"></script>
 </body>
 </html>

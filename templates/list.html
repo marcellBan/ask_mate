@@ -1,62 +1,63 @@
 {% extends "layout.html" %}
 
-{% block title %}AskMate{% endblock %}
-
 {% block head %}
-    <link rel="stylesheet" href="/static/css/cards.css">
-    <link rel="stylesheet" href="/static/css/list.css">
+  <link rel="stylesheet" href="/static/css/list.css">
+  <link rel="stylesheet" href="/static/css/cards.css">
 {% endblock %}
 
 {% block header_content %}
-    {% if page=='sorted' %}
-    <a href="/sort/clear" id="clear-sort"><div>
-        Clear sort
-    </div></a>
-    {% endif %}
-    <div id="sort-menu-container">
-        <div id="sort-dropdown">
-            Sort by
-        </div>
-        <div id="sort-values">
-            ID: <a href="/sort?id=asc" class="material-icons">arrow_upward</a>
-            <a href="/sort?id=desc" class="material-icons">arrow_downward</a><br>
-            Title: <a href="/sort?title=asc" class="material-icons">arrow_upward</a>
-            <a href="/sort?title=desc" class="material-icons">arrow_downward</a><br>
-            Rating: <a href="/sort?vote_number=asc" class="material-icons">arrow_upward</a>
-            <a href="/sort?vote_number=desc" class="material-icons">arrow_downward</a><br>
-            Time posted: <a href="/sort?submission_time=asc" class="material-icons">arrow_upward</a>
-            <a href="/sort?submission_time=desc" class="material-icons">arrow_downward</a><br>
-            Views: <a href="/sort?view_number=asc" class="material-icons">arrow_upward</a>
-            <a href="/sort?view_number=desc" class="material-icons">arrow_downward</a><br>
-        </div>
-    </div>
+  {% if page == 'sorted' %}
+  <a class="header-link no-underline" href="/sort/clear">Clear sort</a>
+  {% endif %}
+  <div id="sort-menu-wrapper">
+    <span class="header-link">Sort by</span>
+    <nav id="sort-menu-dropdown">
+      ID:
+      <a class="material-icons no-underline" href="/sort?id=desc">arrow_downward</a>
+      <a class="material-icons no-underline" href="/sort?id=asc">arrow_upward</a><br>
+      Title:
+      <a class="material-icons no-underline" href="/sort?title=desc">arrow_downward</a>
+      <a class="material-icons no-underline" href="/sort?title=asc">arrow_upward</a><br>
+      Rating:
+      <a class="material-icons no-underline" href="/sort?vote_number=desc">arrow_downward</a>
+      <a class="material-icons no-underline" href="/sort?vote_number=asc">arrow_upward</a><br>
+      Views:
+      <a class="material-icons no-underline" href="/sort?view_number=desc">arrow_downward</a>
+      <a class="material-icons no-underline" href="/sort?view_number=asc">arrow_upward</a><br>
+      Post time:
+      <a class="material-icons no-underline" href="/sort?submission_time=desc">arrow_downward</a>
+      <a class="material-icons no-underline" href="/sort?submission_time=asc">arrow_upward</a><br>
+    </nav>
+  </div>
 {% endblock %}
 
 {% block main %}
-    {% for question in question_list %}
-    <article class="question-card">
-        <div class="numbers-wrapper">
-        <section class="numbers">
-            <div class="votes">
-                <a href="/question/{{ question['id'] }}/vote-up" class="material-icons vote-button vote-up">arrow_upward</a>
-                <div class="vote-number">{{ question['vote_number'] }}</div>
-                <a href="/question/{{ question['id'] }}/vote-down" class="material-icons vote-button vote-down">arrow_downward</a>
-            </div>
-            <div><span class="material-icons num-icon">remove_red_eye</span> {{ question['view_number'] }}</div>
-            <div><span class="material-icons num-icon">question_answer</span> {{ question['answer_count']}}</div>
-        </section>
-        </div>
-        <div class="question-wrapper">
-            <a href="/question/{{ question['id'] }}" class="link-to-question"><h2>{{ question['title'] }}</h2></a>
-            <a href="/question/{{ question['id'] }}" class="link-to-question"><p class="entry-message"><pre>{{ question['message'] }}</pre></p></a>
-        </div>
-    </article>
-    {% endfor %}
-    {% if page=='index' %}
-    <a class="more-q-link" href="/list"><button class="more-questions">Load more questions</button></a>
-    {% endif %}
+  {% if question_list %}
+  {% for question in question_list %}
+  <article class="card question s-shadow">
+    <div class="numbers-wrapper">
+    <section class="numbers">
+      <div class="votes-wrapper">
+        <a class="material-icons no-underline vote-button vote-up"  href="/question/{{ question['id'] }}/vote-up">arrow_upward</a>
+        <div class="vote-number">{{ question['vote_number'] }}</div>
+        <a class="material-icons no-underline vote-button vote-down" href="/question/{{ question['id'] }}/vote-down">arrow_downward</a>
+      </div>
+      <div>
+        <span class="material-icons number-icon">remove_red_eye</span> {{ question['view_number'] }}
+      </div>
+      <div>
+        <span class="material-icons number-icon">question_answer</span> {{ question['answer_count'] }}
+      </div>
+    </section>
+    </div>
+    <div class="text-wrapper">
+      <a class="no-underline" href="/question/{{ question['id'] }}"><h2>{{ question['title'] }}</h2></a>
+      <a class="no-underline" href="/question/{{ question['id'] }}"><p class="entry-message"><pre>{{ question['message'] }}</pre></p></a>
+    </div>
+  </article>
+  {% endfor %}
+  {% endif %}
+  {% if page == 'index' %}
+  <a class="no-underline" href="/list"><button class="button-card">Load more questions</button></a>
+  {% endif %}
 {% endblock %}
-
-<!-- ONLICK
-onclick="location='/question/{{ id }}'"
--->

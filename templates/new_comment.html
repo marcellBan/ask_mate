@@ -3,21 +3,23 @@
 {% block title %}Add a comment!{% endblock %}
 
 {% block head %}
-    {{ super() }}
-    <link rel="stylesheet" href="/static/css/new_entry.css">
+  <link rel="stylesheet" href="/static/css/new_entry.css">
 {% endblock %}
 
 {% block main %}
-    <form action="" method="post">
-        <article>
-        {% if entry.get('title') %}
-          <h2>{{ entry['title'] }}</h2>
-        {% endif %}
-        <p class="entry-message"><pre>{{ entry['message'] }}</pre></p>
+  <form class="s-shadow" action="" method="post">
+    <article>
+      <h2>You're commenting on:</h2>
+      {% if entry.get('title') %}
+      <h3>{{ entry['title'] }}</h3>
+      {% endif %}
+      <p><pre>{{ entry['message'] }}</pre></p>
     </article>
-        <label for="message">Your comment<span class="req">*</span>:</label>
-        <textarea name="message" id="message" rows="4" required autofocus minlength="10">{{ form_message }}</textarea>
-        <hr>
-        <input type="submit" value="Comment!"><br>
-    </form>
+    <label for="message">Your comment<span class="">*</span>:</label>
+    <small>Make sure your comment is at least 10 characters long!</small>
+    <textarea id="message" class="" name="message" autofocus minlength="10" required rows="4"
+      >{{ form_message }}</textarea>
+    <hr>
+    <input type="submit" value="Comment!">
+  </form>
 {% endblock %}

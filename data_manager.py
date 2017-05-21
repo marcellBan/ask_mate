@@ -52,7 +52,7 @@ def get_questions(sorting=None, limit=None):
     '''
     returns a list of dictionaries containing all the questions\n
     the amount of questions returened can be limited with the limit parameter\n
-    the sorting parameter is should be None or a list of tuples containing the column and the sorting order
+    the sorting parameter is should be None or a list of lists containing the column and the sorting order
     '''
     if sorting is None:
         sorting_query = "ORDER BY submission_time DESC"

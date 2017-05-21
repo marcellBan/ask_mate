@@ -51,7 +51,7 @@ def display_sorted_questions():
                     sort[1] = request.args.get(aspect)
                     flag = True
             if not flag:
-                session['sorting'].append((aspect, request.args.get(aspect)))
+                session['sorting'].append([aspect, request.args.get(aspect)])
     questions = data_manager.get_questions(sorting=session['sorting'])
     for question in questions:
         question['answer_count'] = len(data_manager.get_answers(question['id']))

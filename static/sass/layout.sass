@@ -1,3 +1,4 @@
+@import colors
 @import meta-selectors
 @import variables
 
@@ -7,9 +8,10 @@
   padding: 0
   box-sizing: border-box
   outline: none
+  font-size: 1em
 
   &::selection
-    background: $acc200
+    background: $accent200
 
 header,
 main,
@@ -30,6 +32,11 @@ footer
   \:root
     font-size: 20px
 
+body
+  background: $grey300
+  font-family: $font-family
+  line-height: $line-height
+
 .page-wrapper
   max-width: 960px
   margin: 0 auto
@@ -37,95 +44,96 @@ footer
 .hide
   display: none
 
-body
-  background: $grey300
-  font-family: $font-family
-  line-height: 1.25em
-
 
 
 // PAGE HEADER
-header
+#page-header
   position: fixed
   z-index: 1
-  top: 0
-  left: 0
   width: 100%
   min-height: $header-height
   background: $grey200
-  border-bottom: calc(#{$one-px-rem} * 2) solid $grey400
+  border-bottom: calc(#{$one-px-rem} * 3) solid $grey400
 
   .page-wrapper
     padding: 0 1ch
-
-  #header-logo
-    float: left
-    font-size: 2em
-    line-height: $header-height
   
-  #ask-mate
+  .header-link
+    @extend .no-underline
+
+    display: inline-block
     color: $black
-    font-family: $logo-font
-    text-decoration: none
-
-  #ask
-    color: $theme700
-  
-  #header-content
-    position: relative
-    float: right
     line-height: $header-height
-
-    > *
-      display: inline-block
-      margin-left: 1ch
-  
-  .header-new-question
-    padding: 0 1ch
-    color: $black
-    line-height: calc(#{$header-height} + (#{$one-px-rem} * 5))
-    text-decoration: none
-    transition: background 0.3s
+    transition: all 0.3s
 
     &:hover,
     &:active
       background: $grey300
-  
-  .form
-    @extend .s-border
-    @extend .s-rad
-
-    padding: 0 1ch
-    background: $grey400
-    border-color: $grey500
-    line-height: 1.5em
-
-    input[type="text"]
-      width: 8ch
-      background: $grey400
-      border: none
-      color: $grey700
-      font-size: 1em
-      line-height: 1
-      transition: width 0.3s
-
-      &:focus
-        width: 20ch
-    
-    input[type="submit"].material-icons
-      display: inline-block
-      margin-top: -0.15ch
-      background: $grey400
-      border: none
-      vertical-align: middle
-      color: $grey700
-      font-size: 1.2em
-      line-height: 1
-      font-weight: 700
-      cursor: pointer
+      box-shadow: 0 calc(-#{$one-px-rem} * 3) 0 $theme700 inset
   
   &::after
     @extend .clear
+
+#header-logo-wrapper
+  float: left
+
+#header-logo
+  @extend .no-underline
+  
+  color: $black
+  font-family: $logo-font
+  font-size: 2.15em
+  line-height: $header-height
+
+#ask
+  color: $theme700
+
+#header-content-wrapper
+  float: right
+  line-height: $header-height
+
+  > *
+    display: inline-block
+    margin-left: 0.5ch
+    padding: 0 1ch
+
+#fake-search-form
+  @extend .s-border
+  @extend .s-rad
+
+  background: $grey350
+  border-color: $grey500
+  line-height: 1.5em // makes the "form" not take up all the vertical space
+
+  input[type="text"]
+    @extend .no-border
+
+    width: 8ch
+    background: $grey350
+    color: $grey500
+    transition: width 0.3s
+
+    &::placeholder
+      color: $grey500
+
+    &:focus
+      width: 15ch
+  
+  input[type="submit"]
+    @extend .no-border
+
+    background: $grey350
+    color: $grey500
+    font-size: 1.2em
+    font-weight: 700
+    cursor: pointer
+    // vertical middle position hack
+    display: inline-block
+    margin-top: -0.15ch
+    vertical-align: middle
+
+#top
+  height: calc(#{$header-height} + (#{$one-px-rem} * 3))
 
 
 
@@ -133,8 +141,7 @@ header
 #flash-messages
   position: fixed
   z-index: 1
-  top: calc((#{$header-height} + (#{$one-px-rem} * 2)) + 1em)
-  left: 0
+  top: calc((#{$header-height} + (#{$one-px-rem} * 2)) + 2em)
   width: 100%
 
 .flash-message
@@ -143,37 +150,29 @@ header
   @extend .s-shadow
 
   position: relative
-  top: 0
-  left: 0
-  margin-bottom: 0.5em
+  width: 80%
+  margin: 0 auto 0.5em
   padding: 0 2ch
-  background: $acc100
-  border-color: $acc400
-  color: $acc400
+  background: $accent100
+  border-color: $accent400
+  color: $accent400
   line-height: 2em
   text-align: center
   animation:
     name: flash-anim
     delay: 2s
-    duration: 1s
+    duration: 2s
     fill-mode: forwards
 
 @keyframes flash-anim
   0%
-    width: initial
-    height: initial
+    top: 0
     opacity: 1
-    top: 0
-    left: 0
+  50%,
   99%
-    width: initial
-    height: initial
+    top: -1em
     opacity: 0
-    top: 0
-    left: 0
   100%
-    width: 0
-    height: 0
     top: -100vh
     left: -100vw
     display: none
@@ -183,11 +182,8 @@ header
 
 
 // MAIN
-#top
-  height: calc(#{$header-height} + (#{$one-px-rem} * 2))
-
 main
-  min-height: calc(100vh - (#{$header-height} + (#{$one-px-rem} * 2)) - 10vh)
+  min-height: calc(100vh - (#{$header-height} + (#{$one-px-rem} * 3)) - 10vh)
   transition: all 0.3s
 
 @media screen and (max-width: 959px)
@@ -200,40 +196,43 @@ main
     margin-bottom: 10vh
     padding-top: calc(#{$one-px-rem} * 10)
 
-.more-q-link
-  text-decoration: none
-
-.more-questions
-  @extend .s-rad
+.button-card
+  @extend .no-underline
+  @extend .s-shadow
 
   display: block
-  margin: 10vh auto 0
-  padding: 1ch 1.5ch
-  background: $theme500
-  border: none
+  width: 50%
+  margin: 0 auto 1em
+  background: $theme400
   color: $white
-  font-size: 1em
+  font-size: 1.25em
   font-weight: 700
-  cursor: pointer
+  line-height: 2.75em
+  text-align: center
   transition: background 0.3s
 
   &:hover,
   &:active
-    background: $theme700
+    background: $theme500
+
+small
+  font-size: 0.75em
+  line-height: 0.75
 
 
 
 // PGE FOOTER
 footer
   background: $theme700
+  color: $grey200
 
   .page-wrapper
     position: relative
+    padding: 0 1ch
     background:
       image: url("/static/images/layout-footer-background.png")
       repeat: no-repeat
       size: 25vh 25vh
-    color: $white
     text-align: center
   
   #footer-vertical-align
@@ -269,22 +268,20 @@ footer
   bottom: 7vmin
   right: 7vmin
 
-  a
-    text-decoration: none
-
 .floating-button
+  @extend .no-underline
   @extend .s-shadow
 
   display: block
-  margin-top: calc(#{$one-px-rem} * 10)
   width: 50px
   height: 50px
-  background: $acc400
-  border: none
+  margin-top: calc(#{$one-px-rem} * 10)
+  background: $accent400
   border-radius: 50%
   color: $grey200
   font-size: 1.75em
   line-height: 50px
+  text-align: center
   cursor: pointer
 
 #to-top

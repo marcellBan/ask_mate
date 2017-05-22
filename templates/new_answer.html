@@ -7,13 +7,13 @@
 {% endblock %}
 
 {% block main %}
-  <form class="s-shadow" action="" method="post" enctype="multipart/form-data">
+  <form action="" method="post" enctype="multipart/form-data">
     <article>
-      <h2>You're replying to:</h2>
+      <h2>You're answering to:</h2>
       <h3>{{ question['title'] }}</h3>
-      <p><pre>{{ question['message'] }}</pre></p>
+      <p>{{ question['message'] }}</p>
     </article>
-    <label for="message">Your answer<span class="">*</span>:</label>
+    <label for="message">Your answer<span class="req">*</span>:</label>
     <small>Make sure your answer is at least 10 characters long!</small>
     <textarea id="message" class="" name="message" autofocus minlength="10" required rows="4"
       >{{ form_message }}</textarea>
@@ -21,6 +21,6 @@
     <label for="image" class="hide">Upload an image of your solution:</label>
     <small class="hide">Accepted file formats: .gif, .jpeg, .jpg, .png</small>
     <input id="image" class="hide" name="image" type="file" accept="image/*">
-    <input type="submit" value="Reply!">
+    <input type="submit" value="Answer!">
   </form>
 {% endblock %}

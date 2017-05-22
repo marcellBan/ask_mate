@@ -7,26 +7,26 @@
 
 {% block header_content %}
   {% if page == 'sorted' %}
-  <a class="header-link no-underline" href="/sort/clear">Clear sort</a>
+  <a class="header-link" href="/sort/clear">Clear sort</a>
   {% endif %}
   <div id="sort-menu-wrapper">
     <span class="header-link">Sort by</span>
     <nav id="sort-menu-dropdown">
       ID:
-      <a class="material-icons no-underline" href="/sort?id=desc">arrow_downward</a>
-      <a class="material-icons no-underline" href="/sort?id=asc">arrow_upward</a><br>
+      <a class="material-icons" href="/sort?id=desc">arrow_downward</a>
+      <a class="material-icons" href="/sort?id=asc">arrow_upward</a><br>
       Title:
-      <a class="material-icons no-underline" href="/sort?title=desc">arrow_downward</a>
-      <a class="material-icons no-underline" href="/sort?title=asc">arrow_upward</a><br>
+      <a class="material-icons" href="/sort?title=desc">arrow_downward</a>
+      <a class="material-icons" href="/sort?title=asc">arrow_upward</a><br>
       Rating:
-      <a class="material-icons no-underline" href="/sort?vote_number=desc">arrow_downward</a>
-      <a class="material-icons no-underline" href="/sort?vote_number=asc">arrow_upward</a><br>
+      <a class="material-icons" href="/sort?vote_number=desc">arrow_downward</a>
+      <a class="material-icons" href="/sort?vote_number=asc">arrow_upward</a><br>
       Views:
-      <a class="material-icons no-underline" href="/sort?view_number=desc">arrow_downward</a>
-      <a class="material-icons no-underline" href="/sort?view_number=asc">arrow_upward</a><br>
+      <a class="material-icons" href="/sort?view_number=desc">arrow_downward</a>
+      <a class="material-icons" href="/sort?view_number=asc">arrow_upward</a><br>
       Post time:
-      <a class="material-icons no-underline" href="/sort?submission_time=desc">arrow_downward</a>
-      <a class="material-icons no-underline" href="/sort?submission_time=asc">arrow_upward</a><br>
+      <a class="material-icons" href="/sort?submission_time=desc">arrow_downward</a>
+      <a class="material-icons" href="/sort?submission_time=asc">arrow_upward</a><br>
     </nav>
   </div>
 {% endblock %}
@@ -34,13 +34,13 @@
 {% block main %}
   {% if question_list %}
   {% for question in question_list %}
-  <article class="card question s-shadow">
+  <article class="card list-question">
     <div class="numbers-wrapper">
     <section class="numbers">
       <div class="votes-wrapper">
-        <a class="material-icons no-underline vote-button vote-up"  href="/question/{{ question['id'] }}/vote-up">arrow_upward</a>
+        <a class="material-icons vote-button vote-up"  href="/question/{{ question['id'] }}/vote-up">arrow_upward</a>
         <div class="vote-number">{{ question['vote_number'] }}</div>
-        <a class="material-icons no-underline vote-button vote-down" href="/question/{{ question['id'] }}/vote-down">arrow_downward</a>
+        <a class="material-icons vote-button vote-down" href="/question/{{ question['id'] }}/vote-down">arrow_downward</a>
       </div>
       <div>
         <span class="material-icons number-icon">remove_red_eye</span> {{ question['view_number'] }}
@@ -50,14 +50,18 @@
       </div>
     </section>
     </div>
-    <div class="text-wrapper">
-      <a class="no-underline" href="/question/{{ question['id'] }}"><h2>{{ question['title'] }}</h2></a>
-      <a class="no-underline" href="/question/{{ question['id'] }}"><p class="entry-message"><pre>{{ question['message'] }}</pre></p></a>
+    <a class="text-wrapper" href="/question/{{ question['id'] }}">
+    <div>
+      <h2>{{ question['title'] }}</h2>
+      <p>{{ question['message'] }}</p>
+      <div class="paragraph-overlay"></div>
+      <span class="read-more">Read more</span>
     </div>
+    </a>
   </article>
   {% endfor %}
   {% endif %}
   {% if page == 'index' %}
-  <a class="no-underline" href="/list"><button class="button-card">Load more questions</button></a>
+  <a class="button-card" href="/list">Load more questions</a>
   {% endif %}
 {% endblock %}

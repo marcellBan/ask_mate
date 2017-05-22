@@ -7,15 +7,15 @@
 {% endblock %}
 
 {% block main %}
-  <form class="s-shadow" action="" method="post" enctype="multipart/form-data">
-    <label for="title">Summary<span class="">*</span>:</label>
+  <form action="" method="post" enctype="multipart/form-data">
+    <label for="title">Summary<span class="req">*</span>:</label>
     <input id="title" class="" name="title" type="text" required value="{{ form_title }}"
       {% if not form_title %}
       autofocus
       {% endif %}>
     <hr>
-    <label for="message">Your answer<span class="">*</span>:</label>
-    <small>Make sure your answer is at least 10 characters long!</small>
+    <label for="message">Your question<span class="req">*</span>:</label>
+    <small>Make sure your question is at least 10 characters long!</small>
     <textarea id="message" class="" name="message" autofocus minlength="10" required rows="4"
       {% if form_message %}
       autofocus
@@ -24,6 +24,6 @@
     <label for="image" class="hide">Upload an image of your solution:</label>
     <small class="hide">Accepted file formats: .gif, .jpeg, .jpg, .png</small>
     <input id="image" class="hide" name="image" type="file" accept="image/*">
-    <input type="submit" value="Ark!">
+    <input type="submit" value="Ask!">
   </form>
 {% endblock %}

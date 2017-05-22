@@ -2,15 +2,19 @@
 
 {% block title %}{{ question['title'] }}{% endblock %}
 
+{% block head %}
+  <link rel="stylesheet" href="/static/css/cards.css">
+{% endblock %}
+
 {% block main %}
   <!-- question -->
-  <article class="card question s-shadow">
+  <article class="card question">
     <div class="numbers-wrapper">
     <section class="numbers">
       <div class="votes-wrapper">
-        <a class="material-icons no-underline vote-button vote-up"  href="/question/{{ question['id'] }}/vote-up?next=this">arrow_upward</a>
+        <a class="material-icons vote-button vote-up"  href="/question/{{ question['id'] }}/vote-up?next=this">arrow_upward</a>
         <div class="vote-number">{{ question['vote_number'] }}</div>
-        <a class="material-icons no-underline vote-button vote-down" href="/question/{{ question['id'] }}/vote-down?next=this">arrow_downward</a>
+        <a class="material-icons vote-button vote-down" href="/question/{{ question['id'] }}/vote-down?next=this">arrow_downward</a>
       </div>
       <div>
         <span class="material-icons number-icon">remove_red_eye</span> {{ question['view_number'] }}
@@ -22,15 +26,15 @@
     </div>
     <div class="text-wrapper">
       <h2>{{ question['title'] }}</h2>
-      <p class="entry-message"><pre>{{ question['message'] }}</pre></p>
+      <p>{{ question['message'] }}</p>
       <section class="edit-buttons">
-        <a class="material-icons no-underline" href="/question/{{ question['id'] }}/edit">mode_edit</a>
-        <a class="material-icons no-underline" href="/question/{{ question['id'] }}/delete">delete</a>
+        <a class="material-icons" href="/question/{{ question['id'] }}/edit">mode_edit</a>
+        <a class="material-icons" href="/question/{{ question['id'] }}/delete">delete</a>
       </section>
       <section class="meta-info">
       <small>
         ID: {{ question['id'] }}<br>
-        Post Time: {{ question['submission_time'] }}
+        Post Time: {{ question['submission_time']|time }}
       </small>
       </section>
       <section class="comments">
@@ -38,47 +42,46 @@
         {% if question.get('comments') %}
         {% for comment in question['comments'] %}
         <li>
-          <p><pre>{{ comment['message'] }}</pre></p>
+          <p>{{ comment['message'] }}</p>
           <sectionn class="meta-info">
-            Post Time: {{ comment['submission_time'] }}<br>
+            Post Time: {{ comment['submission_time']|time }}<br>
             Edits: {{ comment['edit_count'] }}
             <section class="edit-buttons">
-              <a class="material-icons no-underline" href="/comments/{{ comment['id'] }}/edit">mode_edit</a>
-              <a class="material-icons no-underline" href="/comments/{{ comment['id'] }}/delete">delete</a>
+              <a class="material-icons" href="/comments/{{ comment['id'] }}/edit">mode_edit</a>
+              <a class="material-icons" href="/comments/{{ comment['id'] }}/delete">delete</a>
             </section>
           </sectionn>
         </li>
         {% endfor %}
         {% endif %}
-        <a class="no-underline" href="/question/{{ question['id'] }}/new-comment"><li>Add a comment</li></a>
+        <a href="/question/{{ question['id'] }}/new-comment"><li>Add a comment</li></a>
       </ul>
     </div>
   </article>
-  <hr>
-  <a class="no-underline" href="/question/{{ question['id'] }}/new-answer"><button class="button-card">Add an answer</button></a>
   <!-- answers -->
+  <a class="button-card" href="/question/{{ question['id'] }}/new-answer">Add an answer</a>
   <section id="answers">
     {% if answers %}
     {% for answer in answers %}
-    <article class="card answer s-shadow">
+    <article class="card answer">
       <div class="numbers-wrapper">
       <section class="numbers">
         <div class="votes-wrapper">
-          <a class="material-icons no-underline vote-button vote-up"  href="/answer/{{ answer['id'] }}/vote-up?next=this">arrow_upward</a>
+          <a class="material-icons vote-button vote-up"  href="/answer/{{ answer['id'] }}/vote-up?next=this">arrow_upward</a>
           <div class="vote-number">{{ answer['vote_number'] }}</div>
-          <a class="material-icons no-underline vote-button vote-down" href="/answer/{{ answer['id'] }}/vote-down?next=this">arrow_downward</a>
+          <a class="material-icons vote-button vote-down" href="/answer/{{ answer['id'] }}/vote-down?next=this">arrow_downward</a>
         </div>
       </section>
       </div>
       <div class="text-wrapper">
-        <p class="entry-message"><pre>{{ answer['message'] }}</pre></p>
+        <p class="entry-message">{{ answer['message'] }}</p>
         <section class="edit-buttons">
           <a class="material-icons no-underline" href="/answer/{{ answer['id'] }}/edit">mode_edit</a>
           <a class="material-icons no-underline" href="/answer/{{ answer['id'] }}/delete">delete</a>
         </section>
         <section class="meta-info">
         <small>
-          Post Time: {{ answer['submission_time'] }}
+          Post Time: {{ answer['submission_time']|time }}
         </small>
         </section>
         <section class="comments">
@@ -86,24 +89,24 @@
           {% if answer.get('comments') %}
           {% for comment in answer['comments'] %}
           <li>
-            <p><pre>{{ comment['message'] }}</pre></p>
+            <p>{{ comment['message'] }}</p>
             <sectionn class="meta-info">
-              Post Time: {{ comment['submission_time'] }}<br>
+              Post Time: {{ comment['submission_time']|time }}<br>
               Edits: {{ comment['edit_count'] }}
               <section class="edit-buttons">
-                <a class="material-icons no-underline" href="/comments/{{ comment['id'] }}/edit">mode_edit</a>
-                <a class="material-icons no-underline" href="/comments/{{ comment['id'] }}/delete">delete</a>
+                <a class="material-icons" href="/comments/{{ comment['id'] }}/edit">mode_edit</a>
+                <a class="material-icons" href="/comments/{{ comment['id'] }}/delete">delete</a>
               </section>
             </sectionn>
           </li>
           {% endfor %}
           {% endif %}
-          <a class="no-underline" href="/answer/{{ answer['id'] }}/new-comment"><li>Add a comment</li></a>
+          <a href="/answer/{{ answer['id'] }}/new-comment"><li>Add a comment</li></a>
         </ul>
       </div>
     </article>
     {% endfor %}
+    <a class="button-card" href="/question/{{ question['id'] }}/new-answer">Add an answer</a>
     {% endif %}
   </section>
-  <a class="no-underline" href="/question/{{ question['id'] }}/new-answer"><button class="button-card">Add an answer</button></a>
 {% endblock %}

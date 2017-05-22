@@ -1,10 +1,10 @@
 @import meta-selectors
 @import variables
 
-main
-  .req
-    color: $acc400
+.req
+  color: $accent400
 
+main
   form
     @extend .s-rad
     @extend .s-shadow
@@ -16,18 +16,18 @@ main
     label
       display: block
 
-      &+p
-        font-size: 0.8em
+    small
+      color: $grey600
     
     input[type="text"],
     textarea
       width: 100%
-      padding: 0 1.25em
+      padding: 0 $line-height
       background: $grey200
       border: none
       resize: none
 
-      font-size: 1.25em
+      font-size: $line-height
       line-height: 2em
 
       &:focus+hr
@@ -65,7 +65,12 @@ main
 
     h2
       margin: 1ch 0
-      padding-bottom: 0.5em
+      font-size: 1.25em
+    
+    h3
+      margin: 0 0 0.5ch 1ch
+      font-size: 1.1em
     
     p
-      font-size: 0.8em
+      margin-left: 1ch
+      white-space: pre-wrap

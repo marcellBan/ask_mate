@@ -7,15 +7,15 @@
 {% endblock %}
 
 {% block main %}
-  <form class="s-shadow" action="" method="post">
+  <form action="" method="post">
     <article>
       <h2>You're commenting on:</h2>
       {% if entry.get('title') %}
       <h3>{{ entry['title'] }}</h3>
       {% endif %}
-      <p><pre>{{ entry['message'] }}</pre></p>
+      <p>{{ entry['message'] }}</p>
     </article>
-    <label for="message">Your comment<span class="">*</span>:</label>
+    <label for="message">Your comment<span class="req">*</span>:</label>
     <small>Make sure your comment is at least 10 characters long!</small>
     <textarea id="message" class="" name="message" autofocus minlength="10" required rows="4"
       >{{ form_message }}</textarea>

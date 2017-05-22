@@ -15,16 +15,16 @@
   <link rel="stylesheet" href="/static/css/layout.css">
   {% block head %}{% endblock %}
 </head>
-<body class="">
+<body>
   <!-- page header -->
-  <header id="page-header" class="">
+  <header id="page-header">
   <div class="page-wrapper">
     <div id="header-logo-wrapper">
-      <a id="header-logo" class="no-underline" href="/"><span class="">Ask</span>Mata</a>
+      <a id="header-logo" href="/"><span id="ask">Ask</span>Mate</a>
     </div>
     <div id="header-content-wrapper">
       {% block header_content %}{% endblock %}
-      <a class="header-link no-underline" href="/question/new">New question</a>
+      <a class="header-link" href="/question/new">New question</a>
       <div id="fake-search-form">
         <input id="easter-egg-input" type="text" placeholder="Search...">
         <input id="easter-egg-submit" class="material-icons" type="submit" value="search">
@@ -52,7 +52,7 @@
   </div>
   </main>
   <!-- page footer -->
-  <footer id="page-footer" class="">
+  <footer id="page-footer">
   <div class="page-wrapper">
   <div id="footer-vertical-align">
     Created by SzószKód<br>
@@ -63,7 +63,7 @@
   <!-- floating buttons -->
   <div id="floating-buttons">
     {% block floating_buttons %}{% endblock %}
-    <a href="#top" class="no-underline"><button id="to-top" class="material-icons floating-button">arrow_upward</button></a>
+    <a id="to-top" href="#top" class="material-icons floating-button">arrow_upward</a>
   </div>
   <!-- easter egg audio -->
   <audio id="easter-egg-audio" preload="auto">

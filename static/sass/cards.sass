@@ -1,11 +1,66 @@
 @import variables
 @import meta-selectors
 
-// COMMON SETTINGS
+// Card style
+.card
+  @extend .s-shadow
+
+  display: flex
+  background: $grey200
+
+  a
+    @extend .no-underline
+
+    color: $black
+
+.numbers-wrapper
+  padding: 1ch
+
+.numbers
+  margin: 0 auto
+
+.votes-wrapper
+  text-align: center
+
+.vote-button
+  display: inline-block
+  font-size: 2em
+  font-weight: 700
+  transition: color 0.3s
+  // vertical middle position hack
+  display: inline-block
+  margin-top: -0.15ch
+  vertical-align: middle
+
+.vote-up:hover
+  color: $theme700
+
+.vote-down:hover
+  color: $accent400
+
+.vote-number
+  margin-top: -0.25em
+  line-height: calc(2em * #{$line-height})
+
+.number-icon
+  color: $theme700
+
+.text-wrapper
+  padding: 1ch
+
+  h2
+    margin: 1ch 0
+  
+  p
+    margin-bottom: 1ch
+    white-space: pre-wrap
+
+// Card style responsivity
+// Overall card style
 @media screen and (max-width: 959px)
-  *[class*="card"]
+  .card
     margin-bottom: 0
-    padding: 1em 0
+    padding: 1ch 0
     border-bottom: calc(#{$one-px-rem} * 3) solid $grey400
 
     &:last-of-type
@@ -13,120 +68,103 @@
       border-bottom: none
 
 @media screen and (min-width: 960px)
-  *[class*="card"]
+  .card
     margin-bottom: 1em
 
+// Card content positioning
 @media screen and (max-width: 749px)
-  *[class*="card"]
+  .card
     flex-direction: column
-
-    .numbers-wrapper
-      width: 100%
-      text-align: center
-
-      *
-        display: inline-block
-    
-    .numbers
-      padding: 0
-    
-    .votes
-      margin-bottom: 0
-    
-    .question-wrapper,
-    .answer-wrapper
-      width: 100%
-      padding: 1ch
-
-@media screen and (min-width: 750px)
-  *[class*="card"]
-    flex-direction: row
-
-    .numbers-wrapper
-      width: 14%
-    
-    .numbers
-      padding: 1ch
-    
-    .votes
-      margin-bottom: 1.5em
-    
-    .question-wrapper,
-    .answer-wrapper
-      width: 86%
-      padding: 1ch
-
-*[class*="card"]
-  @extend .s-shadow
   
-  display: flex
-  background: $grey200
-  overflow-wrap: break-word
-  transition: margin-bottom 0.3s, padding 0.3s
-
-  .material-icons
-    font-size: 1em
-    line-height: 1.25em
-
-  .numbers
-    margin: 0 auto
-  
-  .votes
+  .numbers-wrapper
+    width: 100%
     text-align: center
 
-    a
+    *
       display: inline-block
-      color: $black
-      font-size: 2em
-      font-weight: 700
-      text-decoration: none
-      transition: color 0.3s
+    
+  .numbers
+    padding: 0
   
-  .vote-up:hover
-    color: $theme700
-
-  .vote-down:hover
-    color: $acc400
+  .votes-wrapper
+    margin-bottom: 0
   
-  h2
-    margin: 1ch 0
+  .text-wrapper
+    width: 100%
+    padding: 1ch
+
+@media screen and (min-width: 750px)
+  .card
+    flex-direction: row
   
-  .edit-buttons
-    text-align: right
-
-    button
-      margin-left: 0.5em
-      background: $grey200
-      border: none
-      color: $acc100
-      font-size: 1.25em
-      font-weight: 700
-      cursor: pointer
-      transition: color 0.3s
-
-      &:hover
-        color: $acc400
+  .numbers-wrapper
+    width: 14%
+  
+  .numbers
+    padding: 1ch
+  
+  .votes-wrapper
+    margin-bottom: 1.5em
+  
+  .text-wrapper
+    width: 86%
+    padding: 1ch
 
 
 
-// SINGLE QUESTION ONLY
-.question-meta-info,
-.answer-meta-info
-  margin-bottom: 1em
-  color: $grey500
-  font-size: 0.8em
-  line-height: 1.25em
-  text-align: right
+// List page questions
+.list-question
+  .text-wrapper
+    position: relative
 
-.num-icon
-  margin-left: 1ch
-  color: $theme700
-  font-size: 1.25em
+    &:hover .read-more,
+    &:active .read-more
+      color: $accent400
+
+  p
+    position: relative
+    height: calc(5em * #{$line-height})
+    overflow: hidden
+
+.paragraph-overlay
+  position: absolute
+  width: 100%
+  height: calc(5em * #{$line-height})
+  bottom: calc(1em + (1em * #{$line-height}) + 1em)
+  left: 0
+  background: linear-gradient(rgba(238, 238, 238, 0), #{$grey200}) // #EEE
+
+.read-more
+  display: block
+  text-align: center
   transition: color 0.3s
 
 
 
-// COMMENTS
+// Questin page question, answer
+.question,
+.answer
+  // sth
+
+.edit-buttons
+  text-align: right
+
+  a
+    margin-left: 0.5ch
+    color: $accent100
+    transition: color 0.3s
+
+    &:hover,
+    &:active
+      color: $accent200
+
+.meta-info
+  text-align: right
+  color: $grey500
+
+
+
+// Comment
 .comments
   margin-left: 1ch
 
@@ -134,22 +172,27 @@
     list-style-type: none
   
   a
-    text-decoration: none
+    @extend .no-underline
   
   li
     margin-top: 0.5em
     padding: 0.5em 0 0.5em 1ch
     border-left: calc(#{$one-px-rem} * 3) solid $theme700
-    overflow: hidden
     font-size: 0.8em
     line-height: 1.25em
+
+    p
+      white-space: pre-wrap
 
     &:nth-child(odd)
       background: $grey350
 
-      button
-        background: $grey350
-        color: $acc200
+      a
+        color: $accent200
+
+        &:hover,
+        &:active
+          color: $accent400
     
     &:last-child
       background: $theme400
@@ -161,56 +204,22 @@
       &:hover
         background: $theme500
 
-  .comment-meta-info
+  .meta-info
     padding-right: 1ch
     color: $grey700
     font-size: 0.9em
+  
+  .edit-buttons
+    float: right
     text-align: right
 
-    .edit-buttons
-      float: right
-
-      &::after
-        @extend .clear
+    &::after
+      @extend .clear
 
 
+// answers
+.answer
+  box-shadow: 0 calc(#{$one-px-rem} * 3) calc(#{$one-px-rem} * 6) calc(-#{$one-px-rem} * 2) rgba(0, 0, 0, 0.5), calc(#{$one-px-rem} * 3) 0 0 $theme300 inset
 
-// ANSWER
-.answer-card
-  .answer-message
-    margin: 1ch 0
-
-
-
-hr
-  width: 85%
-  height: calc(#{$one-px} * 3)
-  margin: 2em auto 2em
-  background: $grey400
-  border: none
-
-.add-new-answer
-  @extend .s-shadow
-  
-  margin-bottom: 1em
-  background: $theme400
-  color: $white
-  font-weight: 700
-  line-height: 4em
-  text-align: center
-  transition: background 0.3s
-
-  &:hover,
-  &:active
-    background: $theme500
-
-.new-answer-link
-  text-decoration: none
-
-.link-to-question
-  color: $black
-  text-decoration: none
-
-pre
-  font-family: $font-family
-  overflow-wrap: break-word
+  .entry-message
+    margin-top: 2ch

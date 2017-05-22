@@ -42,9 +42,6 @@
   margin-top: -0.25em
   line-height: calc(2em * #{$line-height})
 
-.number-icon
-  color: $theme700
-
 .text-wrapper
   padding: 1ch
 
@@ -53,6 +50,7 @@
   
   p
     margin-bottom: 1ch
+    overflow-wrap: break-word
     white-space: pre-wrap
 
 // Card style responsivity
@@ -112,6 +110,12 @@
 
 
 
+// Questions
+.number-icon
+  color: $theme700
+
+
+
 // List page questions
 .list-question
   .text-wrapper
@@ -130,7 +134,6 @@
   position: absolute
   width: 100%
   height: calc(5em * #{$line-height})
-  bottom: calc(1em + (1em * #{$line-height}) + 1em)
   left: 0
   background: linear-gradient(rgba(238, 238, 238, 0), #{$grey200}) // #EEE
 
@@ -139,13 +142,19 @@
   text-align: center
   transition: color 0.3s
 
+// Responsive .paragraph-overlay
+@media screen and (max-width: 749px)
+  .paragraph-overlay
+    bottom: calc(1em + (1em * #{$line-height}))
+
+@media screen and (min-width: 750px)
+  .paragraph-overlay
+    bottom: calc(1em + (1em * #{$line-height}) + 1em)
+    
+
 
 
 // Questin page question, answer
-.question,
-.answer
-  // sth
-
 .edit-buttons
   text-align: right
 
@@ -161,6 +170,15 @@
 .meta-info
   text-align: right
   color: $grey500
+
+
+
+// answers
+.answer
+  box-shadow: 0 calc(#{$one-px-rem} * 3) calc(#{$one-px-rem} * 6) calc(-#{$one-px-rem} * 2) rgba(0, 0, 0, 0.5), calc(#{$one-px-rem} * 3) 0 0 $theme400 inset
+
+  .entry-message
+    margin-top: 2ch
 
 
 
@@ -215,11 +233,3 @@
 
     &::after
       @extend .clear
-
-
-// answers
-.answer
-  box-shadow: 0 calc(#{$one-px-rem} * 3) calc(#{$one-px-rem} * 6) calc(-#{$one-px-rem} * 2) rgba(0, 0, 0, 0.5), calc(#{$one-px-rem} * 3) 0 0 $theme300 inset
-
-  .entry-message
-    margin-top: 2ch

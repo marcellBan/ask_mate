@@ -22,14 +22,16 @@
     <div id="header-logo-wrapper">
       <a id="header-logo" href="/"><span id="ask">Ask</span>Mate</a>
     </div>
+    <div id="page-menu-button" class="material-icons">menu</div>
     <div id="header-content-wrapper">
       {% block header_content %}{% endblock %}
       <a class="header-link" href="/question/new">New question</a>
       <div id="fake-search-form">
-        <input id="easter-egg-input" type="text" placeholder="Search...">
+        <input id="easter-egg-input" type="text" placeholder="Search">
         <input id="easter-egg-submit" class="material-icons" type="submit" value="search">
       </div>
     </div>
+    <div id="header-content-shadow">
   </div>
   </header>
   <div id="top"></div>
@@ -73,5 +75,6 @@
   {% block js %}{% endblock %}
   <script src="/static/script/easter_egg.js"></script>
   <script src="/static/script/scroll_event.js"></script>
+  <script src="/static/script/click_event.js"></script>
 </body>
 </html>

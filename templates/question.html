@@ -8,7 +8,7 @@
 
 {% block main %}
   <!-- question -->
-  <article class="card question">
+  <article class="card question temp">
     <div class="numbers-wrapper">
     <section class="numbers">
       <div class="votes-wrapper">
@@ -109,4 +109,8 @@
     <a class="button-card" href="/question/{{ question['id'] }}/new-answer">Add an answer</a>
     {% endif %}
   </section>
+{% endblock %}
+
+{% block js %}
+  <script src="/static/script/numbers_scroll.js"></script>
 {% endblock %}

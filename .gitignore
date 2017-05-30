@@ -3,6 +3,7 @@ __pycache__/*
 data/*
 *.pyc
 setenv.sh
+setenv.ps1
 
 templates/card.css
 templates/layout.css

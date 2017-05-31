@@ -121,13 +121,5 @@ def _jinja2_time_filter(value):
     return result
 
 
-@app.template_filter('nl2br')
-@evalcontextfilter
-def _jinja2_new_line_to_line_break_filter(eval_ctx, value):
-    result = value.replace('\n', '<br>\n')
-    if eval_ctx.autoescape:
-        result = Markup(result)
-    return result
-
 if __name__ == "__main__":
     app.run()

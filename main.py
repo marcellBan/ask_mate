@@ -10,6 +10,7 @@ import data_manager
 import display
 import entry_manager
 import vote
+from users import login_required, author_user_required
 app = Flask(__name__)
 app.secret_key = 'I have no idea what I\'m doing'
 
@@ -35,6 +36,7 @@ def clear_sort():
 
 
 @app.route('/question/new', methods=['GET', 'POST'])
+@login_required
 def new_question():
     return entry_manager.add_question()
 
@@ -45,11 +47,15 @@ def display_question(question_id):
 
 
 @app.route('/question/<int:question_id>/edit', methods=['GET', 'POST'])
+@login_required
+@author_user_required('question')
 def question_edit(question_id):
     return entry_manager.edit_question(question_id)
 
 
 @app.route('/question/<int:question_id>/delete')
+@login_required
+@author_user_required('question')
 def question_delete(question_id):
     return entry_manager.delete_question(question_id)
 

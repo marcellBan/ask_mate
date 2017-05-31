@@ -10,6 +10,7 @@ import data_manager
 import display
 import entry_manager
 import vote
+from users import login_required, author_user_required
 app = Flask(__name__)
 app.secret_key = 'I have no idea what I\'m doing'
 
@@ -70,6 +71,7 @@ def upvote_question(question_id):
 
 
 @app.route('/question/<int:question_id>/new-comment', methods=['GET', 'POST'])
+@login_required
 def new_comment_for_question(question_id):
     return entry_manager.new_comment_for_question(question_id)
 
@@ -95,16 +97,21 @@ def answer_edit(answer_id):
 
 
 @app.route('/comments/<int:comment_id>/delete')
+@login_required
+@author_user_required('comment')
 def comment_delete(comment_id):
     return entry_manager.delete_comment(comment_id)
 
 
 @app.route('/answer/<int:answer_id>/new-comment', methods=['GET', 'POST'])
+@login_required
 def new_comment_for_answer(answer_id):
     return entry_manager.new_comment_for_answer(answer_id)
 
 
 @app.route('/comments/<int:comment_id>/edit', methods=['GET', 'POST'])
+@login_required
+@author_user_required('comment')
 def edit_comment(comment_id):
     return entry_manager.edit_comment(comment_id)
 

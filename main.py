@@ -66,11 +66,13 @@ def new_answer(question_id):
 
 
 @app.route('/question/<int:question_id>/vote-down')
+@login_required
 def downvote_question(question_id):
     return vote.downvote_question(question_id)
 
 
 @app.route('/question/<int:question_id>/vote-up')
+@login_required
 def upvote_question(question_id):
     return vote.upvote_question(question_id)
 

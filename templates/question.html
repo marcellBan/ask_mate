@@ -44,14 +44,16 @@
         {% if question.get('comments') %}
         {% for comment in question['comments'] %}
         <li>
-          <p>{{ comment['message'] }}</p>
+          <p>{{ comment['user_name'] }}: {{ comment['message'] }}</p>
           <sectionn class="meta-info">
             Post Time: {{ comment['submission_time']|time }}<br>
             Edits: {{ comment['edit_count'] }}
+            {% if session['user_name'] == comment['user_name'] %}
             <section class="edit-buttons">
               <a class="material-icons" href="/comments/{{ comment['id'] }}/edit">mode_edit</a>
               <a class="material-icons" href="/comments/{{ comment['id'] }}/delete">delete</a>
             </section>
+            {% endif %}
           </sectionn>
         </li>
         {% endfor %}
@@ -94,14 +96,16 @@
           {% if answer.get('comments') %}
           {% for comment in answer['comments'] %}
           <li>
-            <p>{{ comment['message'] }}</p>
+            <p>{{ comment['user_name'] }}: {{ comment['message'] }}</p>
             <sectionn class="meta-info">
               Post Time: {{ comment['submission_time']|time }}<br>
               Edits: {{ comment['edit_count'] }}
+              {% if session['user_name'] == comment['user_name'] %}
               <section class="edit-buttons">
                 <a class="material-icons" href="/comments/{{ comment['id'] }}/edit">mode_edit</a>
                 <a class="material-icons" href="/comments/{{ comment['id'] }}/delete">delete</a>
               </section>
+              {% endif %}
             </sectionn>
           </li>
           {% endfor %}

@@ -54,9 +54,9 @@ def register():
             return render_template('register.html', form_user_name=user_name)
         password = hash_password(password)
         flash('Successfully registered!')
-        # TODO update users table and and session data,
-        # user should be logged in after registering.
+        # TODO update users table.
         # TODO user should be redirected based on session data.
+        session['user_name'] = user_name
         return redirect(url_for('index'))
 
 
@@ -85,3 +85,8 @@ def login():
         # TODO user should be redirected based on session data.
         return redirect(url_for('index'))
 
+
+def logout():
+    if session.get('user_name'):
+        session.pop('user_name')
+    return redirect(url_for('index'))

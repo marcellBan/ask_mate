@@ -120,7 +120,7 @@ def new_comment_for_question(question_id):
                 'answer_id': None,
                 'message': request.form.get('message'),
                 'submission_time': int(time.time()),
-                'edit_count': 0
+                'edit_count': 0,
                 'user_name': session.get('user_name')
             }
             data_manager.new_comment(comment)
@@ -151,7 +151,7 @@ def new_comment_for_answer(answer_id):
                 'answer_id': answer_id,
                 'message': request.form.get('message'),
                 'submission_time': int(time.time()),
-                'edit_count': 0
+                'edit_count': 0,
                 'user_name': session.get('user_name')
             }
             data_manager.new_comment(comment)

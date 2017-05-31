@@ -3,7 +3,7 @@ entry manager module for AskMate
 by SzószKód
 '''
 
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, session
 import data_manager
 import time
 
@@ -25,7 +25,8 @@ def add_question():
                 'vote_number': 0,
                 'title': request.form.get('title'),
                 'message': request.form.get('message'),
-                'image': request.files.get('image').filename
+                'image': request.files.get('image').filename,
+                'user_name': session.get('user_name')
             }
             question_id = data_manager.new_question(question)
             return redirect(url_for('display_question', question_id=question_id))

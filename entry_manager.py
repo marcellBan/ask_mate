@@ -3,7 +3,7 @@ entry manager module for AskMate
 by SzószKód
 '''
 
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, session
 import data_manager
 import time
 
@@ -121,6 +121,7 @@ def new_comment_for_question(question_id):
                 'message': request.form.get('message'),
                 'submission_time': int(time.time()),
                 'edit_count': 0
+                'user_name': session.get('user_name')
             }
             data_manager.new_comment(comment)
             return redirect(
@@ -151,6 +152,7 @@ def new_comment_for_answer(answer_id):
                 'message': request.form.get('message'),
                 'submission_time': int(time.time()),
                 'edit_count': 0
+                'user_name': session.get('user_name')
             }
             data_manager.new_comment(comment)
             return redirect(

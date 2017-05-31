@@ -4,14 +4,14 @@ from db_connect import connect_to_database
 
 
 @connect_to_database
-def delete_comment(comment_id):
+def delete_comment(comment_id, _cursor=None):
     query = '''DELETE FROM comment
                  WHERE id = %s;'''
     _cursor.execute(query, [comment_id])
 
 
 @connect_to_database
-def get_comment(comment_id):
+def get_comment(comment_id, _cursor=None):
     query = '''SELECT *
                  FROM comment
                  WHERE id = %s;'''
@@ -28,7 +28,7 @@ def get_comment(comment_id):
 
 
 @connect_to_database
-def new_comment(comment):
+def new_comment(comment, _cursor=None):
     '''
     adds a new comment to the database\n
     the parameter should be a dictionary with the following keys:\n
@@ -43,7 +43,7 @@ def new_comment(comment):
 
 
 @connect_to_database
-def get_comments_for_question(question_id):
+def get_comments_for_question(question_id, _cursor=None):
     '''returns a dictionary of ditionaries containing all the comments with the given question_id'''
     query = '''SELECT *
                  FROM comment
@@ -56,7 +56,7 @@ def get_comments_for_question(question_id):
 
 
 @connect_to_database
-def get_comments_for_answer(answer_id):
+def get_comments_for_answer(answer_id, _cursor=None):
     '''returns a dictionary of dictionaries containing all the comments with the given answer_id'''
     query = '''SELECT *
                  FROM comment
@@ -83,7 +83,7 @@ def construct_comment_list(result_set):
 
 
 @connect_to_database
-def update_comment(comment):
+def update_comment(commen, _cursor=None):
     '''
     updates a comment in the database
     the parameter should be a dictionary with the following keys:\n

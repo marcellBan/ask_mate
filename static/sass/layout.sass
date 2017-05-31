@@ -255,6 +255,17 @@ main
   min-height: calc(100vh - (#{$header-height} + (#{$one-px-rem} * 3)) - 10vh)
   transition: all 0.3s
 
+  a.normal-link:link,
+  a.normal-link:visited
+    @extend .no-underline
+
+    color: $theme500
+    transition: color 0.3s
+  
+  a.normal-link:hover,
+  a.normal-link:active
+    color: $theme700
+
 @media screen and (max-width: 959px)
   main
     margin-bottom: 0

@@ -4,7 +4,7 @@ from db_connect import connect_to_database
 
 
 @connect_to_database
-def get_question(question_id):
+def get_question(question_id, _cursor=None):
     '''returns a dictionary containing all the information of a question with the given id'''
     query = '''SELECT *
                  FROM question
@@ -24,7 +24,7 @@ def get_question(question_id):
 
 
 @connect_to_database
-def get_questions(sorting=None, limit=None):
+def get_questions(sorting=None, limit=None, _cursor=None):
     '''
     returns a list of dictionaries containing all the questions\n
     the amount of questions returened can be limited with the limit parameter\n
@@ -61,7 +61,7 @@ def get_limit_clause(limit):
 
 
 @connect_to_database
-def new_question(question):
+def new_question(question, _cursor=None):
     '''
     adds a new question to the database\n
     the parameter should be a dictionary with the following keys:\n
@@ -85,7 +85,7 @@ def new_question(question):
 
 
 @connect_to_database
-def update_question(question):
+def update_question(question, _cursor=None):
     '''
     updates a question in the database
     the parameter should be a dictionary with the following keys:\n
@@ -102,7 +102,7 @@ def update_question(question):
 
 
 @connect_to_database
-def delete_question(question_id):
+def delete_question(question_id, _cursor=None):
     '''
     deletes a question from the database with the given id\n
     also deletes al the answers that are for that question

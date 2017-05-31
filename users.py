@@ -97,10 +97,6 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
     elif request.method == 'POST':
-
-        # TODO check database for credential information
-        correct_credentials = True
-
         user_name = request.form.get('user_name')
         password = request.form.get('password')
         if user_name is None:
@@ -110,11 +106,14 @@ def login():
             flash('Please enter your password!')
             return render_template('login.html', form_user_name=user_name)
         password = hash_password(password)
-        # TODO query matching user_name and password from database
-        if not correct_credentials:
+        user_data = {
+            'user_name': user_name,
+            'password': password
+        }
+        if not users_data_manager.correct_credentials(user_data):
             flash('The credential information you entered was incorrect!')
             return render_template('login.html', form_user_name=user_name)
-        # TODO update session data.
+        session['user_name'] = user_name
         # TODO user should be redirected based on session data.
         return redirect(url_for('index'))
 

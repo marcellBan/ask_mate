@@ -2,6 +2,10 @@ import hashlib
 
 from flask import flash, render_template, request, redirect, session, url_for
 
+import comment_data_manager
+import answer_data_manager
+import question_data_manager
+
 
 def login_required(func_that_needs_login):
     def logged_in_check(*args, **kwargs):
@@ -11,6 +15,22 @@ def login_required(func_that_needs_login):
             return redirect(url_for('login'))
         return func_that_needs_login(*args, **kwargs)
     return logged_in_check
+
+
+def author_user_required(func, entry_type):
+    def author_check(*args, **kwargs):
+        if entry_type == 'question':
+            entry = question_data_manager.get_question(args[0])
+        elif entry_type == 'answer':
+            entry = answer_data_manager.get_answer(args[0])
+        elif entry_type == 'comment':
+            entry = comment_data_manager.get_comment(args[0])
+        if entry.get('user_name') != session.get('user_name'):
+            flash('You don\' have permission for this operation!')
+            return redirect(session.get('prev'))
+        else:
+            return func(*args, **kwargs)
+    return author_check
 
 
 def hash_password(password):

@@ -115,6 +115,11 @@ def register():
     return users.register()
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    return users.login()
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return 'Oops, page not found!', 404

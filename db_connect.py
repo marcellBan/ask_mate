@@ -4,7 +4,6 @@ import psycopg2
 
 def connect_to_database(func_to_be_connected):
     def connection(*args, **kwargs):
-        nonlocal _cursor
         _db_connection = None
         _cursor = None
         connection_data = {
@@ -18,7 +17,7 @@ def connect_to_database(func_to_be_connected):
         _db_connection = psycopg2.connect(connect_string)
         _db_connection.autocommit = True
         _cursor = _db_connection.cursor()
-        result = func_to_be_connected(*args, **kwargs)
+        result = func_to_be_connected(*args, **kwargs, _cursor=_cursor)
         _cursor.close()
         _db_connection.close()
         return result

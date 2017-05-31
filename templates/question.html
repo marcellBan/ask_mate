@@ -25,12 +25,14 @@
     </section>
     </div>
     <div class="text-wrapper">
-      <h2>{{ question['title'] }}</h2>
+      <h2>{{ question['user_name'] }} asks: {{ question['title'] }}</h2>
       <p>{{ question['message'] }}</p>
+      {% if session['user_name'] == question['user_name'] %}
       <section class="edit-buttons">
         <a class="material-icons" href="/question/{{ question['id'] }}/edit">mode_edit</a>
         <a class="material-icons" href="/question/{{ question['id'] }}/delete">delete</a>
       </section>
+      {% endif %}
       <section class="meta-info">
       <small>
         ID: {{ question['id'] }}<br>
@@ -42,14 +44,16 @@
         {% if question.get('comments') %}
         {% for comment in question['comments'] %}
         <li>
-          <p>{{ comment['message'] }}</p>
+          <p>{{ comment['user_name'] }}: {{ comment['message'] }}</p>
           <sectionn class="meta-info">
             Post Time: {{ comment['submission_time']|time }}<br>
             Edits: {{ comment['edit_count'] }}
+            {% if session['user_name'] == comment['user_name'] %}
             <section class="edit-buttons">
               <a class="material-icons" href="/comments/{{ comment['id'] }}/edit">mode_edit</a>
               <a class="material-icons" href="/comments/{{ comment['id'] }}/delete">delete</a>
             </section>
+            {% endif %}
           </sectionn>
         </li>
         {% endfor %}
@@ -74,11 +78,14 @@
       </section>
       </div>
       <div class="text-wrapper">
+        <h3>{{ answer['user_name'] }}'s solution:</h3>
         <p class="entry-message">{{ answer['message'] }}</p>
+        {% if session['user_name'] == answer['user_name'] %}
         <section class="edit-buttons">
           <a class="material-icons no-underline" href="/answer/{{ answer['id'] }}/edit">mode_edit</a>
           <a class="material-icons no-underline" href="/answer/{{ answer['id'] }}/delete">delete</a>
         </section>
+        {% endif %}
         <section class="meta-info">
         <small>
           Post Time: {{ answer['submission_time']|time }}
@@ -89,14 +96,16 @@
           {% if answer.get('comments') %}
           {% for comment in answer['comments'] %}
           <li>
-            <p>{{ comment['message'] }}</p>
+            <p>{{ comment['user_name'] }}: {{ comment['message'] }}</p>
             <sectionn class="meta-info">
               Post Time: {{ comment['submission_time']|time }}<br>
               Edits: {{ comment['edit_count'] }}
+              {% if session['user_name'] == comment['user_name'] %}
               <section class="edit-buttons">
                 <a class="material-icons" href="/comments/{{ comment['id'] }}/edit">mode_edit</a>
                 <a class="material-icons" href="/comments/{{ comment['id'] }}/delete">delete</a>
               </section>
+              {% endif %}
             </sectionn>
           </li>
           {% endfor %}

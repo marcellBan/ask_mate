@@ -10,6 +10,7 @@ import data_manager
 import display
 import entry_manager
 import vote
+import users
 app = Flask(__name__)
 app.secret_key = 'I have no idea what I\'m doing'
 
@@ -107,6 +108,11 @@ def new_comment_for_answer(answer_id):
 @app.route('/comments/<int:comment_id>/edit', methods=['GET', 'POST'])
 def edit_comment(comment_id):
     return entry_manager.edit_comment(comment_id)
+
+
+@app.route('/registration', methods=['GET', 'POST'])
+def register():
+    return users.register()
 
 
 @app.errorhandler(404)

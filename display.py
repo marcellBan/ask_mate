@@ -62,3 +62,7 @@ def clear_sorting():
     if session.get('sorting') is not None:
         del(session['sorting'])
     return redirect(url_for('list_index'))
+
+
+def list_users():
+    return render_template('list_users.html')

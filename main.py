@@ -109,6 +109,11 @@ def edit_comment(comment_id):
     return entry_manager.edit_comment(comment_id)
 
 
+@app.route('/users')
+def list_users():
+    return display.list_users()
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return 'Oops, page not found!', 404

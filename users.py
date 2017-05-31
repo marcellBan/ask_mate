@@ -7,7 +7,8 @@ def login_required(func_that_needs_login):
     def logged_in_check(*args, **kwargs):
         user = session.get('user_name')
         if user is None:
-            return redirect(session.get('prev'))
+            session['prev'] = request.url
+            return redirect(url_for('login'))
         return func_that_needs_login(*args, **kwargs)
     return logged_in_check
 

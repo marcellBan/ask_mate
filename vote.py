@@ -3,8 +3,6 @@ by SzószKód
 '''
 from flask import flash, redirect, request, url_for
 
-import data_manager
-
 
 def downvote_question(question_id):
     question = data_manager.get_question(question_id)

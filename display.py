@@ -3,7 +3,6 @@ Display the questions from the database
 For AskMate by SzószKód
 '''
 
-import data_manager
 from flask import render_template, redirect, request, session, url_for
 
 

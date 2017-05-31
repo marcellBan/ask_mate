@@ -6,7 +6,6 @@ from flask import Flask
 from jinja2 import evalcontextfilter, Markup
 import datetime
 
-import data_manager
 import display
 import entry_manager
 import vote

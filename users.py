@@ -1,6 +1,6 @@
 import hashlib
 
-from flask import flash, render_template, request
+from flask import flash, render_template, request, redirect, session
 
 
 def register():
@@ -40,3 +40,12 @@ def register():
         password = hashing.hexdigest()
         print(password)
         return render_template('register.html')
+
+
+def login_required(func_that_needs_login):
+    def logged_in_check(*args, **kwargs):
+        user = session.get('user_name')
+        if user is None:
+            return redirect(session.get('prev'))
+        return func_that_needs_login(*args, **kwargs)
+    return logged_in_check

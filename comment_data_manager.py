@@ -1,5 +1,6 @@
 import psycopg2
 import datetime
+from db_connect import connect_to_database
 
 
 @connect_to_database

@@ -36,6 +36,7 @@ def clear_sort():
 
 
 @app.route('/question/new', methods=['GET', 'POST'])
+@login_required
 def new_question():
     return entry_manager.add_question()
 
@@ -46,11 +47,15 @@ def display_question(question_id):
 
 
 @app.route('/question/<int:question_id>/edit', methods=['GET', 'POST'])
+@login_required
+@author_user_required('question')
 def question_edit(question_id):
     return entry_manager.edit_question(question_id)
 
 
 @app.route('/question/<int:question_id>/delete')
+@login_required
+@author_user_required('question')
 def question_delete(question_id):
     return entry_manager.delete_question(question_id)
 
@@ -62,11 +67,13 @@ def new_answer(question_id):
 
 
 @app.route('/question/<int:question_id>/vote-down')
+@login_required
 def downvote_question(question_id):
     return vote.downvote_question(question_id)
 
 
 @app.route('/question/<int:question_id>/vote-up')
+@login_required
 def upvote_question(question_id):
     return vote.upvote_question(question_id)
 

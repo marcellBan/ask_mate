@@ -25,12 +25,14 @@
     </section>
     </div>
     <div class="text-wrapper">
-      <h2>{{ question['title'] }}</h2>
+      <h2>{{ question['user_name'] }} asks: {{ question['title'] }}</h2>
       <p>{{ question['message'] }}</p>
+      {% if session['user_name'] == question['user_name'] %}
       <section class="edit-buttons">
         <a class="material-icons" href="/question/{{ question['id'] }}/edit">mode_edit</a>
         <a class="material-icons" href="/question/{{ question['id'] }}/delete">delete</a>
       </section>
+      {% endif %}
       <section class="meta-info">
       <small>
         ID: {{ question['id'] }}<br>

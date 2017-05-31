@@ -4,7 +4,7 @@ from db_connect import connect_to_database
 
 
 @connect_to_database
-def get_answer(answer_id):
+def get_answer(answer_id, _cursor=None):
     '''returns a dictionary containing all the information of an answer with the given id'''
     query = '''SELECT *
                  FROM answer
@@ -23,7 +23,7 @@ def get_answer(answer_id):
 
 
 @connect_to_database
-def get_answers(question_id):
+def get_answers(question_id, _cursor=None):
     '''returns a list of ditionaries containing all the answers with the given question_id'''
     query = '''SELECT *
                  FROM answer
@@ -38,7 +38,7 @@ def get_answers(question_id):
 
 
 @connect_to_database
-def new_answer(answer):
+def new_answer(answer, _cursor=None):
     '''
     adds a new answer to the database\n
     the parameter should be a dictionary with the following keys:\n
@@ -52,7 +52,7 @@ def new_answer(answer):
 
 
 @connect_to_database
-def update_answer(answer):
+def update_answer(answer, _cursor=None):
     '''
     updates an answer in the database
     the parameter should be a dictionary with the following keys:\n
@@ -67,7 +67,7 @@ def update_answer(answer):
 
 
 @connect_to_database
-def delete_answer(answer_id):
+def delete_answer(answer_id, _cursor=None):
     '''deletes an answer from the database with the given id'''
     query = '''DELETE FROM comment
                  WHERE answer_id = %(answer_id)s;

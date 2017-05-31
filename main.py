@@ -7,7 +7,9 @@ from jinja2 import evalcontextfilter, Markup
 import datetime
 
 import display
-import entry_manager
+import answer_entry_manager
+import comment_entry_manager
+import question_entry_manager
 import vote
 import users
 app = Flask(__name__)
@@ -36,7 +38,7 @@ def clear_sort():
 
 @app.route('/question/new', methods=['GET', 'POST'])
 def new_question():
-    return entry_manager.add_question()
+    return question_entry_manager.add_question()
 
 
 @app.route('/question/<int:question_id>')
@@ -46,17 +48,17 @@ def display_question(question_id):
 
 @app.route('/question/<int:question_id>/edit', methods=['GET', 'POST'])
 def question_edit(question_id):
-    return entry_manager.edit_question(question_id)
+    return question_entry_manager.edit_question(question_id)
 
 
 @app.route('/question/<int:question_id>/delete')
 def question_delete(question_id):
-    return entry_manager.delete_question(question_id)
+    return question_entry_manager.delete_question(question_id)
 
 
 @app.route('/question/<int:question_id>/new-answer', methods=['GET', 'POST'])
 def new_answer(question_id):
-    return entry_manager.add_answer(question_id)
+    return answer_entry_manager.add_answer(question_id)
 
 
 @app.route('/question/<int:question_id>/vote-down')
@@ -71,7 +73,7 @@ def upvote_question(question_id):
 
 @app.route('/question/<int:question_id>/new-comment', methods=['GET', 'POST'])
 def new_comment_for_question(question_id):
-    return entry_manager.new_comment_for_question(question_id)
+    return comment_entry_manager.new_comment_for_question(question_id)
 
 
 @app.route('/answer/<int:answer_id>/vote-down')
@@ -86,27 +88,27 @@ def upvote_answer(answer_id):
 
 @app.route('/answer/<int:answer_id>/delete')
 def answer_delete(answer_id):
-    return entry_manager.delete_answer(answer_id)
+    return answer_entry_manager.delete_answer(answer_id)
 
 
 @app.route('/answer/<int:answer_id>/edit', methods=['GET', 'POST'])
 def answer_edit(answer_id):
-    return entry_manager.edit_answer(answer_id)
+    return answer_entry_manager.edit_answer(answer_id)
 
 
 @app.route('/comments/<int:comment_id>/delete')
 def comment_delete(comment_id):
-    return entry_manager.delete_comment(comment_id)
+    return comment_entry_manager.delete_comment(comment_id)
 
 
 @app.route('/answer/<int:answer_id>/new-comment', methods=['GET', 'POST'])
 def new_comment_for_answer(answer_id):
-    return entry_manager.new_comment_for_answer(answer_id)
+    return comment_entry_manager.new_comment_for_answer(answer_id)
 
 
 @app.route('/comments/<int:comment_id>/edit', methods=['GET', 'POST'])
 def edit_comment(comment_id):
-    return entry_manager.edit_comment(comment_id)
+    return comment_entry_manager.edit_comment(comment_id)
 
 
 @app.route('/registration', methods=['GET', 'POST'])

@@ -74,11 +74,14 @@
       </section>
       </div>
       <div class="text-wrapper">
+        <h3>{{ answer['user_name'] }}'s solution:</h3>
         <p class="entry-message">{{ answer['message'] }}</p>
+        {% if session['user_name'] == answer['user_name'] %}
         <section class="edit-buttons">
           <a class="material-icons no-underline" href="/answer/{{ answer['id'] }}/edit">mode_edit</a>
           <a class="material-icons no-underline" href="/answer/{{ answer['id'] }}/delete">delete</a>
         </section>
+        {% endif %}
         <section class="meta-info">
         <small>
           Post Time: {{ answer['submission_time']|time }}

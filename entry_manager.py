@@ -72,7 +72,7 @@ def add_answer(question_id):
                 'vote_number': 0,
                 'question_id': question_id,
                 'message': request.form.get('message'),
-                'image': request.files.get('image').filename
+                'image': request.files.get('image').filename,
                 'user_name': session.get('user_name')
             }
             data_manager.new_answer(answer)

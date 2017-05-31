@@ -15,7 +15,7 @@ CREATE TABLE users (
 
 CREATE TABLE question (
     id serial primary key,
-    user_id integer not null references users(id),
+    user_name text not null references users(user_name),
     submission_time timestamp without time zone,
     view_number integer,
     vote_number integer,
@@ -29,7 +29,7 @@ CREATE TABLE question (
 CREATE TABLE answer (
     id serial primary key,
     question_id integer not null references question(id),
-    user_id integer not null references users(id),
+    user_name text not null references users(user_name),
     submission_time timestamp without time zone,
     vote_number integer,
     message text,
@@ -42,7 +42,7 @@ CREATE TABLE comment (
     id serial primary key,
     question_id integer references question(id),
     answer_id integer references answer(id),
-    user_id integer not null references users(id),
+    user_name text not null references users(user_name),
     message text,
     submission_time timestamp without time zone,
     edit_count integer

@@ -1,3 +1,8 @@
+
+DROP TABLE IF EXISTS comment;
+DROP TABLE IF EXISTS answer;
+DROP TABLE IF EXISTS question_tag;
+DROP TABLE IF EXISTS question;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
@@ -7,8 +12,6 @@ CREATE TABLE users (
     password text
 );
 
-
-DROP TABLE IF EXISTS question;
 
 CREATE TABLE question (
     id serial primary key,
@@ -23,8 +26,6 @@ CREATE TABLE question (
 );
 
 
-DROP TABLE IF EXISTS answer;
-
 CREATE TABLE answer (
     id serial primary key,
     question_id integer not null references question(id),
@@ -36,8 +37,6 @@ CREATE TABLE answer (
     accepted_answer boolean not null default FALSE
 );
 
-
-DROP TABLE IF EXISTS comment;
 
 CREATE TABLE comment (
     id serial primary key,

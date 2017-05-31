@@ -8,6 +8,15 @@ import question_data_manager
 import users_data_manager
 
 
+def not_logged_in(function):
+    def wrapper(*args, **kwargs):
+        if session.get('user_name'):
+            flash('You can\'t do that while logged in!')
+            return redirect(url_for('index'))
+        return function(*args, **kwargs)
+    return wrapper
+
+
 def login_required(func_that_needs_login):
     def logged_in_check(*args, **kwargs):
         user = session.get('user_name')
@@ -41,6 +50,7 @@ def hash_password(password):
     return hashing.hexdigest()
 
 
+@not_logged_in
 def register():
     if request.method == 'GET':
         return render_template('register.html')
@@ -76,6 +86,7 @@ def register():
         return redirect(url_for('index'))
 
 
+@not_logged_in
 def login():
     if request.method == 'GET':
         return render_template('login.html')

@@ -7,7 +7,7 @@ from db_connect import connect_to_database
 
 
 @connect_to_database
-def username_exists(user_name):
+def username_exists(user_name, _cursor=None):
     query = (
         '''SELECT user_name '''
         '''FROM users '''
@@ -17,7 +17,7 @@ def username_exists(user_name):
 
 
 @connect_to_database
-def new_user(user_name, password):
+def new_user(user_name, password, _cursor=None):
     user_data = {
         'user_name': user_name,
         'password': password,

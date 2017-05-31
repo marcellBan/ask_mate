@@ -1,4 +1,5 @@
 import hashlib
+import time
 
 from flask import flash, render_template, request, redirect, session, url_for
 
@@ -79,8 +80,13 @@ def register():
             flash('The two passwords don\'t match!')
             return render_template('register.html', form_user_name=user_name)
         password = hash_password(password)
+        user_data = {
+            'user_name': user_name,
+            'password': password,
+            'registration_date': int(time.time())
+        }
         flash('Successfully registered!')
-        users_data_manager.new_user(user_name, password)
+        users_data_manager.new_user(user_data)
         session['user_name'] = user_name
         # TODO user should be redirected based on session data.
         return redirect(url_for('index'))

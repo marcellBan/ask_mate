@@ -1,5 +1,4 @@
 import datetime
-import time
 
 import psycopg2
 
@@ -13,20 +12,17 @@ def username_exists(user_name, _cursor=None):
         '''FROM users '''
         '''WHERE user_name = %s;''')
     _cursor.execute(query, [user_name])
-    return True if _cursor.fetch() else False
+    return True if _cursor.fetchone() else False
 
 
 @connect_to_database
-def new_user(user_name, password, _cursor=None):
-    user_data = {
-        'user_name': user_name,
-        'password': password,
-        'registration_time': int(time.time())
-    }
+def new_user(user_data, _cursor=None):
+    final_user_date = dict(user_data)
+    final_user_date['registration_date'] = datetime.datetime.fromtimestamp(user_data['registration_date'])
     query = (
         '''INSERT INTO users '''
-        '''     (user_name, password, registration_time) '''
+        '''     (user_name, password, registration_date) '''
         '''VALUES '''
-        '''     (%(user_name)s, %(password)s, %(registration_time)s);'''
+        '''     (%(user_name)s, %(password)s, %(registration_date)s);'''
     )
-    _cursor.execute(query, user_data)
+    _cursor.execute(query, final_user_date)

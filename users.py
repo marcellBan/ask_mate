@@ -1,6 +1,22 @@
 import hashlib
 
-from flask import flash, render_template, request, redirect, session
+from flask import flash, render_template, request, redirect, session, url_for
+
+
+def login_required(func_that_needs_login):
+    def logged_in_check(*args, **kwargs):
+        user = session.get('user_name')
+        if user is None:
+            return redirect(session.get('prev'))
+        return func_that_needs_login(*args, **kwargs)
+    return logged_in_check
+
+
+def hash_password(password):
+    '''Return a string of a hashed password'''
+    hashing = hashlib.sha1()
+    hashing.update(bytes(password, 'utf-8'))
+    return hashing.hexdigest()
 
 
 def register():
@@ -18,7 +34,7 @@ def register():
         if user_name is None:
             flash('Please enter a username!')
             return render_template('register.html')
-        elif len(user_name) > 4:
+        elif len(user_name) < 4:
             flash('Your username isn\'t long enough!')
             return render_template('register.thml')
         # TODO check existing users in database, usernames must be unique
@@ -29,23 +45,15 @@ def register():
         elif password is None or password_check is None:
             flash('Please enter a password!')
             return render_template('register.html', form_user_name=user_name)
-        elif len(password) > 6:
+        elif len(password) < 6:
             flash('Your password isn\'t long enough!')
             return render_template('register.html', form_user_name=user_name)
         elif password != password_check:
             flash('The two passwords don\'t match!')
             return render_template('register.html', form_user_name=user_name)
-        hashing = hashlib.sha1()
-        hashing.update(bytes(password, 'utf-8'))
-        password = hashing.hexdigest()
-        print(password)
-        return render_template('register.html')
-
-
-def login_required(func_that_needs_login):
-    def logged_in_check(*args, **kwargs):
-        user = session.get('user_name')
-        if user is None:
-            return redirect(session.get('prev'))
-        return func_that_needs_login(*args, **kwargs)
-    return logged_in_check
+        password = hash_password(password)
+        flash('Successfully registered!')
+        # TODO update users table and and session data,
+        # user should be logged in after registering.
+        # TODO user should be redirected based on session data.
+        return redirect(url_for('index'))

@@ -21,8 +21,7 @@ app.secret_key = 'I have no idea what I\'m doing'
 
 @app.before_request
 def login_required():
-    if request.endpoint is None:
-        abort(404)
+    check_for_valid_request()
     url_parts = request.url.split('/')
     login_valid = 'user_name' in session
     is_public = getattr(app.view_functions[request.endpoint], 'is_public', False)
@@ -39,18 +38,36 @@ def login_required():
     if url_parts[-1] in ('edit', 'delete'):
         entry_id = int(url_parts[-2])
         entry_type = url_parts[-3]
-        try:
-            if entry_type == 'question':
-                entry = question_data_manager.get_question(entry_id)
-            elif entry_type == 'answer':
-                entry = answer_data_manager.get_answer(entry_id)
-            elif entry_type == 'comments':
-                entry = comment_data_manager.get_comment(entry_id)
-        except ValueError:
-            abort(404)
+        entry = get_entry(entry_type, entry_id)
         if entry.get('user_name') != session.get('user_name'):
             flash('You don\' have permission for this operation!')
             return redirect(session.get('prev'))
+
+
+def check_for_valid_request():
+    if request.endpoint is None:
+        post_allowed = [
+            'new', 'edit', 'new-answer', 'new-comment', 'registration', 'login'
+        ]
+        if request.method not in ('GET', 'POST'):
+            abort(405)
+        # if it's a POST request check if the route allows it
+        elif request.method == 'POST' and request.url.split('/')[-1] not in post_allowed:
+            abort(405)
+        abort(404)
+
+
+def get_entry(entry_type, entry_id):
+    try:
+        if entry_type == 'question':
+            entry = question_data_manager.get_question(entry_id)
+        elif entry_type == 'answer':
+            entry = answer_data_manager.get_answer(entry_id)
+        elif entry_type == 'comments':
+            entry = comment_data_manager.get_comment(entry_id)
+    except ValueError:
+        abort(404)
+    return entry
 
 
 def public(func):

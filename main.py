@@ -29,7 +29,7 @@ def login_required():
         flash('You can\'t do that while logged in!')
         return redirect(session.get('prev'))
     # not logged in redirect to login
-    if (not login_valid and not is_public):
+    if (not login_valid and not is_public and 'static' not in url_parts):
         session['prev'] = request.url
         flash('You need to log in to do that.')
         return redirect(url_for('login'))
@@ -82,6 +82,7 @@ def new_question():
     return question_entry_manager.add_question()
 
 
+@public
 @app.route('/question/<int:question_id>')
 def display_question(question_id):
     return display.display_one_question(question_id)

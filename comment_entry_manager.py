@@ -8,6 +8,7 @@ import time
 def new_comment_for_question(question_id):
     question = question_data_manager.get_question(question_id)
     if request.method == 'GET':
+        session['prev'] = request.url
         return render_template('new_comment.html', entry=question)
     elif request.method == 'POST':
         if len(request.form.get('message')) < 10:
@@ -33,6 +34,7 @@ def new_comment_for_question(question_id):
 def new_comment_for_answer(answer_id):
     answer = answer_data_manager.get_answer(answer_id)
     if request.method == 'GET':
+        session['prev'] = request.url
         return render_template('new_comment.html', entry=answer)
     elif request.method == 'POST':
         if len(request.form.get('message')) < 10:
@@ -59,6 +61,7 @@ def edit_comment(comment_id):
     comment = comment_data_manager.get_comment(comment_id)
     question_id = get_question_id(comment_id)
     if comment['answer_id'] is None:
+        session['prev'] = request.url
         entry = question_data_manager.get_question(comment['question_id'])
     else:
         entry = answer_data_manager.get_answer(comment['answer_id'])

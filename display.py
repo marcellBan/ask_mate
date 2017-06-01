@@ -12,6 +12,7 @@ import users_data_manager
 
 
 def display_questions():
+    session['prev'] = request.url
     questions_list = question_data_manager.get_questions()
     for question in questions_list:
         question['answer_count'] = len(answer_data_manager.get_answers(question['id']))
@@ -19,6 +20,7 @@ def display_questions():
 
 
 def display_one_question(question_id):
+    session['prev'] = request.url
     question = question_data_manager.get_question(question_id)
     question['view_number'] += 1
     question_data_manager.update_question(question)
@@ -31,6 +33,7 @@ def display_one_question(question_id):
 
 
 def display_five_latest_questions():
+    session['prev'] = request.url
     questions_list = question_data_manager.get_questions(limit=5)
     for question in questions_list:
         question['answer_count'] = len(answer_data_manager.get_answers(question['id']))
@@ -38,6 +41,7 @@ def display_five_latest_questions():
 
 
 def display_sorted_questions():
+    session['prev'] = request.url
     aspect_list = (
         'id',
         'submission_time',
@@ -69,5 +73,6 @@ def clear_sorting():
 
 
 def list_users():
+    session['prev'] = request.url
     users = users_data_manager.get_users()
     return render_template('list_users.html', users=users)

@@ -7,6 +7,7 @@ import time
 def add_answer(question_id):
     question = question_data_manager.get_question(question_id)
     if request.method == 'GET':
+        session['prev'] = request.url
         return render_template('new_answer.html', question=question)
     elif request.method == 'POST':
         if len(request.form.get('message')) < 10:
@@ -32,6 +33,7 @@ def edit_answer(answer_id):
     question_id = answer.get('question_id')
     question = question_data_manager.get_question(question_id)
     if request.method == 'GET':
+        session['prev'] = request.url
         return render_template('new_answer.html', question=question, form_message=answer.get('message'))
     elif request.method == 'POST':
         if len(request.form.get('message')) < 10:
@@ -54,7 +56,6 @@ def delete_answer(answer_id):
 
 
 def accepted_answer(answer_id):
-    # session['prev'] = request.url
     answer = answer_data_manager.get_answer(answer_id)
     question = question_data_manager.get_question(answer['question_id'])
     question_id = question['question_id']

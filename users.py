@@ -49,8 +49,7 @@ def register():
         flash('Successfully registered!')
         users_data_manager.new_user(user_data)
         session['user_name'] = user_name
-        # TODO user should be redirected based on session data.
-        return redirect(url_for('index'))
+        return redirect(session.get('prev'))
 
 
 def login():
@@ -74,8 +73,7 @@ def login():
             flash('The credential information you entered was incorrect!')
             return render_template('login.html', form_user_name=user_name)
         session['user_name'] = user_name
-        # TODO user should be redirected based on session data.
-        return redirect(url_for('index'))
+        return redirect(session.get('prev'))
 
 
 def logout():

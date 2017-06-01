@@ -8,6 +8,7 @@ from flask import render_template, redirect, request, session, url_for
 import answer_data_manager
 import comment_data_manager
 import question_data_manager
+import users_data_manager
 
 
 def display_questions():
@@ -68,4 +69,5 @@ def clear_sorting():
 
 
 def list_users():
-    return render_template('list_users.html')
+    users = users_data_manager.get_users()
+    return render_template('list_users.html', users=users)

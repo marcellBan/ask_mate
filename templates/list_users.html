@@ -13,11 +13,11 @@
       <th>Username</th>
       <th>Registration Date</th>
     </tr>
-    {% if table %}
-    {% for user_name, registration_date in table %}
+    {% if users %}
+    {% for user in users %}
     <tr>
-      <td>{{ user_name }}</td>
-      <td>{{ registration_date|time }}</td>
+      <td>{{ user['user_name'] }}</td>
+      <td>{{ user['registration_date']|time }}</td>
     </tr>
     {% endfor %}
     {% endif %}

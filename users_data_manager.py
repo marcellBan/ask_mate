@@ -41,3 +41,25 @@ def correct_credentials(user_data, _cursor=None):
     elif user_data['user_name'] != result[0] or user_data['password'] != result[1]:
         return False
     return True
+
+
+@connect_to_database
+def get_users(_cursor=None):
+    query = '''
+            SELECT user_name, registration_date
+            FROM users;
+            '''
+    _cursor.execute(query)
+    users = _cursor.fetchall()
+    users = construct_user_list(users)
+    return users
+
+
+def construct_user_list(result_set):
+    users = list()
+    for user in result_set:
+        users.append({
+            'user_name': user[0],
+            'registration_date': user[1].timestamp()
+        })
+    return users

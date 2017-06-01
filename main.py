@@ -170,6 +170,7 @@ def logout():
     return users.logout()
 
 
+@public
 @app.route('/users')
 def list_users():
     return display.list_users()

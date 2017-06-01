@@ -8,6 +8,7 @@ from flask import render_template, redirect, request, session, url_for
 import answer_data_manager
 import comment_data_manager
 import question_data_manager
+import users_data_manager
 
 
 def display_questions():
@@ -65,3 +66,8 @@ def clear_sorting():
     if session.get('sorting') is not None:
         del(session['sorting'])
     return redirect(url_for('list_index'))
+
+
+def list_users():
+    users = users_data_manager.get_users()
+    return render_template('list_users.html', users=users)

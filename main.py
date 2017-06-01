@@ -170,6 +170,12 @@ def logout():
     return users.logout()
 
 
+@public
+@app.route('/users')
+def list_users():
+    return display.list_users()
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     return 'Oops, page not found!', 404

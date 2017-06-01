@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Users{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="/static/css/list_users.css">
+{% endblock %}
+
+{% block main %}
+  <div class="table-wrapper">
+  <table>
+    <tr class="table-header">
+      <th>Username</th>
+      <th>Registration Date</th>
+    </tr>
+    {% if users %}
+    {% for user in users %}
+    <tr>
+      <td>{{ user['user_name'] }}</td>
+      <td>{{ user['registration_date']|time }}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+  </table>
+  </div>
+{% endblock %}

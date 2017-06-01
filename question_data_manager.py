@@ -125,13 +125,12 @@ def construct_question_list(result_set):
     questions = list()
     for question in result_set:
         questions.append({'id': question[0],
-                          'submission_time': question[1].timestamp(),
-                          'view_number': question[2],
-                          'vote_number': question[3],
-                          'title': question[4],
-                          'message': question[5],
-                          'image': question[6],
-                          'has_accepted_answer': question[7],
-                          'user_id': question[8],
-                          'user_name': question[9]})
+                          'user_name': question[1],
+                          'submission_time': question[2].timestamp(),
+                          'view_number': question[3],
+                          'vote_number': question[4],
+                          'title': question[5],
+                          'message': question[6],
+                          'image': question[7],
+                          'has_accepted_answer': question[8]})
     return questions

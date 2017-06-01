@@ -139,7 +139,7 @@ def answer_edit(answer_id):
 
 
 @app.route('/answer/<int:answer_id>/accepted')
-def accept_answer():
+def accept_answer(answer_id):
     return answer_entry_manager.accepted_answer(answer_id)
 
 

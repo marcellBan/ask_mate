@@ -57,7 +57,7 @@ def accepted_answer(answer_id):
     # session['prev'] = request.url
     answer = answer_data_manager.get_answer(answer_id)
     question = question_data_manager.get_question(answer['question_id'])
-    question_id = question['question_id']
+    question_id = question['id']
     if session['user_name'] != question['user_name']:
         flash('This is not your question!')
         return redirect(session['prev'])

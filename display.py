@@ -23,7 +23,7 @@ def display_one_question(question_id):
     question_data_manager.update_question(question)
     answers = answer_data_manager.get_answers(question_id)
     for answer in answers:
-        answer['comments'] = commetn_data_manager.get_comments_for_answer(answer['id'])
+        answer['comments'] = comment_data_manager.get_comments_for_answer(answer['id'])
     question['answer_count'] = len(answers)
     question['comments'] = comment_data_manager.get_comments_for_question(question_id)
     return render_template('question.html', question=question, answers=answers)

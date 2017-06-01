@@ -41,7 +41,7 @@ def login_required():
             entry = question_data_manager.get_question(entry_id)
         elif entry_type == 'answer':
             entry = answer_data_manager.get_answer(entry_id)
-        elif entry_type == 'comment':
+        elif entry_type == 'comments':
             entry = comment_data_manager.get_comment(entry_id)
         if entry.get('user_name') != session.get('user_name'):
             flash('You don\' have permission for this operation!')

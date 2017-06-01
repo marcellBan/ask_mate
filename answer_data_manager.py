@@ -27,7 +27,7 @@ def get_answers(question_id, _cursor=None):
     '''returns a list of ditionaries containing all the answers with the given question_id'''
     query = '''SELECT *
                  FROM answer
-                 WHERE id = %s
+                 WHERE question_id = %s
                  ORDER BY
                    vote_number DESC,
                    submission_time ASC;'''

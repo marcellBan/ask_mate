@@ -72,6 +72,8 @@ def login():
         if not users_data_manager.correct_credentials(user_data):
             flash('The credential information you entered was incorrect!')
             return render_template('login.html', form_user_name=user_name)
+        if session.get('prev'):
+            session.pop('prev', None)
         session['user_name'] = user_name
         return redirect(session.get('prev'))
 
@@ -79,4 +81,6 @@ def login():
 def logout():
     if session.get('user_name'):
         session.pop('user_name', None)
+        if session.get('prev'):
+            session.pop('prev', None)
     return redirect(url_for('index'))

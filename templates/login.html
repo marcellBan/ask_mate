@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="/static/css/new_entry.css">
+{% endblock %}
+
+{% block main %}
+  <form action="" method="post">
+    
+    <label for="user_name">Username:</label>
+    <input id="user_name" name="user_name" type="text" 
+        {% if not form_user_name %}autofocus{% endif %}
+        value="{{ form_user_name }}">
+    <hr>
+    <label for="password">Password:</label>
+    <input id="password" name="password" type="password"
+        {% if form_user_name %} autofocus{% endif %}>
+    <hr>
+    <input type="submit" value="Login">
+    <small>Don't have an account? Register <a class="normal-link" href="/registration">here</a>.</small>
+  </form>
+{% endblock %}

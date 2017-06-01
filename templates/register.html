@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="/static/css/new_entry.css">
+{% endblock %}
+
+{% block main %}
+  <form action="" method="post">
+    <label for="user_name">Username<span class="req">*</span>:</label>
+    <small>Has to be at least 4 characters long.</small>
+    <input id="user_name" name="user_name" type="text" minlength="4" 
+        {% if not form_user_name %}autofocus{% endif %}
+        value="{{ form_user_name }}">
+    <hr>
+    <label for="password">Password<span class="req">*</span>:</label>
+    <small>Has to be at least 6 characters long.</small>
+    <input id="password" name="password" type="password" minlength="6"
+        {% if form_user_name %}autofocus{% endif %}>
+    <hr>
+    <label for="password_check">Confirm password<span class="req">*</span>:</label>
+    <input id="password_check" name="password_check" type="password" minlength="6">
+    <hr>
+    <input type="submit" value="Register">
+{% endblock %}

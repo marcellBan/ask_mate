@@ -13,6 +13,13 @@
 
     color: $black
 
+    &.select-accepted-answer
+      color: $grey350
+    
+    &:hover.select-accepted-answer,
+    &:active.select-accepted-answer
+      color: $theme400
+
 .numbers-wrapper
   padding: 1ch
 
@@ -180,6 +187,26 @@
 
   .entry-message
     margin-top: 2ch
+
+.accepted-answer-wrapper
+  padding: 1ch
+  text-align: center
+
+.select-accepted-answer
+  @extend .no-underline
+
+  display: block
+  margin: 0 auto
+  font-size: 2em
+  transition: color 0.3s
+
+#accepted-answer
+  @extend .no-underline
+
+  display: block
+  margin: 0 auto
+  color: $theme500
+  font-size: 2em
 
 
 

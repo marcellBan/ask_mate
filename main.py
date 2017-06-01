@@ -111,6 +111,11 @@ def answer_edit(answer_id):
     return answer_entry_manager.edit_answer(answer_id)
 
 
+@app.route('/answer/<int:answer_id>/accepted')
+def accept_answer():
+    return answer_entry_manager.accepted_answer(answer_id)
+
+
 @app.route('/comments/<int:comment_id>/delete')
 @users.login_required
 @users.author_user_required('comment')

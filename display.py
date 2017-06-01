@@ -22,14 +22,24 @@ def display_questions():
 def display_one_question(question_id):
     session['prev'] = request.url
     question = question_data_manager.get_question(question_id)
-    question['view_number'] += 1
-    question_data_manager.update_question(question)
+    if 'visited_questions' in session:
+        if question_id not in session['visited_questions']:
+            update_view_count(question_id, question)
+    else:
+        session['visited_questions'] = list()
+        update_view_count(question_id, question)
     answers = answer_data_manager.get_answers(question_id)
     for answer in answers:
         answer['comments'] = comment_data_manager.get_comments_for_answer(answer['id'])
     question['answer_count'] = len(answers)
     question['comments'] = comment_data_manager.get_comments_for_question(question_id)
     return render_template('question.html', question=question, answers=answers)
+
+
+def update_view_count(question_id, question):
+    session['visited_questions'].append(question_id)
+    question['view_number'] += 1
+    question_data_manager.update_question(question)
 
 
 def display_five_latest_questions():

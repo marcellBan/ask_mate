@@ -12,6 +12,7 @@ import users_data_manager
 
 
 def display_questions():
+    session['prev'] = request.url
     questions_list = question_data_manager.get_questions()
     for question in questions_list:
         question['answer_count'] = len(answer_data_manager.get_answers(question['id']))
@@ -19,12 +20,17 @@ def display_questions():
 
 
 def display_one_question(question_id):
+    session['prev'] = request.url
     try:
         question = question_data_manager.get_question(question_id)
     except ValueError:
         abort(404)
-    question['view_number'] += 1
-    question_data_manager.update_question(question)
+    if 'visited_questions' in session:
+        if question_id not in session['visited_questions']:
+            update_view_count(question_id, question)
+    else:
+        session['visited_questions'] = list()
+        update_view_count(question_id, question)
     answers = answer_data_manager.get_answers(question_id)
     for answer in answers:
         answer['comments'] = comment_data_manager.get_comments_for_answer(answer['id'])
@@ -33,7 +39,14 @@ def display_one_question(question_id):
     return render_template('question.html', question=question, answers=answers)
 
 
+def update_view_count(question_id, question):
+    session['visited_questions'].append(question_id)
+    question['view_number'] += 1
+    question_data_manager.update_question(question)
+
+
 def display_five_latest_questions():
+    session['prev'] = request.url
     questions_list = question_data_manager.get_questions(limit=5)
     for question in questions_list:
         question['answer_count'] = len(answer_data_manager.get_answers(question['id']))
@@ -41,6 +54,7 @@ def display_five_latest_questions():
 
 
 def display_sorted_questions():
+    session['prev'] = request.url
     aspect_list = (
         'id',
         'submission_time',
@@ -72,5 +86,6 @@ def clear_sorting():
 
 
 def list_users():
+    session['prev'] = request.url
     users = users_data_manager.get_users()
     return render_template('list_users.html', users=users)

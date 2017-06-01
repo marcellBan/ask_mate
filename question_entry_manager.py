@@ -5,6 +5,7 @@ import time
 
 def add_question():
     if request.method == 'GET':
+        session['prev'] = request.url
         return render_template('new_question.html')
     elif request.method == 'POST':
         if len(request.form.get('message')) < 10:
@@ -35,6 +36,7 @@ def edit_question(question_id):
     form_title = question['title']
     form_message = question['message']
     if request.method == 'GET':
+        session['prev'] = request.url
         return render_template('new_question.html', form_title=form_title, form_message=form_message)
     elif request.method == 'POST':
         if len(request.form.get('message')) < 10:

@@ -2,7 +2,7 @@
 AskMate Q&A website
 by SzószKód
 '''
-from flask import Flask, session, request, redirect, url_for, flash
+from flask import abort, Flask, session, request, redirect, url_for, flash, render_template
 from jinja2 import evalcontextfilter, Markup
 import datetime
 
@@ -21,6 +21,8 @@ app.secret_key = 'I have no idea what I\'m doing'
 
 @app.before_request
 def login_required():
+    if request.endpoint is None:
+        abort(404)
     url_parts = request.url.split('/')
     login_valid = 'user_name' in session
     is_public = getattr(app.view_functions[request.endpoint], 'is_public', False)
@@ -37,12 +39,15 @@ def login_required():
     if url_parts[-1] in ('edit', 'delete'):
         entry_id = int(url_parts[-2])
         entry_type = url_parts[-3]
-        if entry_type == 'question':
-            entry = question_data_manager.get_question(entry_id)
-        elif entry_type == 'answer':
-            entry = answer_data_manager.get_answer(entry_id)
-        elif entry_type == 'comments':
-            entry = comment_data_manager.get_comment(entry_id)
+        try:
+            if entry_type == 'question':
+                entry = question_data_manager.get_question(entry_id)
+            elif entry_type == 'answer':
+                entry = answer_data_manager.get_answer(entry_id)
+            elif entry_type == 'comments':
+                entry = comment_data_manager.get_comment(entry_id)
+        except ValueError:
+            abort(404)
         if entry.get('user_name') != session.get('user_name'):
             flash('You don\' have permission for this operation!')
             return redirect(session.get('prev'))
@@ -183,7 +188,17 @@ def list_users():
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return 'Oops, page not found!', 404
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(405)
+def page_not_found(error):
+    return render_template('405.html'), 405
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return render_template('500.html', error_message=error), 500
 
 
 @app.template_filter('time')

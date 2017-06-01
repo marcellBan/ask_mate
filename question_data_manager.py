@@ -10,6 +10,8 @@ def get_question(question_id, _cursor=None):
                  FROM question
                  WHERE id = %s;'''
     _cursor.execute(query, [question_id])
+    if _cursor.rowcount == 0:
+        raise ValueError
     question = _cursor.fetchall()[0]
     dict_of_question = {'id': question[0],
                         'user_name': question[1],

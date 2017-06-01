@@ -3,7 +3,7 @@ Display the questions from the database
 For AskMate by SzószKód
 '''
 
-from flask import render_template, redirect, request, session, url_for
+from flask import render_template, redirect, request, session, url_for, abort
 
 import answer_data_manager
 import comment_data_manager
@@ -21,7 +21,10 @@ def display_questions():
 
 def display_one_question(question_id):
     session['prev'] = request.url
-    question = question_data_manager.get_question(question_id)
+    try:
+        question = question_data_manager.get_question(question_id)
+    except ValueError:
+        abort(404)
     if 'visited_questions' in session:
         if question_id not in session['visited_questions']:
             update_view_count(question_id, question)

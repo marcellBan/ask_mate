@@ -16,6 +16,8 @@ def get_comment(comment_id, _cursor=None):
                  FROM comment
                  WHERE id = %s;'''
     _cursor.execute(query, [comment_id])
+    if _cursor.rowcount == 0:
+        raise ValueError
     comment = _cursor.fetchall()[0]
     comment = {'id': comment[0],
                'question_id': comment[1],

@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for, flash, session
+from flask import render_template, redirect, request, url_for, flash, session, abort
 import comment_data_manager
 import question_data_manager
 import answer_data_manager
@@ -6,7 +6,10 @@ import time
 
 
 def new_comment_for_question(question_id):
-    question = question_data_manager.get_question(question_id)
+    try:
+        question = question_data_manager.get_question(question_id)
+    except ValueError:
+        abort(404)
     if request.method == 'GET':
         session['prev'] = request.url
         return render_template('new_comment.html', entry=question)
@@ -32,7 +35,10 @@ def new_comment_for_question(question_id):
 
 
 def new_comment_for_answer(answer_id):
-    answer = answer_data_manager.get_answer(answer_id)
+    try:
+        answer = answer_data_manager.get_answer(answer_id)
+    except ValueError:
+        abort(404)
     if request.method == 'GET':
         session['prev'] = request.url
         return render_template('new_comment.html', entry=answer)
@@ -58,7 +64,10 @@ def new_comment_for_answer(answer_id):
 
 
 def edit_comment(comment_id):
-    comment = comment_data_manager.get_comment(comment_id)
+    try:
+        comment = comment_data_manager.get_comment(comment_id)
+    except ValueError:
+        abort(404)
     question_id = get_question_id(comment_id)
     if comment['answer_id'] is None:
         session['prev'] = request.url
@@ -88,7 +97,10 @@ def delete_comment(comment_id):
 
 
 def get_question_id(comment_id):
-    comment = comment_data_manager.get_comment(comment_id)
+    try:
+        comment = comment_data_manager.get_comment(comment_id)
+    except ValueError:
+        abort(404)
     if comment['answer_id'] is None:
         return comment['question_id']
     else:

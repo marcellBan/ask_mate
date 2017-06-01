@@ -85,7 +85,7 @@ def construct_comment_list(result_set):
 
 
 @connect_to_database
-def update_comment(commen, _cursor=None):
+def update_comment(comment, _cursor=None):
     '''
     updates a comment in the database
     the parameter should be a dictionary with the following keys:\n

@@ -3,45 +3,7 @@ import time
 
 from flask import flash, render_template, request, redirect, session, url_for
 
-import comment_data_manager
-import answer_data_manager
-import question_data_manager
 import users_data_manager
-
-
-def not_logged_in(function):
-    def wrapper(*args, **kwargs):
-        if session.get('user_name'):
-            flash('You can\'t do that while logged in!')
-            return redirect(url_for('index'))
-        return function(*args, **kwargs)
-    return wrapper
-
-
-def login_required(func_that_needs_login):
-    def logged_in_check(*args, **kwargs):
-        user = session.get('user_name')
-        if user is None:
-            session['prev'] = request.url
-            return redirect(url_for('login'))
-        return func_that_needs_login(*args, **kwargs)
-    return logged_in_check
-
-
-def author_user_required(func, entry_type):
-    def author_check(*args, **kwargs):
-        if entry_type == 'question':
-            entry = question_data_manager.get_question(args[0])
-        elif entry_type == 'answer':
-            entry = answer_data_manager.get_answer(args[0])
-        elif entry_type == 'comment':
-            entry = comment_data_manager.get_comment(args[0])
-        if entry.get('user_name') != session.get('user_name'):
-            flash('You don\' have permission for this operation!')
-            return redirect(session.get('prev'))
-        else:
-            return func(*args, **kwargs)
-    return author_check
 
 
 def hash_password(password):
@@ -51,7 +13,6 @@ def hash_password(password):
     return hashing.hexdigest()
 
 
-@not_logged_in
 def register():
     if request.method == 'GET':
         return render_template('register.html')
@@ -92,7 +53,6 @@ def register():
         return redirect(url_for('index'))
 
 
-@not_logged_in
 def login():
     if request.method == 'GET':
         return render_template('login.html')
@@ -120,5 +80,5 @@ def login():
 
 def logout():
     if session.get('user_name'):
-        session.pop('user_name')
+        session.pop('user_name', None)
     return redirect(url_for('index'))

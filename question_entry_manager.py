@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for, flash, session
+from flask import render_template, redirect, request, url_for, flash, session, abort
 import question_data_manager
 import time
 
@@ -28,7 +28,10 @@ def add_question():
 
 
 def edit_question(question_id):
-    question = question_data_manager.get_question(question_id)
+    try:
+        question = question_data_manager.get_question(question_id)
+    except ValueError:
+        abort(404)
     form_title = question['title']
     form_message = question['message']
     if request.method == 'GET':

@@ -1,11 +1,14 @@
-from flask import render_template, redirect, request, url_for, flash, session
+from flask import render_template, redirect, request, url_for, flash, session, abort
 import question_data_manager
 import answer_data_manager
 import time
 
 
 def add_answer(question_id):
-    question = question_data_manager.get_question(question_id)
+    try:
+        question = question_data_manager.get_question(question_id)
+    except ValueError:
+        abort(404)
     if request.method == 'GET':
         return render_template('new_answer.html', question=question)
     elif request.method == 'POST':
@@ -28,7 +31,10 @@ def add_answer(question_id):
 
 
 def edit_answer(answer_id):
-    answer = answer_data_manager.get_answer(answer_id)
+    try:
+        answer = answer_data_manager.get_answer(answer_id)
+    except ValueError:
+        abort(404)
     question_id = answer.get('question_id')
     question = question_data_manager.get_question(question_id)
     if request.method == 'GET':
@@ -48,14 +54,20 @@ def edit_answer(answer_id):
 
 
 def delete_answer(answer_id):
-    question_id = answer_data_manager.get_answer(answer_id).get('question_id')
+    try:
+        question_id = answer_data_manager.get_answer(answer_id).get('question_id')
+    except ValueError:
+        abort(404)
     answer_data_manager.delete_answer(answer_id)
     return redirect(url_for('display_question', question_id=question_id))
 
 
 def accepted_answer(answer_id):
     # session['prev'] = request.url
-    answer = answer_data_manager.get_answer(answer_id)
+    try:
+        answer = answer_data_manager.get_answer(answer_id)
+    except ValueError:
+        abort(404)
     question = question_data_manager.get_question(answer['question_id'])
     question_id = question['question_id']
     if session['user_name'] != question['user_name']:

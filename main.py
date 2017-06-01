@@ -39,12 +39,15 @@ def login_required():
     if url_parts[-1] in ('edit', 'delete'):
         entry_id = int(url_parts[-2])
         entry_type = url_parts[-3]
-        if entry_type == 'question':
-            entry = question_data_manager.get_question(entry_id)
-        elif entry_type == 'answer':
-            entry = answer_data_manager.get_answer(entry_id)
-        elif entry_type == 'comments':
-            entry = comment_data_manager.get_comment(entry_id)
+        try:
+            if entry_type == 'question':
+                entry = question_data_manager.get_question(entry_id)
+            elif entry_type == 'answer':
+                entry = answer_data_manager.get_answer(entry_id)
+            elif entry_type == 'comments':
+                entry = comment_data_manager.get_comment(entry_id)
+        except ValueError:
+            abort(404)
         if entry.get('user_name') != session.get('user_name'):
             flash('You don\' have permission for this operation!')
             return redirect(session.get('prev'))

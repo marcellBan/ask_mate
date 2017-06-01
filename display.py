@@ -3,7 +3,7 @@ Display the questions from the database
 For AskMate by SzószKód
 '''
 
-from flask import render_template, redirect, request, session, url_for
+from flask import render_template, redirect, request, session, url_for, abort
 
 import answer_data_manager
 import comment_data_manager
@@ -19,7 +19,10 @@ def display_questions():
 
 
 def display_one_question(question_id):
-    question = question_data_manager.get_question(question_id)
+    try:
+        question = question_data_manager.get_question(question_id)
+    except ValueError:
+        abort(404)
     question['view_number'] += 1
     question_data_manager.update_question(question)
     answers = answer_data_manager.get_answers(question_id)

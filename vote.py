@@ -9,7 +9,10 @@ import question_data_manager
 
 
 def downvote_question(question_id):
-    question = question_data_manager.get_question(question_id)
+    try:
+        question = question_data_manager.get_question(question_id)
+    except ValueError:
+        abort(404)
     question['vote_number'] -= 1
     question_data_manager.update_question(question)
     flash('Successfully downvoted this question!')
@@ -20,7 +23,10 @@ def downvote_question(question_id):
 
 
 def upvote_question(question_id):
-    question = question_data_manager.get_question(question_id)
+    try:
+        question = question_data_manager.get_question(question_id)
+    except ValueError:
+        abort(404)
     question['vote_number'] += 1
     question_data_manager.update_question(question)
     flash('Successfully upvoted this question!')
@@ -31,7 +37,10 @@ def upvote_question(question_id):
 
 
 def downvote_answer(answer_id):
-    answer = answer_data_manager.get_answer(answer_id)
+    try:
+        answer = answer_data_manager.get_answer(answer_id)
+    except ValueError:
+        abort(404)
     answer['vote_number'] -= 1
     answer_data_manager.update_answer(answer)
     flash('Successfully downvoted the answer: ({})'.format(answer_id))
@@ -39,7 +48,10 @@ def downvote_answer(answer_id):
 
 
 def upvote_answer(answer_id):
-    answer = answer_data_manager.get_answer(answer_id)
+    try:
+        answer = answer_data_manager.get_answer(answer_id)
+    except ValueError:
+        abort(404)
     answer['vote_number'] += 1
     answer_data_manager.update_answer(answer)
     flash('Successfully upvoted the answer ({})'.format(answer_id))

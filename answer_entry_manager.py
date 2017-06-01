@@ -51,3 +51,23 @@ def delete_answer(answer_id):
     question_id = answer_data_manager.get_answer(answer_id).get('question_id')
     answer_data_manager.delete_answer(answer_id)
     return redirect(url_for('display_question', question_id=question_id))
+
+
+def accepted_answer(answer_id):
+    # session['prev'] = request.url
+    answer = answer_data_manager.get_answer(answer_id)
+    question = question_data_manager.get_question(answer['question_id'])
+    question_id = question['question_id']
+    if session['user_name'] != question['user_name']:
+        flash('This is not your question!')
+        return redirect(session['prev'])
+    else:
+        if question['has_accepted_answer'] is True:
+            flash('There is already an accepted answer!')
+            return redirect(session['prev'])
+        elif answer['accepted_answer'] is False:
+            answer['accepted_answer'] = True
+            question['has_accepted_answer'] = True
+            answer_data_manager.update_answer(answer)
+            question_data_manager.update_question(question)
+            return redirect(url_for('display_question', question_id=question_id))

@@ -138,6 +138,11 @@ def answer_edit(answer_id):
     return answer_entry_manager.edit_answer(answer_id)
 
 
+@app.route('/answer/<int:answer_id>/accepted')
+def accept_answer():
+    return answer_entry_manager.accepted_answer(answer_id)
+
+
 @app.route('/comments/<int:comment_id>/delete')
 def comment_delete(comment_id):
     return comment_entry_manager.delete_comment(comment_id)

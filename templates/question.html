@@ -75,6 +75,13 @@
           <div class="vote-number">{{ answer['vote_number'] }}</div>
           <a class="material-icons vote-button vote-down" href="/answer/{{ answer['id'] }}/vote-down?next=this">arrow_downward</a>
         </div>
+        <div class="accepted-answer-wrapper">
+          {% if answer['accepted_answer'] %}
+            <span id="accepted-answer" class="material-icons">circle_check</span>
+          {% elif not question['has_accepted_answer'] and session.get('user_name') == question['user_name'] %}
+            <a class="material-icons select-accepted-answer" href="/answer/{{ answer['id'] }}/accepted">circle_check</a>
+          {% endif %}
+        </div>
       </section>
       </div>
       <div class="text-wrapper">

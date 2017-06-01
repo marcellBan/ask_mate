@@ -181,6 +181,28 @@
   .entry-message
     margin-top: 2ch
 
+.accepted-answer-wrapper
+  padding: 1ch
+
+.select-accepted-answer
+  @extend .no-underline
+
+  display: block
+  margin: 0 auto
+  color: $grey350
+  transition: color 0.3s
+
+  &:hover,
+  &:active
+    color: $theme400
+
+#accepted-answer
+  @extend .no-underline
+
+  display: block
+  margin: 0 auto
+  color: $theme700
+
 
 
 // Comment

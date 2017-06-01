@@ -56,13 +56,13 @@ def update_answer(answer, _cursor=None):
     '''
     updates an answer in the database
     the parameter should be a dictionary with the following keys:\n
-    id::int, submission_time::timestamp, vote_number::int, message::str, image::str
+    id::int, submission_time::timestamp, vote_number::int, message::str, image::str, accepted_answer::boolean
     '''
     submitted_answer = dict(answer)
     submitted_answer['submission_time'] = datetime.datetime.fromtimestamp(submitted_answer['submission_time'])
     query = '''UPDATE answer
                  SET submission_time = %(submission_time)s, vote_number = %(vote_number)s,
-                 message = %(message)s, image = %(image)s WHERE id = %(id)s;'''
+                 message = %(message)s, image = %(image)s, accepted_answer = %(accepted_answer)s WHERE id = %(id)s;'''
     _cursor.execute(query, submitted_answer)
 
 

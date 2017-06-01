@@ -89,14 +89,15 @@ def update_question(question, _cursor=None):
     '''
     updates a question in the database
     the parameter should be a dictionary with the following keys:\n
-    id::int, submission_time::timestamp, view_number::int, vote_number::int, title::str, message::str, image::str
+    id::int, submission_time::timestamp, view_number::int, vote_number::int,\n
+    title::str, message::str, image::str, has_accepted_answer::boolean
     '''
     final_question = dict(question)
     final_question['submission_time'] = datetime.datetime.fromtimestamp(final_question['submission_time'])
     query = '''UPDATE question
                  SET submission_time = %(submission_time)s, vote_number = %(vote_number)s,
                    message = %(message)s, image = %(image)s,
-                   view_number = %(view_number)s, title = %(title)s
+                   view_number = %(view_number)s, title = %(title)s, has_accepted_answer = %(has_accepted_answer)s
                  WHERE id = %(id)s;'''
     _cursor.execute(query, final_question)
 

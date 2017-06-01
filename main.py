@@ -38,7 +38,7 @@ def login_required():
         entry_id = int(url_parts[-2])
         entry_type = url_parts[-3]
         if entry_type == 'question':
-                entry = question_data_manager.get_question(entry_id)
+            entry = question_data_manager.get_question(entry_id)
         elif entry_type == 'answer':
             entry = answer_data_manager.get_answer(entry_id)
         elif entry_type == 'comment':

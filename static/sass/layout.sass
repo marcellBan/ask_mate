@@ -48,149 +48,287 @@ body
 
 // PAGE HEADER
 #page-header
-  position: fixed
-  z-index: 1
-  width: 100%
-  min-height: $header-height
   background: $grey200
-  border-bottom: calc(#{$one-px-rem} * 3) solid $grey400
+  border-bottom: calc(3 * #{$one-px-rem}) solid $grey400
 
   .page-wrapper
+    display: flex
+    height: $header-height
     padding: 0 1ch
-  
-  .header-link
-    @extend .no-underline
-
-    display: inline-block
-    color: $black
     line-height: $header-height
-    transition: all 0.3s
-
-    &:hover,
-    &:active
-      background: $grey300
-      box-shadow: 0 calc(-#{$one-px-rem} * 3) 0 $theme700 inset
-  
-  &::after
-    @extend .clear
-
-#header-logo-wrapper
-  float: left
 
 #header-logo
   @extend .no-underline
-  
+
   color: $black
   font-family: $logo-font
-  font-size: 2.15em
-  line-height: $header-height
+  font-size: 2em
 
 #ask
   color: $theme700
 
 #header-content-wrapper
-  float: right
-  line-height: $header-height
+  flex-grow: 1
   text-align: right
 
-  > *
-    display: inline-block
-    margin-left: 0.5ch
-    padding: 0 1ch
+.side-nav
+  position: fixed
+  top: 0
+  right: 0
+  z-index: 1
+  width: 75vw
+  height: 100vh
+  padding: 1em 2ch 5em
+  background: $grey200
+  text-align: left
+  transform: translateX(75vw)
+  transition: transform 0.3s
 
-#header-content-shadow
-  transition: opacity 0.3s
+  &.visible
+    transform: translateX(0)
 
-#fake-search-form
+  ul
+    // width: calc(100% - (2*2ch)) if this was fixed positioned and .side-navs overflow-x was hidden
+    padding-bottom: 5em
+    list-style-type: none
+    text-align: right
+  
+  li
+    padding: 1.5ch 0
+    font-size: 1.25em
+  
+  a
+    @extend .no-underline
+
+    color: $black
+
+#hello-world
+  &.visible
+    background: red
+
+#page-menu-close-button
+  color: $theme700
+  font-size: 2em
+  font-weight: 700
+  cursor: pointer
+
+#page-header form,
+#account-menu-wrapper,
+#page-menu-open-button
+  display: inline-block
+
+#page-header form
   @extend .s-border
   @extend .s-rad
 
-  background: $grey350
+  height: 1.5em
+  background: $grey400
   border-color: $grey500
-  line-height: 1.5em // makes the "form" not take up all the vertical space
 
-  input[type="text"]
+  input
     @extend .no-border
 
-    width: 6ch
-    background: $grey350
-    color: $grey500
-    transition: width 0.3s
+    line-height: 100%
+    background: $grey400
 
-    &::placeholder
-      color: $grey500
+#account-menu-button,
+#page-menu-open-button
+  @extend .material-icon-middle-position
 
-    &:focus
-      width: 12ch
-  
-  input[type="submit"]
-    @extend .no-border
+  margin-top: -0.15ch
+  font-size: 2em
 
-    background: $grey350
-    color: $grey500
-    font-size: 1.2em
-    font-weight: 700
-    cursor: pointer
-    // vertical middle position hack
-    display: inline-block
-    margin-top: -0.15ch
-    vertical-align: middle
+#account-menu-wrapper
+  position: relative
 
-#top
-  height: calc(#{$header-height} + (#{$one-px-rem} * 3))
+  &:hover #account-menu
+    display: block
 
-// Responsive header
-@media screen and (max-width: 649px)
-  #page-menu-button
-    float: right
+#account-menu-button
+  color: $grey350
+
+  &.logged-in
     color: $theme700
-    font-size: 2em
-    font-weight: 700
-    line-height: $header-height
-    // vertical middle position hack
-    display: inline-block
-    vertical-align: middle
+
+#account-menu
+  @extend .s-shadow
+
+  position: absolute
+  top: calc(100% - 1px)
+  right: 0
+  z-index: 2
+  width: 20ch
+  height: auto
+  padding: 0 1ch
+  background: $grey200
+  border-top: calc(3 * #{$one-px-rem}) solid $grey400
+  line-height: 1em
+  text-align: left
+
+  ul
+    list-style-type: none
   
-  #header-content-wrapper
+  li
+    padding: 1ch 0
+  
+  a
+    @extend .no-underline
+
+    color: $black
+
+#page-menu-open-button
+  color: $theme700
+  font-weight: 700
+  cursor: pointer
+
+#account-menu
+  display: none
+
+/*
+  #page-header
     position: fixed
-    top: 0
-    left: 100vw
-    z-index: 3
-    width: 50vw
-    height: 100vh
+    z-index: 1
+    width: 100%
+    min-height: $header-height
     background: $grey200
+    border-bottom: calc(#{$one-px-rem} * 3) solid $grey400
+
+    .page-wrapper
+      padding: 0 1ch
+    
+    .header-link
+      @extend .no-underline
+
+      display: inline-block
+      color: $black
+      line-height: $header-height
+      transition: all 0.3s
+
+      &:hover,
+      &:active
+        background: $grey300
+        box-shadow: 0 calc(-#{$one-px-rem} * 3) 0 $theme700 inset
+    
+    &::after
+      @extend .clear
+
+  #header-logo-wrapper
     float: left
-    transition: left 0.3s
+
+  #header-logo
+    @extend .no-underline
     
+    color: $black
+    font-family: $logo-font
+    font-size: 2.15em
+    line-height: $header-height
+
+  #ask
+    color: $theme700
+
+  #header-content-wrapper
+    float: right
+    line-height: $header-height
+    text-align: right
+
     > *
-      display: block
-      text-align: left
-  
-    &.visible
-      left: 50vw
-    
-    &.visible+#header-content-shadow
-      right: 0
-      opacity: 1
-    
+      display: inline-block
+      margin-left: 0.5ch
+      padding: 0 1ch
+
   #header-content-shadow
-    position: fixed
-    top: 0
-    right: 100%
-    left: 0
-    z-index: 2
-    height: 100vh
-    background: rgba(0, 0, 0, 0.35)
-    opacity: 1
     transition: opacity 0.3s
 
-@media screen and (min-width: 650px)
-  #page-menu-button
-    display: none
-  
-  #header-content-shadow
-    right: 100%
-    opacity: 0
+  #fake-search-form
+    @extend .s-border
+    @extend .s-rad
+
+    background: $grey350
+    border-color: $grey500
+    line-height: 1.5em // makes the "form" not take up all the vertical space
+
+    input[type="text"]
+      @extend .no-border
+
+      width: 6ch
+      background: $grey350
+      color: $grey500
+      transition: width 0.3s
+
+      &::placeholder
+        color: $grey500
+
+      &:focus
+        width: 12ch
+    
+    input[type="submit"]
+      @extend .no-border
+
+      background: $grey350
+      color: $grey500
+      font-size: 1.2em
+      font-weight: 700
+      cursor: pointer
+      // vertical middle position hack
+      display: inline-block
+      margin-top: -0.15ch
+      vertical-align: middle
+
+  #top
+    height: calc(#{$header-height} + (#{$one-px-rem} * 3))
+
+  // Responsive header
+  @media screen and (max-width: 649px)
+    #page-menu-button
+      float: right
+      color: $theme700
+      font-size: 2em
+      font-weight: 700
+      line-height: $header-height
+      // vertical middle position hack
+      display: inline-block
+      vertical-align: middle
+    
+    #header-content-wrapper
+      position: fixed
+      top: 0
+      left: 100vw
+      z-index: 3
+      width: 50vw
+      height: 100vh
+      background: $grey200
+      float: left
+      transition: left 0.3s
+      
+      > *
+        display: block
+        text-align: left
+    
+      &.visible
+        left: 50vw
+      
+      &.visible+#header-content-shadow
+        right: 0
+        opacity: 1
+      
+    #header-content-shadow
+      position: fixed
+      top: 0
+      right: 100%
+      left: 0
+      z-index: 2
+      height: 100vh
+      background: rgba(0, 0, 0, 0.35)
+      opacity: 1
+      transition: opacity 0.3s
+
+  @media screen and (min-width: 650px)
+    #page-menu-button
+      display: none
+    
+    #header-content-shadow
+      right: 100%
+      opacity: 0
 
 
 

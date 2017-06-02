@@ -22,9 +22,49 @@
     <div id="header-logo-wrapper">
       <a id="header-logo" href="/"><span id="ask">Ask</span>Mate</a>
     </div>
+    <div id="header-content-wrapper">
+      <nav id="page-menu" class="side-nav">
+        <span id="page-menu-close-button" class="material-icons">close</span>
+        <ul>
+          <!--{% block header_content %}{% endblock %}-->
+          <li><a class="header-text header-hover" href="/question/new">New question</a></li>
+        </ul>
+      </nav>
+      <form action="" method="">
+        <input id="easter-egg-input" type="text" placeholder="Search">
+        <input id="easter-egg-submit" class="material-icons" type="submit" value="search">
+      </form>
+      <div id="account-menu-wrapper">
+        <span id="account-menu-button" class="material-icons
+            {% if session['user_name'] %}logged-in{% endif %}">account_circle</span>
+        <nav id="account-menu">
+          {% if session['user_name'] %}
+            <ul>
+              <li>{{ session['user_name'] }}</li>
+              <li><a href="/UNIMPLEMENTED">View profile</a></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          {% else %}
+            <ul>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/registration">Register</a></li>
+            </ul>
+          {% endif %}
+        </nav>
+      </div>
+      <span id="page-menu-open-button" class="material-icons">menu</span>
+    </div>
+  </div>
+  </header>
+  
+  <!--<header id="page-header">
+  <div class="page-wrapper">
+    <div id="header-logo-wrapper">
+      <a id="header-logo" href="/"><span id="ask">Ask</span>Mate</a>
+    </div>
     <div id="page-menu-button" class="material-icons">menu</div>
     <div id="header-content-wrapper">
-      {% block header_content %}{% endblock %}
+      {% block old_header_content %}{% endblock %}
       <a class="header-link" href="/question/new">New question</a>
       {% if session['user_name'] %}
         {{ session['user_name'] }}
@@ -40,7 +80,8 @@
     </div>
     <div id="header-content-shadow">
   </div>
-  </header>
+  </header>-->
+
   <div id="top"></div>
   <!-- flash messages -->
   <aside id="flash-messages">
@@ -81,6 +122,7 @@
   </audio>
   <!-- scrips -->
   {% block js %}{% endblock %}
+  <script src="/static/script/layout.js"></script>
   <script src="/static/script/easter_egg.js"></script>
   <script src="/static/script/scroll_event.js"></script>
   <script src="/static/script/click_event.js"></script>

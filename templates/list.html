@@ -7,10 +7,10 @@
 
 {% block header_content %}
   {% if page == 'sorted' %}
-  <a class="header-link" href="/sort/clear">Clear sort</a>
+  <li><a class="header-text header-hover" href="/sort/clear">Clear sort</a></li>
   {% endif %}
   <div id="sort-menu-wrapper">
-    <span class="header-link">Sort by</span>
+    <li class="header-text header-hover">Sort by <span class="material-icons">arrow_drop_down</span></li>
     <nav id="sort-menu-dropdown">
       ID:
       <a class="material-icons" href="/sort?id=desc">arrow_downward</a>

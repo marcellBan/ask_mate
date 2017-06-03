@@ -10,7 +10,7 @@
   <!-- .material-icons
   https://material.io/icons/
   -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="/static/css/material_icons.css">
   <link rel="icon" href="/static/images/favicon.png">
   <link rel="stylesheet" href="/static/css/layout.css">
   {% block head %}{% endblock %}
@@ -26,13 +26,15 @@
       <nav id="page-menu" class="side-nav">
         <span id="page-menu-close-button" class="material-icons">close</span>
         <ul>
-          <!--{% block header_content %}{% endblock %}-->
+          {% block header_content %}{% endblock %}
           <li><a class="header-text header-hover" href="/question/new">New question</a></li>
+          <li><a class="header-text header-hover" href="/UNIMPLEMENTED">About</a></li>
         </ul>
       </nav>
+      <div id="side-nav-shadow"></div>
       <form action="" method="">
-        <input id="easter-egg-input" type="text" placeholder="Search">
-        <input id="easter-egg-submit" class="material-icons" type="submit" value="search">
+        <input id="easter-egg-input" type="text" placeholder="Search"><!--
+        --><input id="easter-egg-submit" class="material-icons" type="submit" value="search">
       </form>
       <div id="account-menu-wrapper">
         <span id="account-menu-button" class="material-icons
@@ -41,13 +43,13 @@
           {% if session['user_name'] %}
             <ul>
               <li>{{ session['user_name'] }}</li>
-              <li><a href="/UNIMPLEMENTED">View profile</a></li>
-              <li><a href="/logout">Logout</a></li>
+              <a href="/UNIMPLEMENTED"><li>View profile</li></a>
+              <a href="/logout"><li>Logout</li></a>
             </ul>
           {% else %}
             <ul>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/registration">Register</a></li>
+              <a href="/login"><li>Login</li></a>
+              <a href="/registration"><li>Register</li></a>
             </ul>
           {% endif %}
         </nav>
@@ -56,32 +58,6 @@
     </div>
   </div>
   </header>
-  
-  <!--<header id="page-header">
-  <div class="page-wrapper">
-    <div id="header-logo-wrapper">
-      <a id="header-logo" href="/"><span id="ask">Ask</span>Mate</a>
-    </div>
-    <div id="page-menu-button" class="material-icons">menu</div>
-    <div id="header-content-wrapper">
-      {% block old_header_content %}{% endblock %}
-      <a class="header-link" href="/question/new">New question</a>
-      {% if session['user_name'] %}
-        {{ session['user_name'] }}
-        <a class="header-link" href="/logout">Logout</a>
-      {% else %}
-        <a class="header-link" href="/login">Login</a>
-        <a class="header-link" href="/registration">Register</a>
-      {% endif %}
-      <div id="fake-search-form">
-        <input id="easter-egg-input" type="text" placeholder="Search">
-        <input id="easter-egg-submit" class="material-icons" type="submit" value="search">
-      </div>
-    </div>
-    <div id="header-content-shadow">
-  </div>
-  </header>-->
-
   <div id="top"></div>
   <!-- flash messages -->
   <aside id="flash-messages">
@@ -96,7 +72,7 @@
   </div>
   </aside>
   <!-- main -->
-  <main>
+  <main id="page-main">
   <div class="page-wrapper">
     {% block main %}{% endblock %}
   </div>
@@ -125,6 +101,5 @@
   <script src="/static/script/layout.js"></script>
   <script src="/static/script/easter_egg.js"></script>
   <script src="/static/script/scroll_event.js"></script>
-  <script src="/static/script/click_event.js"></script>
 </body>
 </html>

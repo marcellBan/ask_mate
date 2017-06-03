@@ -48,6 +48,9 @@ body
 
 // PAGE HEADER
 #page-header
+  position: fixed
+  z-index: 1
+  width: 100vw
   background: $grey200
   border-bottom: calc(3 * #{$one-px-rem}) solid $grey400
 
@@ -75,10 +78,10 @@ body
   position: fixed
   top: 0
   right: 0
-  z-index: 1
+  z-index: 3
   width: 75vw
   height: 100vh
-  padding: 1em 2ch 5em
+  padding: 0 0 5em
   background: $grey200
   text-align: left
   transform: translateX(75vw)
@@ -94,7 +97,7 @@ body
     text-align: right
   
   li
-    padding: 1.5ch 0
+    padding: 1.5ch 2ch
     font-size: 1.25em
   
   a
@@ -102,14 +105,26 @@ body
 
     color: $black
 
-#hello-world
+#side-nav-shadow
+  position: fixed
+  top: 0
+  left: 0
+  z-index: 2
+  background: $black
+  opacity: 0
+  transition: opacity 0.3s
+
   &.visible
-    background: red
+    right: 0
+    bottom: 0
+    opacity: 0.35
 
 #page-menu-close-button
+  margin-left: 0.5ch
   color: $theme700
   font-size: 2em
   font-weight: 700
+  line-height: $header-height
   cursor: pointer
 
 #page-header form,
@@ -121,15 +136,32 @@ body
   @extend .s-border
   @extend .s-rad
 
-  height: 1.5em
+  padding: 0 1ch
   background: $grey400
   border-color: $grey500
+  line-height: 1.65em
 
   input
     @extend .no-border
 
     line-height: 100%
     background: $grey400
+    color: $grey600
+
+    &[type="text"]
+      width: 7ch
+      transition: width 0.3s
+
+      &:focus
+        width: 15ch
+
+    &[type="submit"]
+      @extend .material-icon-middle-position
+
+      margin-top: -0.15ch
+      margin-left: 0.1ch
+      font-weight: 700
+      cursor: pointer
 
 #account-menu-button,
 #page-menu-open-button
@@ -154,12 +186,11 @@ body
   @extend .s-shadow
 
   position: absolute
-  top: calc(100% - 1px)
+  top: 100%
   right: 0
   z-index: 2
   width: 20ch
   height: auto
-  padding: 0 1ch
   background: $grey200
   border-top: calc(3 * #{$one-px-rem}) solid $grey400
   line-height: 1em
@@ -169,12 +200,17 @@ body
     list-style-type: none
   
   li
-    padding: 1ch 0
+    padding: 1ch
+    transition: background-color 0.15s
   
   a
     @extend .no-underline
 
     color: $black
+
+  a:hover li,
+  a:active li
+    background: $grey300
 
 #page-menu-open-button
   color: $theme700
@@ -184,151 +220,8 @@ body
 #account-menu
   display: none
 
-/*
-  #page-header
-    position: fixed
-    z-index: 1
-    width: 100%
-    min-height: $header-height
-    background: $grey200
-    border-bottom: calc(#{$one-px-rem} * 3) solid $grey400
-
-    .page-wrapper
-      padding: 0 1ch
-    
-    .header-link
-      @extend .no-underline
-
-      display: inline-block
-      color: $black
-      line-height: $header-height
-      transition: all 0.3s
-
-      &:hover,
-      &:active
-        background: $grey300
-        box-shadow: 0 calc(-#{$one-px-rem} * 3) 0 $theme700 inset
-    
-    &::after
-      @extend .clear
-
-  #header-logo-wrapper
-    float: left
-
-  #header-logo
-    @extend .no-underline
-    
-    color: $black
-    font-family: $logo-font
-    font-size: 2.15em
-    line-height: $header-height
-
-  #ask
-    color: $theme700
-
-  #header-content-wrapper
-    float: right
-    line-height: $header-height
-    text-align: right
-
-    > *
-      display: inline-block
-      margin-left: 0.5ch
-      padding: 0 1ch
-
-  #header-content-shadow
-    transition: opacity 0.3s
-
-  #fake-search-form
-    @extend .s-border
-    @extend .s-rad
-
-    background: $grey350
-    border-color: $grey500
-    line-height: 1.5em // makes the "form" not take up all the vertical space
-
-    input[type="text"]
-      @extend .no-border
-
-      width: 6ch
-      background: $grey350
-      color: $grey500
-      transition: width 0.3s
-
-      &::placeholder
-        color: $grey500
-
-      &:focus
-        width: 12ch
-    
-    input[type="submit"]
-      @extend .no-border
-
-      background: $grey350
-      color: $grey500
-      font-size: 1.2em
-      font-weight: 700
-      cursor: pointer
-      // vertical middle position hack
-      display: inline-block
-      margin-top: -0.15ch
-      vertical-align: middle
-
-  #top
-    height: calc(#{$header-height} + (#{$one-px-rem} * 3))
-
-  // Responsive header
-  @media screen and (max-width: 649px)
-    #page-menu-button
-      float: right
-      color: $theme700
-      font-size: 2em
-      font-weight: 700
-      line-height: $header-height
-      // vertical middle position hack
-      display: inline-block
-      vertical-align: middle
-    
-    #header-content-wrapper
-      position: fixed
-      top: 0
-      left: 100vw
-      z-index: 3
-      width: 50vw
-      height: 100vh
-      background: $grey200
-      float: left
-      transition: left 0.3s
-      
-      > *
-        display: block
-        text-align: left
-    
-      &.visible
-        left: 50vw
-      
-      &.visible+#header-content-shadow
-        right: 0
-        opacity: 1
-      
-    #header-content-shadow
-      position: fixed
-      top: 0
-      right: 100%
-      left: 0
-      z-index: 2
-      height: 100vh
-      background: rgba(0, 0, 0, 0.35)
-      opacity: 1
-      transition: opacity 0.3s
-
-  @media screen and (min-width: 650px)
-    #page-menu-button
-      display: none
-    
-    #header-content-shadow
-      right: 100%
-      opacity: 0
+#top
+  height: $header-height
 
 
 
@@ -337,7 +230,9 @@ body
   position: fixed
   z-index: 1
   top: calc((#{$header-height} + (#{$one-px-rem} * 2)) + 2em)
-  width: 100%
+  left: 50%
+  max-width: calc(960px * 0.8)
+  transform: translateX(-50%)
 
 .flash-message
   @extend .s-border
@@ -346,7 +241,7 @@ body
 
   position: relative
   z-index: 1
-  width: 80%
+  width: 100%
   margin: 0 auto 0.5em
   padding: 0 2ch
   background: $accent100
@@ -365,14 +260,14 @@ body
     top: 0
     left: 0
     z-index: 1
-    width: 80%
+    width: 100%
     height: auto
     opacity: 1
   50%
     top: -2em
     left: 0
     z-index: 1
-    width: 80%
+    width: 100%
     height: auto
     opacity: 0
   100%

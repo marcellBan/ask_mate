@@ -5,23 +5,26 @@
   position: relative
   text-align: right
 
-  .header-link
+  .header-text
     padding: 0 1ch
 
     &:hover+#sort-menu-dropdown
-      display: block
+      height: calc(2em * 7 * #{$line-height})
+    
+    span
+      @extend .material-icon-middle-position
 
 #sort-menu-dropdown
-  position: absolute
-  top: 100%
-  right: 1ch
-  z-index: 1
-  display: none
-  width: 17ch
-  padding: 0 1ch
-  background: $grey200
-  border-top: calc(#{$one-px-rem} * 3) solid $grey400
-  box-shadow: 0 calc(#{$one-px-rem} * 5) calc(#{$one-px-rem} * 15) calc(-#{$one-px-rem} * 2) rgba(0, 0, 0, 0.35)
+  position: relative
+  width: 100%
+  height: 0
+  padding: 0 4ch
+  background: $grey300
+  overflow: hidden
+  transition: height 0.3s
+
+  &:hover
+    height: calc(2em * 7 * #{$line-height})
 
   a
     @extend .no-underline
@@ -31,9 +34,6 @@
     display: inline-block
     margin-top: -0.15ch
     vertical-align: middle
-  
-  &:hover
-    display: block
 
 #clear-sort
   padding: 0 1ch

@@ -1,5 +1,5 @@
 import hashlib
-import time
+import datetime
 
 from flask import flash, render_template, request, redirect, session, url_for
 
@@ -44,7 +44,7 @@ def register():
         user_data = {
             'user_name': user_name,
             'password': password,
-            'registration_date': int(time.time())
+            'registration_date': datetime.datetime.now()
         }
         flash('Successfully registered!')
         users_data_manager.new_user(user_data)

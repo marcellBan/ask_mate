@@ -18,7 +18,6 @@ def username_exists(user_name, _cursor=None):
 @connect_to_database
 def new_user(user_data, _cursor=None):
     final_user_data = dict(user_data)
-    final_user_data['registration_date'] = datetime.datetime.fromtimestamp(user_data['registration_date'])
     query = (
         '''INSERT INTO users '''
         '''     (user_name, password, registration_date) '''
@@ -60,6 +59,6 @@ def construct_user_list(result_set):
     for user in result_set:
         users.append({
             'user_name': user[0],
-            'registration_date': user[1].timestamp()
+            'registration_date': user[1]
         })
     return users

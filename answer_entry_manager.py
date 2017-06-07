@@ -1,7 +1,7 @@
 from flask import render_template, redirect, request, url_for, flash, session, abort
 import question_data_manager
 import answer_data_manager
-import time
+import datetime
 
 
 def add_answer(question_id):
@@ -20,7 +20,7 @@ def add_answer(question_id):
             )
         else:
             answer = {
-                'submission_time': int(time.time()),
+                'submission_time': datetime.datetime.now(),
                 'vote_number': 0,
                 'question_id': question_id,
                 'message': request.form.get('message'),
@@ -48,7 +48,7 @@ def edit_answer(answer_id):
                 'new_answer.html', question=question, form_message=request.form.get('message')
             )
         else:
-            answer['submission_time'] = int(time.time())
+            answer['submission_time'] = datetime.datetime.now()
             answer['message'] = request.form.get('message')
             answer['image'] = request.files.get('image').filename
             answer_data_manager.update_answer(answer)

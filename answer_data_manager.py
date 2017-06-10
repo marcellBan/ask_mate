@@ -16,7 +16,7 @@ def get_answer(answer_id, _cursor=None):
     dict_of_answer = {'id': answer[0],
                       'question_id': answer[1],
                       'user_name': answer[2],
-                      'submission_time': answer[3].timestamp(),
+                      'submission_time': answer[3],
                       'vote_number': answer[4],
                       'message': answer[5],
                       'image': answer[6],
@@ -44,10 +44,9 @@ def new_answer(answer, _cursor=None):
     '''
     adds a new answer to the database\n
     the parameter should be a dictionary with the following keys:\n
-    submission_time::timestamp, vote_number::int, question_id::int, message::str, image::str, user_name::str
+    submission_time::datetime, vote_number::int, question_id::int, message::str, image::str, user_name::str
     '''
     final_answer = dict(answer)
-    final_answer['submission_time'] = datetime.datetime.fromtimestamp(final_answer['submission_time'])
     query = '''INSERT INTO answer (submission_time, vote_number, question_id, message, image, user_name)
                VALUES (%(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s, %(user_name)s);'''
     _cursor.execute(query, final_answer)
@@ -58,10 +57,9 @@ def update_answer(answer, _cursor=None):
     '''
     updates an answer in the database
     the parameter should be a dictionary with the following keys:\n
-    id::int, submission_time::timestamp, vote_number::int, message::str, image::str, accepted_answer::boolean
+    id::int, submission_time::datetime, vote_number::int, message::str, image::str, accepted_answer::boolean
     '''
     submitted_answer = dict(answer)
-    submitted_answer['submission_time'] = datetime.datetime.fromtimestamp(submitted_answer['submission_time'])
     query = '''UPDATE answer
                  SET submission_time = %(submission_time)s, vote_number = %(vote_number)s,
                  message = %(message)s, image = %(image)s, accepted_answer = %(accepted_answer)s WHERE id = %(id)s;'''
@@ -85,7 +83,7 @@ def construct_answer_list(result_set):
         answers.append({'id': answer[0],
                         'question_id': answer[1],
                         'user_name': answer[2],
-                        'submission_time': answer[3].timestamp(),
+                        'submission_time': answer[3],
                         'vote_number': answer[4],
                         'message': answer[5],
                         'image': answer[6],

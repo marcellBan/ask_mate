@@ -2,7 +2,7 @@ from flask import render_template, redirect, request, url_for, flash, session, a
 import comment_data_manager
 import question_data_manager
 import answer_data_manager
-import time
+import datetime
 
 
 def new_comment_for_question(question_id):
@@ -24,7 +24,7 @@ def new_comment_for_question(question_id):
                 'question_id': question_id,
                 'answer_id': None,
                 'message': request.form.get('message'),
-                'submission_time': int(time.time()),
+                'submission_time': datetime.datetime.now(),
                 'edit_count': 0,
                 'user_name': session.get('user_name')
             }
@@ -53,7 +53,7 @@ def new_comment_for_answer(answer_id):
                 'question_id': None,
                 'answer_id': answer_id,
                 'message': request.form.get('message'),
-                'submission_time': int(time.time()),
+                'submission_time': datetime.datetime.now(),
                 'edit_count': 0,
                 'user_name': session.get('user_name')
             }
@@ -83,7 +83,7 @@ def edit_comment(comment_id):
                     'new_comment.html', entry=entry, form_message=request.form.get('message')
                 )
         else:
-            comment['submission_time'] = int(time.time())
+            comment['submission_time'] = datetime.datetime.now()
             comment['message'] = request.form.get('message')
             comment['edit_count'] += 1
             comment_data_manager.update_comment(comment)

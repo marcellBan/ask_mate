@@ -15,7 +15,7 @@ def get_question(question_id, _cursor=None):
     question = _cursor.fetchall()[0]
     dict_of_question = {'id': question[0],
                         'user_name': question[1],
-                        'submission_time': question[2].timestamp(),
+                        'submission_time': question[2],
                         'view_number': question[3],
                         'vote_number': question[4],
                         'title': question[5],
@@ -67,11 +67,10 @@ def new_question(question, _cursor=None):
     '''
     adds a new question to the database\n
     the parameter should be a dictionary with the following keys:\n
-    submission_time::timestamp, view_number::int, vote_number::int,
+    submission_time::datetime, view_number::int, vote_number::int,
     title::str, message::str, image::str, user_name::str
     '''
     final_question = dict(question)
-    final_question['submission_time'] = datetime.datetime.fromtimestamp(final_question['submission_time'])
     query = '''INSERT INTO question (submission_time, view_number, vote_number,
                  title, message, image, user_name)
                  VALUES
@@ -91,11 +90,10 @@ def update_question(question, _cursor=None):
     '''
     updates a question in the database
     the parameter should be a dictionary with the following keys:\n
-    id::int, submission_time::timestamp, view_number::int, vote_number::int,\n
+    id::int, submission_time::datetime, view_number::int, vote_number::int,\n
     title::str, message::str, image::str, has_accepted_answer::boolean
     '''
     final_question = dict(question)
-    final_question['submission_time'] = datetime.datetime.fromtimestamp(final_question['submission_time'])
     query = '''UPDATE question
                  SET submission_time = %(submission_time)s, vote_number = %(vote_number)s,
                    message = %(message)s, image = %(image)s,
@@ -129,7 +127,7 @@ def construct_question_list(result_set):
     for question in result_set:
         questions.append({'id': question[0],
                           'user_name': question[1],
-                          'submission_time': question[2].timestamp(),
+                          'submission_time': question[2],
                           'view_number': question[3],
                           'vote_number': question[4],
                           'title': question[5],

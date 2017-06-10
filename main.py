@@ -219,8 +219,7 @@ def internal_server_error(error):
 
 
 @app.template_filter('time')
-def _jinja2_time_filter(value):
-    time = datetime.datetime.fromtimestamp(value)
+def _jinja2_time_filter(time):
     result = '{:02}-{:02}-{} {}:{:02}'.format(time.day, time.month, time.year, time.hour, time.minute)
     return result
 

@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, url_for, flash, session, abort
 import question_data_manager
-import time
+import datetime
 
 
 def add_question():
@@ -16,7 +16,7 @@ def add_question():
             )
         else:
             question = {
-                'submission_time': int(time.time()),
+                'submission_time': datetime.datetime.now(),
                 'view_number': 0,
                 'vote_number': 0,
                 'title': request.form.get('title'),
@@ -47,7 +47,7 @@ def edit_question(question_id):
         else:
             question['title'] = request.form.get('title')
             question['message'] = request.form.get('message')
-            question['submission_time'] = int(time.time())
+            question['submission_time'] = datetime.datetime.now()
             question_data_manager.update_question(question)
             return redirect(url_for('display_question', question_id=question_id))
 
